@@ -266,7 +266,7 @@ function AppDemo() {
 
   return (
     <AppScreen>
-      <AppScreen.Body className="bg-gray-200">
+      <AppScreen.Body className="bg-gray-100">
         <div className="p-4">
           {/*<div className="flex gap-2">*/}
           {/*  <div className="text-xs leading-6 text-gray-500">*/}
