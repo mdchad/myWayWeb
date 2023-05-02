@@ -17,7 +17,7 @@ export default function Home() {
         <title>myHadeeth</title>
         <meta
           name="description"
-          content="By leveraging insights from our network of industry insiders, you’ll know exactly when to buy to maximize profit, and exactly when to sell to avoid painful losses."
+          content="With this app, you can easily access a wide range of hadith in three languages, Arabic, Malay and English, making it easier for you to understand and benefit from the wisdom of the Prophet Muhammad (peace be upon him)."
         />
       </Head>
       <Header />
