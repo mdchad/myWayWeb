@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export function Logomark(props) {
+export function Logomark() {
   return (
     <Image src="/logo.png"
            alt="Picture of the logo"
@@ -17,7 +17,7 @@ export function Logomark(props) {
   )
 }
 
-export function Logo(props) {
+export function Logo() {
   return (
     // <svg viewBox="0 0 106 40" aria-hidden="true" {...props}>
     //   <Logomark width="40" height="40" className="fill-cyan-500" />

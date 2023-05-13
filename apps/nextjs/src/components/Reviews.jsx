@@ -1,12 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import clsx from 'clsx'
 import {
-  motion,
-  useAnimationFrame,
   useInView,
-  useMotionValue,
-  useSpring,
-  useTransform,
 } from 'framer-motion'
 
 import { Container } from '@/components/Container'
@@ -144,6 +139,7 @@ function splitArray(array, numParts) {
 function ReviewColumn({
   className,
   reviews,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   reviewClassName = () => {},
   msPerPixel = 0,
 }) {
