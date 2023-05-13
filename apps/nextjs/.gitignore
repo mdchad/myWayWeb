@@ -1,32 +1,24 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-node_modules
-.pnp
+/node_modules
+/.pnp
 .pnp.js
 
 # testing
-coverage
-
-# database
-prisma/db.sqlite
-prisma/db.sqlite-journal
+/coverage
 
 # next.js
-.next/
-out/
-
-# expo
-.expo/
-dist/
+/.next/
+/out/
 
 # production
-build
+/build
 
 # misc
 .DS_Store
 *.pem
-.idea
+../.idea
 
 # debug
 npm-debug.log*
@@ -35,14 +27,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # local env files
-.env
 .env*.local
 
 # vercel
 .vercel
-
-# typescript
-*.tsbuildinfo
-
-# turbo
-.turbo
