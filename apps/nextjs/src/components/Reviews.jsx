@@ -139,8 +139,7 @@ function splitArray(array, numParts) {
 function ReviewColumn({
   className,
   reviews,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  reviewClassName = () => {},
+  reviewClassName,
   msPerPixel = 0,
 }) {
   let columnRef = useRef()
