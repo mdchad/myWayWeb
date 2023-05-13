@@ -51,7 +51,7 @@ export function Header() {
       <nav>
         <Container className="relative z-50 flex justify-between py-8">
           <div className="relative z-10 flex items-center gap-16">
-            <Link href="/Users/irsyad/Desktop/code/myHadeethWeb/temp/src/pages" aria-label="Home">
+            <Link href="/" aria-label="Home">
               <Logo className="h-10 w-auto" />
             </Link>
             <div className="hidden lg:flex lg:gap-10">

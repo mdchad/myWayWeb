@@ -4,7 +4,7 @@ import clsx from 'clsx'
 export function AppStoreLink({ color = 'black' }) {
   return (
     <Link
-      href="nextjs/src/components/AppStoreLink#"
+      href="#"
       aria-label="Download on the App Store"
       className={clsx(
         'rounded-lg transition-colors',
