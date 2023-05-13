@@ -17,12 +17,6 @@ import {SearchIcon, User} from "lucide-react";
 //   )
 // }
 
-function Search() {
-  return (
-    <SearchIcon size={16}/>
-  )
-}
-
 // function MenuIcon(props) {
 //   return (
 //     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
@@ -63,7 +57,7 @@ export function AppScreen({ children, className, ...props }) {
           {/*<MenuIcon className="h-6 w-6 flex-none" />*/}
           <Greetings />
         </div>
-        <Search />
+        <SearchIcon size={16}/>
       </div>
       {children}
     </div>
