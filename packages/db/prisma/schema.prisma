@@ -10,8 +10,24 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Post {
+type Settings {
+    theme String?
+    language String?
+    fontSize String?
+    location String?
+}
+
+model Notes {
     id      String @id @default(auto()) @map("_id") @db.ObjectId
     title   String
     content String
+}
+
+model Users {
+    id          String @id @default(auto()) @map("_id") @db.ObjectId
+    email       String  @unique
+    notes       String[] @default([])
+    favourites  String[] @default([])
+    hadithRead  String[] @default([])
+    settings    Settings?
 }
