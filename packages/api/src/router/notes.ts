@@ -9,5 +9,5 @@ export const notesRouter = router({
     .input(z.object({ title: z.string(), content: z.string() }))
     .mutation(({ ctx, input }) => {
       return ctx.prisma.notes.create({ data: input });
-    })
+    }),
 });

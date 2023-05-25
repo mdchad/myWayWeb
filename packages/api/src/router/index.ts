@@ -6,7 +6,7 @@ import { notesRouter } from "./notes";
 export const appRouter = router({
   auth: authRouter,
   users: userRouter,
-  notes: notesRouter
+  notes: notesRouter,
 });
 
 // export type definition of API
