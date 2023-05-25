@@ -16,6 +16,8 @@ import { Fragment } from 'react'
 import { Menu, Popover, Transition } from '@headlessui/react'
 import { Menu as MenuIcon, Bell, X, Search } from 'lucide-react'
 import Forms from "@/components/Forms";
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 const user = {
   name: 'Tom Cook',
@@ -24,11 +26,10 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 const navigation = [
-  { name: 'Home', href: '#', current: true },
-  { name: 'Profile', href: '#', current: false },
-  { name: 'Resources', href: '#', current: false },
-  { name: 'Company Directory', href: '#', current: false },
-  { name: 'Openings', href: '#', current: false },
+  { name: 'Hadith', href: '#', current: true },
+  { name: 'Volume', href: '#', current: false },
+  { name: 'Books', href: '#', current: false },
+  { name: 'Chapter', href: '#', current: false },
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
@@ -107,25 +108,25 @@ export default function Dashboard() {
                   </div>
 
                   {/* Search */}
-                  <div className="min-w-0 flex-1 px-12 lg:hidden">
-                    <div className="mx-auto w-full max-w-xs">
-                      <label htmlFor="desktop-search" className="sr-only">
-                        Search
-                      </label>
-                      <div className="relative text-white focus-within:text-gray-600">
-                        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                          <Search size={20} color={'white'} aria-hidden="true" />
-                        </div>
-                        <input
-                          id="desktop-search"
-                          className="block w-full rounded-md border-0 bg-white/20 py-1.5 pl-10 pr-3 text-white placeholder:text-white focus:bg-white focus:text-gray-900 focus:ring-0 focus:placeholder:text-gray-500 sm:text-sm sm:leading-6"
-                          placeholder="Search"
-                          type="search"
-                          name="search"
-                        />
-                      </div>
-                    </div>
-                  </div>
+                  {/*<div className="min-w-0 flex-1 px-12 lg:hidden">*/}
+                  {/*  <div className="mx-auto w-full max-w-xs">*/}
+                  {/*    <label htmlFor="desktop-search" className="sr-only">*/}
+                  {/*      Search*/}
+                  {/*    </label>*/}
+                  {/*    <div className="relative text-white focus-within:text-gray-600">*/}
+                  {/*      <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">*/}
+                  {/*        <Search size={20} color={'white'} aria-hidden="true" />*/}
+                  {/*      </div>*/}
+                  {/*      <input*/}
+                  {/*        id="desktop-search"*/}
+                  {/*        className="block w-full rounded-md border-0 bg-white/20 py-1.5 pl-10 pr-3 text-white placeholder:text-white focus:bg-white focus:text-gray-900 focus:ring-0 focus:placeholder:text-gray-500 sm:text-sm sm:leading-6"*/}
+                  {/*        placeholder="Search"*/}
+                  {/*        type="search"*/}
+                  {/*        name="search"*/}
+                  {/*      />*/}
+                  {/*    </div>*/}
+                  {/*  </div>*/}
+                  {/*</div>*/}
 
                   {/* Menu button */}
                   <div className="absolute right-0 flex-shrink-0 lg:hidden">
@@ -159,25 +160,25 @@ export default function Dashboard() {
                         ))}
                       </nav>
                     </div>
-                    <div>
-                      <div className="mx-auto w-full max-w-md">
-                        <label htmlFor="mobile-search" className="sr-only">
-                          Search
-                        </label>
-                        <div className="relative text-white focus-within:text-gray-600">
-                          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                            <Search size={20} color={'white'} aria-hidden="true" />
-                          </div>
-                          <input
-                            id="mobile-search"
-                            className="block w-full rounded-md border-0 bg-white/20 py-1.5 pl-10 pr-3 text-white placeholder:text-white focus:bg-white focus:text-gray-900 focus:ring-0 focus:placeholder:text-gray-500 sm:text-sm sm:leading-6"
-                            placeholder="Search"
-                            type="search"
-                            name="search"
-                          />
-                        </div>
-                      </div>
-                    </div>
+                    {/*<div>*/}
+                    {/*  <div className="mx-auto w-full max-w-md">*/}
+                    {/*    <label htmlFor="mobile-search" className="sr-only">*/}
+                    {/*      Search*/}
+                    {/*    </label>*/}
+                    {/*    <div className="relative text-white focus-within:text-gray-600">*/}
+                    {/*      <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">*/}
+                    {/*        <Search size={20} color={'white'} aria-hidden="true" />*/}
+                    {/*      </div>*/}
+                    {/*      <input*/}
+                    {/*        id="mobile-search"*/}
+                    {/*        className="block w-full rounded-md border-0 bg-white/20 py-1.5 pl-10 pr-3 text-white placeholder:text-white focus:bg-white focus:text-gray-900 focus:ring-0 focus:placeholder:text-gray-500 sm:text-sm sm:leading-6"*/}
+                    {/*        placeholder="Search"*/}
+                    {/*        type="search"*/}
+                    {/*        name="search"*/}
+                    {/*      />*/}
+                    {/*    </div>*/}
+                    {/*  </div>*/}
+                    {/*</div>*/}
                   </div>
                 </div>
               </div>
@@ -322,7 +323,11 @@ export default function Dashboard() {
                     Section title
                   </h2>
                   <div className="overflow-hidden rounded-lg bg-white shadow">
-                    <div className="p-6">{/* Your content */}</div>
+                    <div className="p-6">
+                      <SyntaxHighlighter language="javascript" style={docco}>
+                        {}
+                      </SyntaxHighlighter>
+                    </div>
                   </div>
                 </section>
               </div>
