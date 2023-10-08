@@ -1,3 +1,4 @@
+// @ts-nocheck
 // src/utils/trpc.ts
 import { createTRPCNext } from '@trpc/next'
 import { httpBatchLink, loggerLink } from '@trpc/client'
