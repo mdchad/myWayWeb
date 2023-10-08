@@ -34,8 +34,8 @@ import {SearchIcon, User} from "lucide-react";
 function Greetings() {
   return (
     <div className="flex flex-col justify-center ml-2">
-      <p className="text-xs">Assalamualaikum,</p>
-      <p className="text-xs">Guest</p>
+      <p className="text-xs text-white">Assalamualaikum,</p>
+      <p className="text-xs text-white">Guest</p>
     </div>
   )
 }
@@ -50,14 +50,14 @@ function UserIcon() {
 
 export function AppScreen({ children, className, ...props }) {
   return (
-    <div className={clsx('flex flex-col pt-2 bg-[#EFEEB4]', className)} {...props}>
+    <div className={clsx('flex flex-col pt-2 bg-[#1C2A4F]', className)} {...props}>
       <div className="flex justify-between items-center px-4 pt-4">
         <div className="flex">
           <UserIcon className="h-6 w-6 flex-none" />
           {/*<MenuIcon className="h-6 w-6 flex-none" />*/}
           <Greetings />
         </div>
-        <SearchIcon size={16}/>
+        <SearchIcon size={16} color={'white'}/>
       </div>
       {children}
     </div>

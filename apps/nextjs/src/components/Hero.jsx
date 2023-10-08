@@ -2,6 +2,7 @@ import { useId } from 'react'
 // import Image from 'next/image'
 // import clsx from 'clsx'
 // import { motion, useInView, useMotionValue } from 'framer-motion'
+import {Bookmark, Heart, Share2} from "lucide-react";
 
 import { AppScreen } from '@/components/AppScreen'
 import { AppStoreLink } from '@/components/AppStoreLink'
@@ -16,7 +17,6 @@ import { PhoneFrame } from '@/components/PhoneFrame'
 // import logoHuffpost from '@/images/logos/huffpost.svg'
 // import logoTechcrunch from '@/images/logos/techcrunch.svg'
 // import logoWired from '@/images/logos/wired.svg'
-import initials from "initialism";
 
 let hadeeths = [
   "Sahih Bukhari",
@@ -338,16 +338,21 @@ function AppDemo() {
           {/*    </div>*/}
           {/*  </div>*/}
           {/*</div>*/}
-          <div className="pt-4">
+          <div className="grid grid-cols-2 gap-4 pt-4">
             {hadeeths.map((hadeeth, key) => {
               return (
-                <div key={key} className="bg-white mb-4 rounded-xl py-2">
-                  <div className="space-x-3 flex flex-row font-xl p-3  items-center">
-                    <div className="bg-[#dad873] rounded-xl w-12 h-12 flex items-center justify-center">
-                      <p className="text-white">{initials(hadeeth, 2)}</p>
-                    </div>
+                <div key={key} className="bg-white mb-4 rounded-xl">
+                    {/*<div className="bg-[#dad873] rounded-xl w-12 h-12 flex items-center justify-center">*/}
+                    {/*  <p className="text-white">{initials(hadeeth, 2)}</p>*/}
+                    {/*</div>*/}
                     {/*<FontAwesome5 name="book" size={16} color="black" />*/}
+                  <div className="p-6 text-center">
                     <p>{hadeeth}</p>
+                  </div>
+                  <div className="bg-[#1C2A4F] rounded-b-xl flex flex-row py-2 px-1">
+                    <Share2 color="white" size={15} absoluteStrokeWidth={2} className="mr-1" />
+                    <Heart color="white" size={15} absoluteStrokeWidth={2} className="mr-1" />
+                    <Bookmark color="white" size={15} absoluteStrokeWidth={2} className="mr-1" />
                   </div>
                 </div>
               )})}
