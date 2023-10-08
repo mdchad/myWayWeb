@@ -1,9 +1,7 @@
 import { Fragment } from 'react'
 import { Menu, Popover, Transition } from '@headlessui/react'
-import { Menu as MenuIcon, Bell, X, Search } from 'lucide-react'
+import { Menu as MenuIcon, Bell, X } from 'lucide-react'
 import Forms from "@/components/Forms";
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 const user = {
   name: 'Tom Cook',
@@ -307,13 +305,13 @@ export default function Dashboard() {
                 <h2 className="sr-only" id="section-2-title">
                   Section title
                 </h2>
-                <div className="overflow-hidden rounded-lg bg-white shadow">
-                  <div className="p-6">
-                    <SyntaxHighlighter language="javascript" style={docco}>
-                      {}
-                    </SyntaxHighlighter>
-                  </div>
-                </div>
+                {/*<div className="overflow-hidden rounded-lg bg-white shadow">*/}
+                {/*  <div className="p-6">*/}
+                {/*    <SyntaxHighlighter language="javascript" style={docco}>*/}
+                {/*      {}*/}
+                {/*    </SyntaxHighlighter>*/}
+                {/*  </div>*/}
+                {/*</div>*/}
               </section>
             </div>
           </div>
