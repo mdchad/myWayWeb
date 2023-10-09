@@ -148,7 +148,9 @@ function ReviewColumn({
 
   useEffect(() => {
     let resizeObserver = new window.ResizeObserver(() => {
-      setColumnHeight(columnRef.current.offsetHeight)
+      if (columnRef.current.offsetHeight) {
+        setColumnHeight(columnRef.current.offsetHeight)
+      }
     })
 
     resizeObserver.observe(columnRef.current)
