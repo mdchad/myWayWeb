@@ -35,9 +35,11 @@ module.exports = {
       },
       colors: ({ colors }) => ({
         gray: colors.neutral,
+        'royal-blue': '#1C2A4F'
       }),
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
+        kfgqpc: ['var(--font-KFGQPC)']
       },
       keyframes: {
         'fade-in': {

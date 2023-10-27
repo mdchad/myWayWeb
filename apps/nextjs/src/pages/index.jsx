@@ -5,8 +5,35 @@ import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { Hero } from '@/components/Hero'
 import { Reviews } from '@/components/Reviews'
+import {trpc} from "../utils/trpc";
+import {Books} from "../components/Books";
 
-export default function Home() {
+import { createServerSideHelpers } from '@trpc/react-query/server';
+import {appRouter} from "@acme/api";
+import superjson from 'superjson';
+
+
+export async function getStaticProps() {
+  const helpers = createServerSideHelpers({
+    router: appRouter,
+    ctx: {},
+    transformer: superjson, // optional - adds superjson serialization
+  });
+
+  // prefetch `post.byId`
+  const books = await prisma.books.findMany()
+
+  return {
+    props: {
+      trpcState: helpers.dehydrate(),
+      books
+    }
+  };
+}
+
+export default function Home(props) {
+  const { books } = props
+
   return (
     <>
       <Head>
@@ -16,15 +43,15 @@ export default function Home() {
           content="With this app, you can easily access a wide range of hadith in three languages, Arabic, Malay and English, making it easier for you to understand and benefit from the wisdom of the Prophet Muhammad (peace be upon him)."
         />
       </Head>
-      <Header />
       <main>
-        <Hero />
+        <Books books={books}/>
+        {/*<Hero />*/}
         {/*<PrimaryFeatures />*/}
         {/*<SecondaryFeatures />*/}
         {/*<CallToAction />*/}
-        <Reviews />
+        {/*<Reviews />*/}
         {/*<Pricing />*/}
-        <Faqs />
+        {/*<Faqs />*/}
       </main>
       <Footer />
     </>
