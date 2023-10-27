@@ -12,7 +12,7 @@ export function Books({ books }) {
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-32 mb-20 py-4 sm:py-6 lg:py-24 bg-gray-100">
-      <div className="grid grid-cols-2 gap-20">
+      <div className="grid lg:grid-cols-2 gap-20">
       { books.map(book => {
         const id = book.id_
         return (
