@@ -1,8 +1,6 @@
-import {trpc} from "../utils/trpc";
 import { useRouter } from 'next/router'
 
 export function Books({ books }) {
-  console.log(books)
   const router = useRouter()
 
   function goToBook(e, id) {

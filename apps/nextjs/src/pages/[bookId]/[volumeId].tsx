@@ -34,7 +34,6 @@ export async function getServerSideProps(ctx) {
 }
 
 export default function HadithsScreen({ hadiths }) {
-  console.log(hadiths)
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-24 mb-20 py-4 sm:py-6 lg:py-12">
       <div className="bg-royal-blue w-1/2 py-4 px-2">
