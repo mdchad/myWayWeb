@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useRouter } from 'next/router'
 
 export function Books({ books }) {

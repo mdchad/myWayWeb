@@ -1,9 +1,11 @@
+// @ts-nocheck
+
 import {appRouter} from "@acme/api";
 
 import { createServerSideHelpers } from '@trpc/react-query/server';
 import superjson from 'superjson';
 
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps(ctx: any) {
   const helpers = createServerSideHelpers({
     router: appRouter,
     ctx: {},

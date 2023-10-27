@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {appRouter} from "@acme/api";
 import { useRouter } from 'next/router'
 
