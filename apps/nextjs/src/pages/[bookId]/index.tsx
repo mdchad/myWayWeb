@@ -1,6 +1,8 @@
 // @ts-nocheck
 import {appRouter} from "@acme/api";
 import { useRouter } from 'next/router'
+import prisma from '@acme/db/index.ts";
+
 
 import { createServerSideHelpers } from '@trpc/react-query/server';
 import superjson from 'superjson';

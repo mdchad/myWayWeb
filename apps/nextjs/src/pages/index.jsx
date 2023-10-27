@@ -13,7 +13,7 @@ import {appRouter} from "@acme/api";
 import superjson from 'superjson';
 
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const helpers = createServerSideHelpers({
     router: appRouter,
     ctx: {},
