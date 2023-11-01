@@ -3,17 +3,11 @@ import { useRouter } from 'next/router'
 import {useState} from "react";
 
 export function Books({ books }) {
-  const [search, setSearch] = useState('')
   const router = useRouter()
 
   function goToBook(e, id) {
     e.preventDefault()
     router.push({ pathname: '/[bookId]', query: { bookId: id} })
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault()
-
   }
 
   return (
