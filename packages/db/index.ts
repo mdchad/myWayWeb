@@ -17,10 +17,6 @@ export const prisma =
 
 export * from "@prisma/client";
 
-if (process.env.NODE_ENV === 'production') {
-  global.prisma = new PrismaClient()
-}
-
 if (process.env.NODE_ENV !== "production") {
   global.prisma = prisma;
 }
