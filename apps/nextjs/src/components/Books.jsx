@@ -1,6 +1,5 @@
 // @ts-nocheck
 import { useRouter } from 'next/router'
-import {useState} from "react";
 
 export function Books({ books }) {
   const router = useRouter()
