@@ -1,27 +1,25 @@
 {
-  "name": "t3-turbo-and-clerk",
+  "name": "myway-web",
+  "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@7.13.0",
   "scripts": {
-    "build": "turbo build",
-    "clean": "rm -rf node_modules",
-    "clean:workspaces": "turbo clean",
-    "db-generate": "turbo db-generate",
-    "db-push": "turbo db-push",
-    "dev": "turbo dev --parallel",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "lint": "turbo lint",
-    "FIXME:lint": "turbo lint && manypkg check",
-    "type-check": "turbo type-check"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@manypkg/cli": "^0.21.0",
-    "@typescript-eslint/eslint-plugin": "^6.7.4",
-    "@typescript-eslint/parser": "^6.7.4",
-    "eslint": "^8.51.0",
-    "prettier": "^3.0.3",
-    "prettier-plugin-tailwindcss": "^0.5.5",
-    "turbo": "^1.10.15",
-    "typescript": "^5.2.2"
+    "@headlessui/react": "^1.7.17",
+    "clsx": "^2.0.0",
+    "framer-motion": "^10.16.4",
+    "mongodb": "^6.2.0",
+    "next": "14.0.1",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.0.1",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0"
   }
 }
