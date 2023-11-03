@@ -10,6 +10,9 @@ dependencies:
   framer-motion:
     specifier: ^10.16.4
     version: 10.16.4(react-dom@18.0.0)(react@18.0.0)
+  lucide-react:
+    specifier: ^0.291.0
+    version: 0.291.0(react@18.0.0)
   mongodb:
     specifier: ^6.2.0
     version: 6.2.0
@@ -556,6 +559,14 @@ packages:
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
+    dev: false
+
+  /lucide-react@0.291.0(react@18.0.0):
+    resolution: {integrity: sha512-79jHlT9Je2PXSvXIBGDkItCK7In2O9iKnnSJ/bJxvIBOFaX2Ex0xEcC4fRS/g0F2uQGFejjmn2qWhwdc5wicMQ==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.0.0
     dev: false
 
   /memory-pager@1.5.0:

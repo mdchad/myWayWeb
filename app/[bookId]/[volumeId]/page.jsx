@@ -43,7 +43,7 @@ export default async function Hadiths({ params }) {
                     }
 
                     return (
-                      <div key={i} style={{ gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))"}} className={`gap-12 grid p-8 bg-white shadow-sm`}>
+                      <div key={i} id={hadith.number} style={{ gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))"}} className={`gap-12 grid p-8 bg-white shadow-sm`}>
                         <p className="text-md text-justify whitespace-pre-line font-arabicSymbol">{content.ms}</p>
                         <p dir="rtl" className="text-xl text-justify whitespace-pre-line font-arabic">{content.ar}</p>
                       </div>
@@ -61,7 +61,7 @@ export default async function Hadiths({ params }) {
                     return
                   }
                   return (
-                    <div key={i} style={{ gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))"}} className={`gap-12 grid p-8 bg-white shadow-sm ${length < 2 && "rounded-lg"}`}>
+                    <div key={i} id={hadith.number} style={{ gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))"}} className={`gap-12 grid p-8 bg-white shadow-sm ${length < 2 && "rounded-lg"}`}>
                       <p className="text-md text-justify whitespace-pre-line font-arabicSymbol">{content.ms}</p>
                       <p dir="rtl" className="text-xl text-justify whitespace-pre-line font-arabic">{content.ar}</p>
                     </div>

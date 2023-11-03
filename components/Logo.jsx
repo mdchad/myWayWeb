@@ -4,6 +4,7 @@ export function Logomark() {
   return (
     <Image src="/logo.png"
            alt="Picture of the logo"
+           className="border border-royal-blue px-2 rounded-xl"
            width={70}
            height={70}
     />

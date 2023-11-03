@@ -8,6 +8,8 @@ import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { Logo } from '@/components/Logo'
 import { NavLinks } from '@/components/NavLinks'
+import {useEffect, useState} from "react";
+import {useRouter, useSearchParams} from "next/navigation";
 
 function MenuIcon(props) {
   return (
@@ -48,6 +50,25 @@ function MobileNavLink({ children, ...props }) {
 }
 
 export function Header() {
+  const searchParams = useSearchParams();
+  const term = searchParams.get('term')
+
+  const router = useRouter()
+  const [searchTerm, setSearchTerm] = useState(term ? term : '')
+
+  useEffect(() => {
+    setSearchTerm(term ? term : '')
+  }, [term])
+
+  function handleChange(e) {
+    setSearchTerm(e.target.value)
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    await router.push(`search?term=${encodeURIComponent(searchTerm)}&page=1`)
+  }
+
   return (
     <header>
       <nav>
@@ -59,6 +80,10 @@ export function Header() {
             <div className="hidden lg:flex lg:gap-10">
               <NavLinks />
             </div>
+            <form onSubmit={handleSubmit} className="flex space-x-2">
+              <input onChange={handleChange} value={searchTerm} className="text-sm border-gray-300 border rounded-md p-2" placeholder="Search..."/>
+              <button className="bg-royal-blue text-white p-2 rounded-md text-sm">Search</button>
+            </form>
           </div>
           <div className="flex items-center gap-6">
             <Popover className="lg:hidden">
