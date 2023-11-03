@@ -5,7 +5,7 @@ import {Header} from "@/components/Header";
 
 export const metadata = {
   title: 'My Way',
-  description: 'Hadith of Prophet Muhammad',
+  description: 'Hadiths of Prophet Muhammad',
 }
 
 export default function RootLayout({ children }) {
