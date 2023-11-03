@@ -54,16 +54,16 @@ export default async function Search({ searchParams }) {
       <div className="bg-royal-blue py-6 px-4">
         <p className="text-xl font-bold text-white">Search Result: {searchParams.term}</p>
       </div>
-      <div className="grid grid-cols-1 justify-items-end">
+      <div className="mt-8 grid grid-cols-1 justify-items-end">
         <Pagination count={count}/>
       </div>
-      <div className="mt-12 p-4 bg-gray-100 grid gap-2">
+      <div className="mt-2 p-4 bg-gray-100 grid gap-2">
         {documents.map(data => {
           const id = data._id
           return (
             // <Link key={id} href={`/${params.bookId}/${vol.id}`}>
-              <div key={id}>
-                <div className="flex items-center gap-2 pt-4 pb-2">
+              <div key={id} className="grid">
+                <div className="flex flex-wrap items-center gap-1 pt-4 pb-2">
                   <Link href={`/${data.book_id}`}><p className="text-royal-blue hover:underline font-sans text-sm font-semibold">{data.book_title?.ms}</p></Link>
                   <span className="text-xs"><ChevronRightSquare color="black" size={18} /></span>
                   <Link href={`/${data.book_id}/${data.volume_id}`}><p className="text-royal-blue hover:underline font-sans text-sm font-semibold">{data.volume_title?.ms}</p></Link>
@@ -73,16 +73,14 @@ export default async function Search({ searchParams }) {
                 {
                   data.content?.map((content, i) => {
                     return (
-                      <div key={i} style={{ gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))"}} className={`gap-12 grid p-8 bg-white shadow-sm`}>
-                        <p className="text-md text-justify whitespace-pre-line font-arabicSymbol">{content.ms}</p>
-                        <p dir="rtl" className="text-xl text-justify whitespace-pre-line font-arabic">{content.ar}</p>
+                      <div key={i} className="grid-cols-1 lg:grid-cols-2 gap-12 grid p-8 bg-white shadow-sm">
+                        <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">{content.ms}</p>
+                        <p dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic">{content.ar}</p>
                       </div>
                     )
                   })
                 }
-                {/*<p className="text-xl text-2xl max-w-xs text-right font-arabic">{vol.title.ar}</p>*/}
               </div>
-            // </Link>
           )
         })}
       </div>

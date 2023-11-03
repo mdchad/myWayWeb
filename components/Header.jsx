@@ -80,7 +80,7 @@ export function Header() {
             <div className="hidden lg:flex lg:gap-10">
               <NavLinks />
             </div>
-            <form onSubmit={handleSubmit} className="flex space-x-2">
+            <form onSubmit={handleSubmit} className="hidden lg:flex space-x-2">
               <input onChange={handleChange} value={searchTerm} className="text-sm border-gray-300 border rounded-md p-2" placeholder="Search..."/>
               <button className="bg-royal-blue text-white p-2 rounded-md text-sm">Search</button>
             </form>
@@ -140,7 +140,10 @@ export function Header() {
                             {/*<Button href="/login" variant="outline">*/}
                             {/*  Log in*/}
                             {/*</Button>*/}
-                            <Button href="#" className="bg-[#433E0E]">Download the app</Button>
+                            <form onSubmit={handleSubmit} className="flex space-x-2">
+                              <input onChange={handleChange} value={searchTerm} className="text-sm border-gray-300 border rounded-md p-2" placeholder="Search..."/>
+                              <button className="bg-royal-blue text-white p-2 rounded-md text-sm">Search</button>
+                            </form>
                           </div>
                         </Popover.Panel>
                       </>
