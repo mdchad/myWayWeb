@@ -13,7 +13,7 @@ export default async function Hadiths({ params }) {
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-24 mb-20 py-4 sm:py-6 lg:py-12">
       <div className="bg-royal-blue py-4 px-2">
         <p className="text-2xl font-bold text-white text-center capitalize font-sans">{hadiths[0]?.volume_title.ms.toLowerCase()}</p>
-        <p className="text-3xl font-bold text-white text-center">{hadiths[0]?.volume_title.ar}</p>
+        <p className="text-3xl font-arabic font-bold text-white text-center">{hadiths[0]?.volume_title.ar}</p>
       </div>
       <div className="mt-12 p-4 bg-gray-100 grid gap-3">
         {hadiths.map(hadith => {
