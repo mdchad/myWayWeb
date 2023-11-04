@@ -11,7 +11,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${arabicFont.variable} ${arabicSymbolFont.variable}`}>
+    <html lang="en" className={`${inter.variable} ${arabicFont.variable} ${arabicSymbolFont.variable}`} content="text/html; charset=utf-8">
       <body>
         <NextTopLoader />
         <Header />

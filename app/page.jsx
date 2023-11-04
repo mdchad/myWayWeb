@@ -4,7 +4,7 @@ import Link from "next/link";
 async function getData() {
   const db = await connectToDatabase();
 
-  return await db.collection('Books').find({}).toArray();
+  return await db.collection('Books').find({}).sort({ _id: 1}).toArray();
 }
 
 export default async function Home() {

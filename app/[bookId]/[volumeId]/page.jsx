@@ -13,7 +13,7 @@ export default async function Hadiths({ params }) {
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-24 mb-20 py-4 sm:py-6 lg:py-12">
       <div className="bg-royal-blue py-4 px-2">
         <p className="text-2xl font-bold text-white text-center capitalize font-sans">{hadiths[0]?.volume_title.ms.toLowerCase()}</p>
-        <p className="text-3xl font-arabic font-bold text-white text-center">{hadiths[0]?.volume_title.ar}</p>
+        <p lang="ar" className="text-3xl font-arabic font-bold text-white text-center">{hadiths[0]?.volume_title.ar}</p>
       </div>
       <div className="mt-12 p-4 bg-gray-100 grid gap-3">
         {hadiths.map(hadith => {
@@ -26,12 +26,12 @@ export default async function Hadiths({ params }) {
                     <p className="font-sans font-bold text-sm text-justify text-gray-500">{hadith?.chapter_title?.ms}</p>
                     <p className="font-sans font-normal text-sm text-justify text-gray-500">{hadith?.chapter_transliteration?.ms}</p>
                   </div>
-                  <p dir="rtl" className="font-bold text-gray-500 text-lg text-justify font-arabic">{hadith?.chapter_title?.ar}</p>
+                  <p lang="ar" dir="rtl" className="font-bold text-gray-500 text-lg text-justify font-arabic">{hadith?.chapter_title?.ar}</p>
                   {
                     hadith?.chapter_metadata.ms && (
                       <>
                         <p className="text-md text-justify whitespace-pre-line font-arabicSymbol">{hadith?.chapter_metadata?.ms}</p>
-                        <p dir="rtl" className="text-xl text-justify whitespace-pre-line font-arabic">{hadith?.chapter_metadata?.ar}</p>
+                        <p lang="ar" dir="rtl" className="text-xl text-justify whitespace-pre-line font-arabic">{hadith?.chapter_metadata?.ar}</p>
                       </>
                     )
                   }
@@ -45,7 +45,7 @@ export default async function Hadiths({ params }) {
                     return (
                       <div key={i} id={hadith.number} className="grid-cols-1 lg:grid-cols-2 gap-12 grid p-8 bg-white shadow-sm">
                         <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">{content.ms}</p>
-                        <p dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic">{content.ar}</p>
+                        <p lang="ar" dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic">{content.ar}</p>
                       </div>
                     )
                   })
@@ -63,7 +63,7 @@ export default async function Hadiths({ params }) {
                   return (
                     <div key={i} id={hadith.number} className={`grid-cols-1 lg:grid-cols-2 gap-12 grid p-8 bg-white shadow-sm ${length < 2 && "rounded-lg"}`}>
                       <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">{content.ms}</p>
-                      <p dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic">{content.ar}</p>
+                      <p lang="ar" dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic">{content.ar}</p>
                     </div>
                   )
                 })

@@ -32,7 +32,7 @@ module.exports = {
       }),
       fontFamily: {
         sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
-        arabic: ['var(--font-arabic)'],
+        arabic: ['var(--font-arabic)', ...defaultTheme.fontFamily.sans],
         arabicSymbol: ['var(--font-arabic-symbol)']
       },
       keyframes: {
