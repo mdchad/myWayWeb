@@ -10,7 +10,7 @@ export async function GET(req) {
   const volumeId = params.volumeId
   console.log('volumeId', volumeId)
 
-  const data = await db.collection('Hadiths').find({ volume_id: new ObjectId(volumeId), book_id: new ObjectId(bookId) }).sort({ number: 1 }).toArray();
+  const data = await db.collection('Hadiths').find({ volume_id: volumeId, book_id: bookId }).sort({ number: 1 }).toArray();
 
   return NextResponse.json({
     success: true,

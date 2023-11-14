@@ -10,7 +10,7 @@ export async function GET(req) {
   const bookId = params.bookId
   console.log('bookId', bookId)
 
-  const data = await db.collection('Volumes').find({book_id: new ObjectId(bookId)}).toArray();
+  const data = await db.collection('Volumes').find({book_id: new bookId}).toArray();
 
   return NextResponse.json({
     success: true,
