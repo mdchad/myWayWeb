@@ -3,6 +3,7 @@ import {NextResponse} from "next/server";
 
 export async function GET(req, { params }) {
   const db = await connectToDatabase();
+  console.log('params', params)
   const bookId = params.bookId
   const volumeId = params.volumeId
   console.log('volumeId', volumeId)
