@@ -1,11 +1,11 @@
 import connectToDatabase from "@/lib/mongodb";
-import {NextRequest, NextResponse} from "next/server";
-import {ObjectId} from "mongodb";
-
+import {NextResponse} from "next/server";
 
 export async function GET(req) {
-  const params = req.params
   const db = await connectToDatabase();
+  const params = req.params
+  console.log('params', params)
+
   const bookId = params.bookId
   const volumeId = params.volumeId
   console.log('volumeId', volumeId)
