@@ -3,10 +3,8 @@ import {NextResponse} from "next/server";
 
 export async function GET(req) {
   const db = await connectToDatabase();
-  const params = req.params
-  console.log('params', params)
-
-  const bookId = params.bookId
+  const { searchParams } = new URL(req.url)
+  const bookId = searchParams.get('bookId')
   console.log('bookId', bookId)
 
   const data = await db.collection('Volumes').find({book_id: new bookId}).toArray();

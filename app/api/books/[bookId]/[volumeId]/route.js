@@ -3,11 +3,9 @@ import {NextResponse} from "next/server";
 
 export async function GET(req) {
   const db = await connectToDatabase();
-  const params = req.params
-  console.log('params', params)
-
-  const bookId = params.bookId
-  const volumeId = params.volumeId
+  const { searchParams } = new URL(req.url)
+  const bookId = searchParams.get('bookId')
+  const volumeId = searchParams.get('volumeId')
   console.log('volumeId', volumeId)
 
   const data = await db.collection('Hadiths').find({ volume_id: volumeId, book_id: bookId }).sort({ number: 1 }).toArray();
