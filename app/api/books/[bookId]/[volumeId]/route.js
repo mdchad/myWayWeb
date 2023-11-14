@@ -8,6 +8,7 @@ export async function GET(req) {
   const db = await connectToDatabase();
   const bookId = params.bookId
   const volumeId = params.volumeId
+  console.log('volumeId', volumeId)
 
   const data = await db.collection('Hadiths').find({ volume_id: new ObjectId(volumeId), book_id: new ObjectId(bookId) }).sort({ number: 1 }).toArray();
 
