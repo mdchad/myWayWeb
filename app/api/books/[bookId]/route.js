@@ -1,5 +1,6 @@
 import connectToDatabase from "@/lib/mongodb";
 import {NextRequest, NextResponse} from "next/server";
+import {ObjectId} from "mongodb";
 
 
 export async function GET(req) {
@@ -8,7 +9,7 @@ export async function GET(req) {
   const db = await connectToDatabase();
   const bookId = params.bookId
 
-  const data = await db.collection('Volumes').find({book_id: bookId}).toArray();
+  const data = await db.collection('Volumes').find({book_id: new ObjectId(bookId)}).toArray();
 
   return NextResponse.json({
     success: true,
