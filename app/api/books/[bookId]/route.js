@@ -6,10 +6,10 @@ export async function GET(request, context) {
   const bookId = context.params.bookId
   console.log('bookId', bookId)
 
-  const data = await db.collection('Volumes').find({ book_id: new bookId }).toArray();
+  // const data = await db.collection('Volumes').find({ book_id: new bookId }).toArray();
 
   return NextResponse.json({
     success: true,
-    data: data
+    // data: data
   })
 }
