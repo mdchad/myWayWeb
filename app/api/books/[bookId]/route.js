@@ -1,13 +1,12 @@
 import connectToDatabase from "@/lib/mongodb";
 import {NextResponse} from "next/server";
 
-export async function GET(req, { params }) {
+export async function GET(request, context) {
   const db = await connectToDatabase();
-  console.log('params', params)
-  const bookId = params.bookId
+  const bookId = context.params.bookId
   console.log('bookId', bookId)
 
-  const data = await db.collection('Volumes').find({book_id: new bookId}).toArray();
+  const data = await db.collection('Volumes').find({ book_id: new bookId }).toArray();
 
   return NextResponse.json({
     success: true,

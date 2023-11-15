@@ -1,11 +1,10 @@
 import connectToDatabase from "@/lib/mongodb";
 import {NextResponse} from "next/server";
 
-export async function GET(req, { params }) {
+export async function GET(request, context) {
   const db = await connectToDatabase();
-  console.log('params', params)
-  const bookId = params.bookId
-  const volumeId = params.volumeId
+  const bookId = context.params.bookId
+  const volumeId = context.params.volumeId
   console.log('volumeId', volumeId)
 
   const data = await db.collection('Hadiths').find({ volume_id: volumeId, book_id: bookId }).sort({ number: 1 }).toArray();
