@@ -5,7 +5,7 @@ export async function GET(request, { params }) {
   const db = await connectToDatabase();
   const bookId = params.bookId
 
-  const data = await db.collection('Volumes').find({ book_id: bookId }).toArray();
+  const data = await db.collection('Volumes').find({ book_id: bookId }).sort({ _id: 1 }).toArray();
 
   return NextResponse.json({
     success: true,
