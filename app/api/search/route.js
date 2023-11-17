@@ -2,7 +2,7 @@ import connectToDatabase from "@/lib/mongodb";
 import {NextResponse} from "next/server";
 
 
-export async function POST(request) {
+export async function GET(request) {
   const db = await connectToDatabase();
   const searchParams = request.nextUrl.searchParams
 
