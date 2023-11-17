@@ -6,9 +6,13 @@ export async function GET(request) {
   const db = await connectToDatabase();
   const searchParams = request.nextUrl.searchParams
 
-  const page = searchParams.get('page')
-  const limit = searchParams.get('limit')
+  const page = Number(searchParams.get('page'))
+  const limit = Number(searchParams.get('limit'))
   const query = searchParams.get('query')
+
+  console.log(page)
+  console.log(limit)
+  console.log(query)
 
   const skip = (page - 1) * limit;
 
