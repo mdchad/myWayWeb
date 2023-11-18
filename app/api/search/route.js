@@ -10,10 +10,6 @@ export async function GET(request) {
   const limit = Number(searchParams.get('limit'))
   const query = searchParams.get('query')
 
-  console.log(page)
-  console.log(limit)
-  console.log(query)
-
   const skip = (page - 1) * limit;
 
   const cursor = await db.collection('Hadiths').aggregate([
