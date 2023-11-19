@@ -36,6 +36,11 @@ export async function GET(request) {
           { $count: "count" } // Count the total number of matching documents
         ]
       }
+    },
+    {
+      $addFields: {
+        currentPage: page // Add the current page number to the result
+      }
     }
     // {
     //   $project: {
