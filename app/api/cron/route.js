@@ -8,7 +8,7 @@ export async function GET(request) {
   const hadith = await db.collection('Hadiths').aggregate([{ $sample: { size: 1 } }]).toArray();
 
   // Cache the Hadith in Vercel KV
-  await kv.set('hadithOfTheDay', JSON.stringify(hadith[0]));
+  await kv.set('todayHadith', hadith[0]);
 
   return NextResponse.json({
     success: true
