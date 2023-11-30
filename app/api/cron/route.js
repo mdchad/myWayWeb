@@ -2,7 +2,9 @@ import connectToDatabase from "@/lib/mongodb";
 import {NextResponse} from "next/server";
 import { kv } from '@vercel/kv'
 
-export async function GET(request) {
+export const revalidate = 0
+export async function GET() {
+  console.log('hit cron')
   const db = await connectToDatabase();
 
   console.log('hit cron')
