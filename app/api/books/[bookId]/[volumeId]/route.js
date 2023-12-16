@@ -14,3 +14,4 @@ export async function GET(request, { params }) {
     data: data
   })
 }
+export const dynamic = "force-dynamic";
