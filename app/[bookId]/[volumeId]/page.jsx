@@ -1,4 +1,6 @@
 import connectToDatabase from "@/lib/mongodb";
+import {FileEditIcon} from "lucide-react";
+import {Button} from "@/components/Button";
 
 export const dynamic = "force-dynamic";
 export const revalidate = false
@@ -47,9 +49,14 @@ export default async function Hadiths({ params }) {
                     }
 
                     return (
-                      <div key={i} id={hadith.number} className="grid-cols-1 lg:grid-cols-2 gap-12 grid p-8 bg-white shadow-sm">
-                        <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">{content.ms}</p>
-                        <p lang="ar" dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic">{content.ar}</p>
+                      <div key={i} className="bg-white shadow-sm p-8 space-y-2">
+                        <div id={hadith.number} className="grid-cols-1 lg:grid-cols-2 gap-12 grid">
+                          <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">{content.ms}</p>
+                          <p lang="ar" dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic">{content.ar}</p>
+                        </div>
+                        <Button href={`/admin/${hadith._id}`} className="p-2 rounded-md">
+                          <FileEditIcon size={16} color={'white'} />
+                        </Button>
                       </div>
                     )
                   })
@@ -65,9 +72,14 @@ export default async function Hadiths({ params }) {
                     return
                   }
                   return (
-                    <div key={i} id={hadith.number} className={`grid-cols-1 lg:grid-cols-2 gap-12 grid p-8 bg-white shadow-sm ${length < 2 && "rounded-lg"}`}>
-                      <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">{content.ms}</p>
-                      <p lang="ar" dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic">{content.ar}</p>
+                    <div key={i} className={`p-8 bg-white shadow-sm ${length < 2 && "rounded-lg"}`}>
+                      <div id={hadith.number} className={`grid-cols-1 lg:grid-cols-2 gap-12 grid`}>
+                        <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">{content.ms}</p>
+                        <p lang="ar" dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic">{content.ar}</p>
+                      </div>
+                      <Button href={`/admin/${hadith._id}`} className="bg-gray-100 p-2 rounded-md hover:bg-gray-300">
+                        <FileEditIcon size={16} color={'white'} />
+                      </Button>
                     </div>
                   )
                 })
