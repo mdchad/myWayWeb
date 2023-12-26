@@ -54,13 +54,14 @@ export default async function Hadiths({ params }) {
                           <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">{content.ms}</p>
                           <p lang="ar" dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic">{content.ar}</p>
                         </div>
-                        <Button href={`/admin/${hadith._id}`} className="p-2 rounded-md">
-                          <FileEditIcon size={16} color={'white'} />
-                        </Button>
                       </div>
                     )
                   })
                 }
+                <Button href={`/admin/${hadith._id}`} className="mt-2">
+                  Edit
+                  <FileEditIcon size={16} color={'white'} />
+                </Button>
               </div>
             )
           }
@@ -77,13 +78,14 @@ export default async function Hadiths({ params }) {
                         <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">{content.ms}</p>
                         <p lang="ar" dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic">{content.ar}</p>
                       </div>
-                      <Button href={`/admin/${hadith._id}`} className="bg-gray-100 p-2 rounded-md hover:bg-gray-300">
-                        <FileEditIcon size={16} color={'white'} />
-                      </Button>
                     </div>
                   )
                 })
               }
+              <Button href={`/admin/${hadith._id}`} className="mt-2">
+                Edit
+                <FileEditIcon size={16} color={'white'} />
+              </Button>
             </div>
           )
         })}

@@ -13,3 +13,19 @@ export async function GET(request, { params }) {
     data: data
   })
 }
+
+export async function PUT(request, { params }) {
+  const db = await connectToDatabase();
+  const id = params.id
+  const body = await request.json()
+  delete body._id
+  console.log(body)
+  console.log(id)
+
+  const data = await db.collection('Hadiths').updateOne({ _id: new ObjectId(id) }, { $set: { ...body }})
+
+  return NextResponse.json({
+    success: true,
+    data: body
+  })
+}

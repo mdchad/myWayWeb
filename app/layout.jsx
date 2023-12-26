@@ -2,6 +2,7 @@ import './globals.css'
 import {arabicFont, inter, arabicSymbolFont} from "@/app/font";
 import {Footer} from "@/components/Footer";
 import {Header} from "@/components/Header";
+import { Toaster } from "@/components/ui/toaster"
 import NextTopLoader from 'nextjs-toploader';
 
 export const metadata = {
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
           <Header />
           {children}
           <Footer />
+          <Toaster />
         </body>
       </html>
   )
