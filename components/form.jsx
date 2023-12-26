@@ -215,6 +215,8 @@ export function HadithForm({ data }) {
                 <div>
                   <Label htmlFor="ar">Arabic</Label>
                   <Textarea value={value.content[index].ar}
+                            lang="ar"
+                            dir="rtl"
                             className="font-arabic"
                             onChange={(e) => {
                               const updatedContent = [...value.content];
@@ -276,7 +278,7 @@ export function HadithForm({ data }) {
           <div className="space-y-4">
             <Label>Chapter</Label>
             <Input value={value.chapter_title.ms} placeholder="Malay" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, ms: e.target.value } }) }/>
-            <Input value={value.chapter_title.ar} placeholder="Arabic" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, ar: e.target.value } }) }/>
+            <Input classname="font-arabic" value={value.chapter_title.ar} placeholder="Arabic" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, ar: e.target.value } }) }/>
             <Input value={value.chapter_transliteration.ms} placeholder="Transliteration" onChange={(e) => setValue({ ...value, chapter_transliteration: { ...value.chapter_transliteration, ms: e.target.value } }) }/>
             <Textarea value={value.chapter_metadata.ms} placeholder="Metadata" onChange={(e) => setValue({ ...value, chapter_metadata: e.target.value }) }/>
           </div>
