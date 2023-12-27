@@ -8,6 +8,7 @@ const Pagination = ({ count }) => {
   const searchParams = useSearchParams();
   const term = searchParams.get('term');
   const currentPage = parseInt(searchParams.get("page"), 10) || 1;
+  const books = searchParams.get("books") || "";
 
   const totalCount = count; // Replace with the actual total count of collections
   const itemsPerPage = 10;
@@ -38,16 +39,16 @@ const Pagination = ({ count }) => {
   }
 
   return (
-    <nav>
+    <nav className="flex flex-col">
       <p className="text-right my-2 font-sans text-sm">Showing {startIndex} - {endIndex} of {totalCount}</p>
-      <ul className='flex list-none'>
+      <ul className='flex list-none justify-end'>
         {pageNumbers.map((number, i) => (
           <li key={i}>
             {number === '...' ? (
               <span className="px-4 py-2 mx-1">{number}</span>
             ) : (
               <Link
-                href={`/search?term=${encodeURIComponent(term)}&page=${number}`}
+                href={`/search?term=${encodeURIComponent(term)}&page=${number}&books=${books}`}
                 className={`${currentPage === number ? 'bg-royal-blue text-white' : 'hover:bg-gray-100 text-black'} shadow-md text-sm px-2 py-1 mx-1 rounded`}
               >
                 {number}

@@ -2,51 +2,104 @@ import connectToDatabase from "@/lib/mongodb";
 import Link from "next/link";
 import { ChevronRightSquare } from "lucide-react";
 import Pagination from "@/components/Pagination";
+import React from "react";
 
-async function getData(terms, page, limit = 10) {
+async function getData(terms, page, selectedBooks = [], limit = 10) {
+  console.log('selected', selectedBooks)
   const db = await connectToDatabase();
 
   const skip = (page - 1) * limit;
 
-  const cursor = await db.collection('Hadiths').aggregate([
-    {
-      $search: {
-        index: "content",
-        text: {
-          query: terms,
-          path: ['content.ms', 'content.ar']
-        },
-        highlight: {
-          path: ['content.ms', 'content.ar'],
-        }
-      }
-    },
-    {
-      $facet: {
-        documents: [
-          { $skip: skip }, // Skip documents for previous pages
-          { $limit: limit }, // Limit to 'limit' number of documents for the current page
-          // Include additional $project here if you want to shape the results
+  let pagination = {
+    $facet: {
+      documents: [
+        { $skip: skip }, // Skip documents for previous pages
+        { $limit: limit }, // Limit to 'limit' number of documents for the current page
+        // Include additional $project here if you want to shape the results
+      ],
+      totalCount: [
+        { $count: "count" } // Count the total number of matching documents
+      ]
+    }
+  }
+
+  let searchQuery = {
+    $search: {
+      index: 'content',
+      compound: {
+        must: [
+          {
+            text: {
+              query: terms,
+              // path: ['content', 'volumeTitle'] // Search in both content and volume title
+              path: ['content.ms', 'content.ar']
+            }
+          }
         ],
-        totalCount: [
-          { $count: "count" } // Count the total number of matching documents
-        ]
+        filter: [],
+        // minimumShouldMatch: 1 // Adjust based on your filtering logic
       }
     }
-    // {
-    //   $project: {
-    //     "content.ms": 1,
-    //     "_id": 0,
-    //     "highlights": { "$meta": "searchHighlights" }
-    //   }
-    // }
-  ]);
+  };
+
+// Dynamically add filters for selected books
+  if (selectedBooks.length > 0) {
+    selectedBooks.forEach(book => {
+      searchQuery.$search.compound.filter.push({
+        text: {
+          path: 'book_name', // Assuming 'title' is the field with the book title
+          query: book
+        }
+      });
+    });
+  } else {
+    // If no specific books are selected, adjust minimumShouldMatch
+    delete searchQuery.$search.compound.filter;
+  }
+
+  // console.log(JSON.stringify({ ...searchQuery, ...pagination }, null , 2))
+  const cursor = await db.collection('Hadiths').aggregate([searchQuery, pagination])
+
+  // const cursor = await db.collection('Hadiths').aggregate([
+  //   {
+  //     $search: {
+  //       index: "content",
+  //       text: {
+  //         query: terms,
+  //         path: ['content.ms', 'content.ar']
+  //       },
+  //       highlight: {
+  //         path: ['content.ms', 'content.ar'],
+  //       }
+  //     }
+  //   },
+  //   {
+  //     $facet: {
+  //       documents: [
+  //         { $skip: skip }, // Skip documents for previous pages
+  //         { $limit: limit }, // Limit to 'limit' number of documents for the current page
+  //         // Include additional $project here if you want to shape the results
+  //       ],
+  //       totalCount: [
+  //         { $count: "count" } // Count the total number of matching documents
+  //       ]
+  //     }
+  //   }
+  //   // {
+  //   //   $project: {
+  //   //     "content.ms": 1,
+  //   //     "_id": 0,
+  //   //     "highlights": { "$meta": "searchHighlights" }
+  //   //   }
+  //   // }
+  // ]);
 
   return await cursor.toArray();
 }
 
 export default async function Search({ searchParams }) {
-  const result = await getData(searchParams.term, searchParams.page)
+  const selectedBooks = searchParams?.books ? searchParams.books.split(',') : []
+  const result = await getData(searchParams.term, searchParams.page, selectedBooks)
   const [{ documents, totalCount: [{count}] } ] = result
 
   return (
@@ -54,8 +107,46 @@ export default async function Search({ searchParams }) {
       <div className="bg-royal-blue py-6 px-4">
         <p className="text-xl font-bold text-white">Search Result: {searchParams.term}</p>
       </div>
-      <div className="mt-8 grid grid-cols-1 justify-items-end">
-        <Pagination count={count}/>
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2">
+        <div className="flex flex-wrap flex-col md:flex-row gap-2">
+          <Link
+            className={`text-sm rounded-md border border-royal-blue p-2 ${searchParams.books === 'sahih_bukhari' ? 'bg-royal-blue text-white' : ''}`}
+            href={`/search?term=${encodeURIComponent(searchParams.term)}&page=${1}&books=sahih_bukhari`}
+          >
+            Sahih al-Bukhari
+          </Link>
+          <Link
+            className={`text-sm rounded-md border border-royal-blue p-2 ${searchParams.books === 'sahih_muslim' ? 'bg-royal-blue text-white' : ''}`}
+            href={`/search?term=${encodeURIComponent(searchParams.term)}&page=${1}&books=sahih_muslim`}
+          >
+            Sahih Muslim
+          </Link>
+          <Link
+            className={`text-sm rounded-md border border-royal-blue p-2 ${searchParams.books === 'sunan_abi_daud' ? 'bg-royal-blue text-white' : ''}`}
+            href={`/search?term=${encodeURIComponent(searchParams.term)}&page=${1}&books=sunan_abi_daud`}
+          >
+            Sunan Abu Dawud
+          </Link>
+          <Link
+            className={`text-sm rounded-md border border-royal-blue p-2 ${searchParams.books === 'jami_al_tirmidhi' ? 'bg-royal-blue text-white' : ''}`}
+            href={`/search?term=${encodeURIComponent(searchParams.term)}&page=${1}&books=jami_al_tirmidhi`}
+          >
+            Jami’ Al-Tirmidhi
+          </Link>
+          <Link
+            className={`text-sm rounded-md border border-royal-blue p-2 ${searchParams.books === 'sunan_ibnu_majah' ? 'bg-royal-blue text-white' : ''}`}
+            href={`/search?term=${encodeURIComponent(searchParams.term)}&page=${1}&books=sunan_ibnu_majah`}
+          >
+            Sunan Ibn Majah
+          </Link>
+          <Link
+            className={`text-sm rounded-md border border-royal-blue p-2 ${searchParams.books === 'sunan_an_nasai' ? 'bg-royal-blue text-white' : ''}`}
+            href={`/search?term=${encodeURIComponent(searchParams.term)}&page=${searchParams.page}&books=sunan_an_nasai`}
+          >
+            Sunan Al-Nasa’i
+          </Link>
+        </div>
+        <Pagination count={count} />
       </div>
       <div className="mt-2 p-4 bg-gray-100 grid gap-2">
         {documents.map(data => {
