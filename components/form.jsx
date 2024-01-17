@@ -7,6 +7,12 @@ import {Label} from "@/components/ui/label";
 import {useEffect, useState} from "react";
 import * as React from "react";
 import {useToast} from "@/components/ui/use-toast";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import {CopyCheckIcon} from "lucide-react";
 
 // This can come from your database or API.
 const defaultValue = {
@@ -140,10 +146,10 @@ const symbol = [
 
 
 export function HadithForm({ data }) {
-  console.log(data)
   const { toast } = useToast()
 
   const [value, setValue] = useState(data ? data : defaultValue)
+    console.log(value)
 
   async function onSubmit(e) {
     e.preventDefault()
@@ -188,17 +194,41 @@ export function HadithForm({ data }) {
     });
   }, [value]);
 
+  const chapterRefs = React.useRef([null, null, null]);
+
+  React.useLayoutEffect(() => {
+      const [arabicRef, malayRef] = chapterRefs.current;
+      [arabicRef, malayRef].forEach(ref => {
+        if (ref) {
+          ref.style.height = 'inherit'; // Reset height
+          ref.style.height = `${Math.max(ref.scrollHeight, MIN_TEXTAREA_HEIGHT)}px`; // Set height
+        }
+      });
+  }, [value]);
+
+  async function copyToClipboard(value) {
+    await navigator.clipboard.writeText(value)
+  }
+
   return (
     <div className="grid grid-cols-2 gap-8">
       <div>
         <p className="font-semibold">Helper</p>
         <p className="text-slate-500 text-xs mb-2">Copy paste the following:</p>
         <div className="flex flex-wrap">
-          {symbol.map(s => {
+          {symbol.map((s, i) => {
             return (
-              <div className="bg-gray-100 mb-2 mr-2 pd-2 border rounded-md">
-                <p className="font-arabicSymbol text-lg">{s}</p>
-              </div>
+              <Popover key={i}>
+                <PopoverTrigger asChild>
+                  <button onClick={() => copyToClipboard(s)} className="bg-gray-100 mb-2 mr-2 pd-2 border rounded-md font-arabicSymbol text-lg">
+                    {s}
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent className="w-fit p-2 flex gap-1">
+                  <CopyCheckIcon size={14}/>
+                  <p className="text-xs">Copied to clipboard</p>
+                </PopoverContent>
+              </Popover>
             )
           })}
         </div>
@@ -240,6 +270,19 @@ export function HadithForm({ data }) {
                             style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
                   />
                 </div>
+                <div>
+                  <Label htmlFor="ms">English</Label>
+                  <Textarea value={value.content[index].en}
+                            className="font-arabicSymbol"
+                            onChange={(e) => {
+                              const updatedContent = [...value.content];
+                              updatedContent[index].en = e.target.value;
+                              setValue((prevValue) => ({ ...prevValue, content: updatedContent }));
+                            }}
+                            ref={el => refs.current[index][2] = el} // Assign Malay ref
+                            style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
+                  />
+                </div>
                 {/*<div className="flex justify-end items-center">*/}
                 {/*  { index > 0 && <Button onClick={() => removeHadith(index)} size={'sm'} className="bg-red-500 text-white hover:bg-red-700">- Remove hadith</Button> }*/}
                 {/*</div>*/}
@@ -278,9 +321,24 @@ export function HadithForm({ data }) {
           <div className="space-y-4">
             <Label>Chapter</Label>
             <Input value={value.chapter_title.ms} placeholder="Malay" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, ms: e.target.value } }) }/>
-            <Input classname="font-arabic" value={value.chapter_title.ar} placeholder="Arabic" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, ar: e.target.value } }) }/>
+            <Input className="font-arabic" value={value.chapter_title.ar} placeholder="Arabic" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, ar: e.target.value } }) }/>
             <Input value={value.chapter_transliteration.ms} placeholder="Transliteration" onChange={(e) => setValue({ ...value, chapter_transliteration: { ...value.chapter_transliteration, ms: e.target.value } }) }/>
-            <Textarea value={value.chapter_metadata.ms} placeholder="Metadata" onChange={(e) => setValue({ ...value, chapter_metadata: e.target.value }) }/>
+            <Textarea
+              value={value.chapter_metadata.ar}
+              className="font-arabic"
+              placeholder="Metadata Arabic"
+              onChange={(e) => setValue({ ...value, chapter_metadata: { ...value.chapter_metadata, ar: e.target.value } }) }
+              style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
+              ref={el => chapterRefs.current[0] = el}
+            />
+            <Textarea
+              value={value.chapter_metadata.ms}
+              className="font-arabicSymbol"
+              placeholder="Metadata Malay"
+              onChange={(e) => setValue({ ...value, chapter_metadata: { ...value.chapter_metadata, ms: e.target.value } }) }
+              style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
+              ref={el => chapterRefs.current[1] = el}
+            />
           </div>
 
           {/*<div className="space-y-4">*/}
@@ -302,14 +360,10 @@ export function HadithForm({ data }) {
               <p className="font-sans font-normal text-sm text-justify text-gray-500">{value?.chapter_transliteration?.ms}</p>
             </div>
             <p lang="ar" dir="rtl" className="font-bold text-gray-500 text-lg text-justify font-arabic">{value?.chapter_title?.ar}</p>
-            {
-              data?.chapter_metadata.ms && (
-                <>
-                  <p className="text-md text-justify whitespace-pre-line font-arabicSymbol">{value?.chapter_metadata?.ms}</p>
-                  <p lang="ar" dir="rtl" className="text-xl text-justify whitespace-pre-line font-arabic">{value?.chapter_metadata?.ar}</p>
-                </>
-              )
-            }
+            <>
+              <p lang="ar" dir="rtl" className="text-xl text-justify whitespace-pre-line font-arabic">{value?.chapter_metadata?.ar}</p>
+              <p className="text-md text-justify whitespace-pre-line font-arabicSymbol">{value?.chapter_metadata?.ms}</p>
+            </>
           </div>
           {
             value.content.map((content, i) => {
