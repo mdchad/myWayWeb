@@ -7,7 +7,12 @@ export async function GET(request, { params }) {
   const bookId = params.bookId
   const volumeId = params.volumeId
 
-  const data = await db.collection('Hadiths').find({ volume_id: volumeId, book_id: bookId }).sort({ number: 1 }).toArray();
+  let data = null
+  if (bookId === "240360e4-50b4-47a9-9506-9850b0e3bfd7") { //check for muslim because they have different way of sort
+    data = await db.collection('Hadiths').find({ volume_id: volumeId, book_id: bookId }).sort({ _id: 1 }).toArray();
+  } else {
+    data = await db.collection('Hadiths').find({ volume_id: volumeId, book_id: bookId }).sort({ number: 1 }).toArray();
+  }
 
   return NextResponse.json({
     success: true,
