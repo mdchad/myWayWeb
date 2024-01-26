@@ -181,7 +181,7 @@ export function HadithForm({ data }) {
     })
   }
 
-  const refs = React.useRef(value.content.map(() => [null, null]));
+  const refs = React.useRef(value.content.map(() => [null, null, null]));
 
   React.useLayoutEffect(() => {
     refs.current.forEach(([arabicRef, malayRef]) => {
@@ -279,7 +279,7 @@ export function HadithForm({ data }) {
                               updatedContent[index].en = e.target.value;
                               setValue((prevValue) => ({ ...prevValue, content: updatedContent }));
                             }}
-                            ref={el => refs.current[index][2] = el} // Assign Malay ref
+                            ref={el => refs.current[index][2] = el} // Assign English ref
                             style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
                   />
                 </div>
@@ -322,6 +322,7 @@ export function HadithForm({ data }) {
             <Label>Chapter</Label>
             <Input value={value.chapter_title.ms} placeholder="Malay" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, ms: e.target.value } }) }/>
             <Input className="font-arabic" value={value.chapter_title.ar} placeholder="Arabic" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, ar: e.target.value } }) }/>
+            <Input value={value.chapter_title.en} placeholder="English" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, en: e.target.value } }) }/>
             <Input value={value.chapter_transliteration.ms} placeholder="Transliteration" onChange={(e) => setValue({ ...value, chapter_transliteration: { ...value.chapter_transliteration, ms: e.target.value } }) }/>
             <Textarea
               value={value.chapter_metadata.ar}
@@ -338,6 +339,14 @@ export function HadithForm({ data }) {
               onChange={(e) => setValue({ ...value, chapter_metadata: { ...value.chapter_metadata, ms: e.target.value } }) }
               style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
               ref={el => chapterRefs.current[1] = el}
+            />
+            <Textarea
+              value={value.chapter_metadata.en}
+              className="font-arabicSymbol"
+              placeholder="Metadata English"
+              onChange={(e) => setValue({ ...value, chapter_metadata: { ...value.chapter_metadata, en: e.target.value } }) }
+              style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
+              ref={el => chapterRefs.current[2] = el}
             />
           </div>
 

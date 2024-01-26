@@ -8,7 +8,7 @@ export const fetchCache = 'force-no-store'
 
 async function getData(volumeId, bookId) {
   const db = await connectToDatabase();
-  return await db.collection('Hadiths').find({ volume_id: volumeId, book_id: bookId }).sort({ number: 1 }).toArray();
+  return await db.collection('Hadiths').find({ volume_id: volumeId, book_id: bookId }).sort({ _id: 1 }).toArray();
 }
 
 export default async function Hadiths({ params }) {
