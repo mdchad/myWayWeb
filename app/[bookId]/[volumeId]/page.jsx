@@ -32,7 +32,7 @@ export default async function Hadiths({ params }) {
               <div key={hadith.id}>
                 <div style={{ gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "3rem"}} className="my-6 border-x-2 border-royal-blue grid px-4 py-2">
                   <div>
-                    <p className="font-arabicSymbol font-bold text-sm text-justify text-gray-500">{hadith?.chapter_title?.ms}</p>
+                    <p className="font-sans font-bold text-sm text-justify text-gray-500">{hadith?.chapter_title?.ms}</p>
                     <p className="font-sans font-normal text-sm text-justify text-gray-500">{hadith?.chapter_transliteration?.ms}</p>
                   </div>
                   <p lang="ar" dir="rtl" className="font-bold text-gray-500 text-lg text-justify font-arabic">{hadith?.chapter_title?.ar}</p>
