@@ -321,12 +321,14 @@ export function HadithForm({ data }) {
           <div className="space-y-4">
             <Label>Chapter</Label>
             <Input value={value.chapter_title.ms} placeholder="Malay" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, ms: e.target.value } }) }/>
-            <Input className="font-arabic" value={value.chapter_title.ar} placeholder="Arabic" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, ar: e.target.value } }) }/>
+            <Input lang="ar" dir="rtl" className="font-arabic" value={value.chapter_title.ar} placeholder="Arabic" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, ar: e.target.value } }) }/>
             <Input value={value.chapter_title.en} placeholder="English" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, en: e.target.value } }) }/>
             <Input value={value.chapter_transliteration.ms} placeholder="Transliteration" onChange={(e) => setValue({ ...value, chapter_transliteration: { ...value.chapter_transliteration, ms: e.target.value } }) }/>
             <Textarea
               value={value.chapter_metadata.ar}
               className="font-arabic"
+              dir="rtl"
+              lang="ar"
               placeholder="Metadata Arabic"
               onChange={(e) => setValue({ ...value, chapter_metadata: { ...value.chapter_metadata, ar: e.target.value } }) }
               style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
