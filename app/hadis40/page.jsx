@@ -16,20 +16,20 @@ export default function Hadith40() {
         </div>
         {
           item.content.map((cnt, index, arr) => {
-            const uriAr = arr.length > 1 ? `${item.number}_content_ar_${index + 1}` : `${item.number}_content_ar`
-            const uriMs = arr.length > 1 ? `${item.number}_content_ms_${index + 1}` : `${item.number}_content_ms`
+            const uriAr = arr.length > 1 ? `/audio/${item.number}_content_ar_${index + 1}.mp3` : `/audio/${item.number}_content_ar.mp3`
+            const uriMs = arr.length > 1 ? `/audio/${item.number}_content_ms_${index + 1}.mp3` : `/audio/${item.number}_content_ms.mp3`
             return (
               <div key={index} className="mb-4">
                 <p className="mb-4">{item.narrators[index].ms}</p>
                 <div className="bg-gray-200 rounded-md px-2 py-4">
                   <p className="text-2xl text-right font-arabic" lang="ar" dir="rtl">{cnt.ar}</p>
                   <p className="text-slate-500 text-md font-arabic mt-4" lang="ar" dir="rtl">{item.narratedBy[index].ar}</p>
-                  {/*<Audio url={item.number === 5 && index === 1 ?  `${item.number}_content_ar`: uriAr } />*/}
+                  <audio controls src={item.number === 5 && index === 1 ?  `/audio/${item.number}_content_ar.mp3`: uriAr } />
                 </div>
                 <div className="mt-12">
                   <p className="text-lg mb-2 font-arabicSymbol">{cnt.ms}</p>
                   <p className="text-slate-500 text-xs text-right font-arabicSymbol mt-4">{item.narratedBy[index].ms}</p>
-                  {/*<Audio url={item.number === 5 && index === 1 ?  `${item.number}_content_ms`: uriMs } />*/}
+                  <audio controls src={item.number === 5 && index === 1 ?  `${item.number}_content_ms`: uriMs } />
                 </div>
               </div>
             )
@@ -46,7 +46,7 @@ export default function Hadith40() {
               )
             })
           }
-          {/*<Audio url={`${item.number}_lesson`} />*/}
+          <audio controls src={`/audio/${item.number}_lesson.mp3`} />
         </div>
       </div>
     )

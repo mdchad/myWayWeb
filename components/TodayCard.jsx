@@ -14,9 +14,9 @@ async function TodayCard({ path}) {
   const data =  await getData()
 
   return (
-    <Link
-      href={{ pathname: `/(default)/hadith` }}
-    >
+    // <Link
+    //   href={{ pathname: `/(default)/hadith` }}
+    // >
       <div className="bg-white border border-royal-blue rounded-md overflow-hidden">
         <div className="p-3">
           <div className="flex flex-row flex-wrap mb-4 items-center">
@@ -71,7 +71,7 @@ async function TodayCard({ path}) {
           </div>
         </div>
       </div>
-    </Link>
+    // </Link>
   );
 };
 
