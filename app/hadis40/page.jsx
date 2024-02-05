@@ -21,15 +21,19 @@ export default function Hadith40() {
             return (
               <div key={index} className="mb-4">
                 <p className="mb-4">{item.narrators[index].ms}</p>
-                <div className="bg-gray-200 rounded-md px-2 py-4">
+                <div className="bg-gray-200 rounded-md px-4 py-6">
                   <p className="text-2xl text-right font-arabic" lang="ar" dir="rtl">{cnt.ar}</p>
                   <p className="text-slate-500 text-md font-arabic mt-4" lang="ar" dir="rtl">{item.narratedBy[index].ar}</p>
-                  <audio controls src={item.number === 5 && index === 1 ?  `/audio/${item.number}_content_ar.mp3`: uriAr } />
+                  <div className="mt-8 flex items-center justify-center">
+                    <audio controls src={item.number === 5 && index === 1 ?  `/audio/${item.number}_content_ar.mp3`: uriAr } />
+                  </div>
                 </div>
                 <div className="mt-12">
                   <p className="text-lg mb-2 font-arabicSymbol">{cnt.ms}</p>
                   <p className="text-slate-500 text-xs text-right font-arabicSymbol mt-4">{item.narratedBy[index].ms}</p>
-                  <audio controls src={item.number === 5 && index === 1 ?  `${item.number}_content_ms`: uriMs } />
+                  <div className="mt-8 flex items-center justify-center">
+                    <audio controls src={item.number === 5 && index === 1 ?  `/audio/${item.number}_content_ms.mp3`: uriMs } />
+                  </div>
                 </div>
               </div>
             )
@@ -46,7 +50,9 @@ export default function Hadith40() {
               )
             })
           }
-          <audio controls src={`/audio/${item.number}_lesson.mp3`} />
+          <div className="mt-8 flex items-center justify-center">
+            <audio controls src={`/audio/${item.number}_lesson.mp3`} />
+          </div>
         </div>
       </div>
     )
@@ -59,21 +65,12 @@ export default function Hadith40() {
       </div>
       <div className="flex-1">
         <div className="flex-1">
-          {/* Render list using map */}
           <div style={{ padding: '6px' }}>
             {hadiths.map((item) => (
               <Items key={item.number} item={item} />
             ))}
           </div>
         </div>
-
-        {/*<FlashList*/}
-        {/*  data={hadiths}*/}
-        {/*  renderItem={Items}*/}
-        {/*  contentContainerStyle={{ paddingHorizontal: 6, paddingVertical: 6 }}*/}
-        {/*  // style={{ paddingRight: 5, marginRight: -10 }}*/}
-        {/*  estimatedItemSize={42}*/}
-        {/*/>*/}
       </div>
     </main>
   )
