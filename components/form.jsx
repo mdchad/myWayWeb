@@ -146,12 +146,16 @@ const symbol = [
   '»',
 ]
 
+const correction = {
+  "«": "»",
+  "»": "«",
+};
+
 
 export function HadithForm({ data }) {
   const { toast } = useToast()
 
   const [value, setValue] = useState(data ? data : defaultValue)
-    console.log(value)
 
   async function onSubmit(e) {
     e.preventDefault()
@@ -212,6 +216,17 @@ export function HadithForm({ data }) {
     await navigator.clipboard.writeText(value)
   }
 
+  function replaceBracketText(e, text, index) {
+    e.preventDefault()
+    const reg = new RegExp(Object.keys(correction).join("|"), "g");
+    const replacedText = value.content[index].ar.replace(reg, (matched) => correction[matched]);
+
+    // const replacedText = value.content[index].ar.replaceAll("»", "«")
+    const updatedContent = [...value.content];
+    updatedContent[index].ar = replacedText;
+    setValue((prevValue) => ({ ...prevValue, content: updatedContent }));
+  }
+
   return (
     <div className="grid grid-cols-2 gap-8">
       <div>
@@ -245,7 +260,10 @@ export function HadithForm({ data }) {
             value.content.map((contentItem, index) => (
               <div key={index} className="space-y-8">
                 <div>
-                  <Label htmlFor="ar">Arabic</Label>
+                  <div className="flex justify-between items-center mb-2">
+                    <Label htmlFor="ar">Arabic</Label>
+                    <Button size="sm" className="p-2 text-xs" onClick={(e) => replaceBracketText(e, value, index)}>Replace</Button>
+                  </div>
                   <Textarea value={value.content[index].ar}
                             lang="ar"
                             dir="rtl"
