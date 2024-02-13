@@ -14,7 +14,7 @@ export default async function Home() {
     <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-32 mb-20 py-4 sm:py-6 lg:py-16 bg-gray-100">
       {/*<input onChange={(e) => setSearch(e.target.value)} value={search} />*/}
       {/*<button onClick={handleSubmit}>Submit</button>*/}
-      <div className="grid lg:grid-cols-2 gap-20 ">
+      <div className="grid lg:grid-cols-2 lg:gap-20 gap-10">
         { books.map(book => {
           return (
             <Link key={book.id} href={`/${book.id}`}>
