@@ -12,7 +12,7 @@ export default async function Home() {
       </div>
       <div className="space-y-8">
         <TodayCard />
-        <div className="grid grid-cols-2 flex-row space-x-2">
+        <div className="grid grid-cols-2 space-x-2">
           <Card title="Hadis 40" description={"Imam Nawawi"} path="/hadis40" />
           <Card title="Kutub Sittah" path="/books" description={"Enam buku hadis utama"} gradient={true}/>
         </div>

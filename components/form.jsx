@@ -227,6 +227,22 @@ export function HadithForm({ data }) {
     setValue((prevValue) => ({ ...prevValue, content: updatedContent }));
   }
 
+  function replaceBracketChapterText(e) {
+    e.preventDefault()
+    const reg = new RegExp(Object.keys(correction).join("|"), "g");
+    value.chapter_title.ar = value.chapter_title.ar.replace(reg, (matched) => correction[matched]);
+
+    setValue((prevValue) => ({ ...prevValue, chapter_title: value.chapter_title }));
+  }
+
+  function replaceBracketMetadataText(e) {
+    e.preventDefault()
+    const reg = new RegExp(Object.keys(correction).join("|"), "g");
+    value.chapter_metadata.ar = value.chapter_metadata.ar.replace(reg, (matched) => correction[matched]);
+
+    setValue((prevValue) => ({ ...prevValue, chapter_metadata: value.chapter_title }));
+  }
+
   return (
     <div className="grid grid-cols-2 gap-8">
       <div>
@@ -340,10 +356,14 @@ export function HadithForm({ data }) {
 
           <div className="space-y-4">
             <Label>Chapter</Label>
+            <div className="space-y-4">
+              <Button size="sm" className="p-2 text-xs" onClick={(e) => replaceBracketChapterText(e)}>Replace</Button>
+              <Input lang="ar" dir="rtl" className="font-arabic" value={value.chapter_title.ar} placeholder="Arabic" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, ar: e.target.value } }) }/>
+            </div>
             <Input value={value.chapter_title.ms} placeholder="Malay" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, ms: e.target.value } }) }/>
-            <Input lang="ar" dir="rtl" className="font-arabic" value={value.chapter_title.ar} placeholder="Arabic" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, ar: e.target.value } }) }/>
             <Input value={value.chapter_title.en} placeholder="English" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, en: e.target.value } }) }/>
             <Input value={value.chapter_transliteration.ms} placeholder="Transliteration" onChange={(e) => setValue({ ...value, chapter_transliteration: { ...value.chapter_transliteration, ms: e.target.value } }) }/>
+            <Button size="sm" className="p-2 text-xs" onClick={(e) => replaceBracketMetadataText(e)}>Replace</Button>
             <Textarea
               value={value.chapter_metadata.ar}
               className="font-arabic"

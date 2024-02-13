@@ -32,7 +32,7 @@ async function TodayCard({ path}) {
               {data?.volume_title.ms}
             </p>
           </div>
-          <p className="mb-1 text-xl font-arabic" lang="ar" dir="rtl">
+          <p className="mb-4 text-xl font-arabic" lang="ar" dir="rtl">
             {data?.content[0].ar}
           </p>
           <p className="font-arabicSymbol">

@@ -23,7 +23,7 @@ export default async function Home() {
                   <p className="text-2xl text-royal-blue font-semibold">{book.title}</p>
                 </div>
                 <div className="bg-royal-blue flex justify-end px-4 py-0.5">
-                  <p className="text-white">View more</p>
+                  <p className="text-white">Lihat Lagi</p>
                 </div>
               </div>
             </Link>
