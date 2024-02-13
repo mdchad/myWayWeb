@@ -175,6 +175,7 @@ export default async function Search({ searchParams }) {
           )
         })}
       </div>
+      <Pagination count={count} />
     </div>
   )
 }
