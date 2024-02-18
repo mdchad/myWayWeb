@@ -13,6 +13,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import {CopyCheckIcon} from "lucide-react";
+import { v4 as uuidv4 } from 'uuid';
 
 // This can come from your database or API.
 const defaultValue = {
@@ -151,6 +152,24 @@ const correction = {
   "»": "«",
 };
 
+const symbolToReplace = {
+  "/s": "1",
+  "/ra": "48",
+  "/rh": "49",
+  "/r2": "51"
+};
+
+function StickySubmitButton({ submit }) {
+  return (
+    <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 m-4">
+       <Button onClick={(e) => submit(e)} size="lg" className="hover:bg-red-400 bg-red-500 text-lg font-arabicSymbol">
+        Submit
+      </Button>
+    </div>
+  );
+};
+
+export default StickySubmitButton;
 
 export function HadithForm({ data }) {
   const { toast } = useToast()
@@ -227,6 +246,17 @@ export function HadithForm({ data }) {
     setValue((prevValue) => ({ ...prevValue, content: updatedContent }));
   }
 
+  function replaceSymbol(e, text, index) {
+    e.preventDefault()
+    const reg = new RegExp(Object.keys(symbolToReplace).join("|"), "g");
+    const replacedText = value.content[index].ms.replace(reg, (matched) => symbol[symbolToReplace[matched]]);
+
+    // const replacedText = value.content[index].ar.replaceAll("»", "«")
+    const updatedContent = [...value.content];
+    updatedContent[index].ms = replacedText;
+    setValue((prevValue) => ({ ...prevValue, content: updatedContent }));
+  }
+
   function replaceBracketChapterText(e) {
     e.preventDefault()
     const reg = new RegExp(Object.keys(correction).join("|"), "g");
@@ -243,8 +273,15 @@ export function HadithForm({ data }) {
     setValue((prevValue) => ({ ...prevValue, chapter_metadata: value.chapter_title }));
   }
 
+  function setNewUUID(e) {
+    e.preventDefault()
+    const newId = uuidv4()
+    setValue((prevState) => ({ ...prevState, chapter_id: newId }))
+  }
+
   return (
     <div className="grid grid-cols-2 gap-8">
+      <StickySubmitButton submit={onSubmit}/>
       <div>
         <p className="font-semibold">Helper</p>
         <p className="text-slate-500 text-xs mb-2">Copy paste the following:</p>
@@ -294,7 +331,10 @@ export function HadithForm({ data }) {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="ms">Malay</Label>
+                  <div className="flex justify-between items-center mb-2">
+                    <Label htmlFor="ar">Malay</Label>
+                    <Button size="sm" className="p-2 text-xs" onClick={(e) => replaceSymbol(e, value, index)}>Replace</Button>
+                  </div>
                   <Textarea value={value.content[index].ms}
                             className="font-arabicSymbol"
                             onChange={(e) => {
@@ -326,36 +366,12 @@ export function HadithForm({ data }) {
               </div>
             ))}
 
-          {/*<div className="space-y-2">*/}
-          {/*  <p className="text-slate-500 text-xs">This add hadith button will add a new set of inputs. This is for duplicate hadith numbers</p>*/}
-          {/*  <Button onClick={(e) => addNewHadith(e)} size={'sm'}>+ Add hadith</Button>*/}
-          {/*</div>*/}
-
-          {/*setValue({ ...value, volume_id: selectedVol.id, volume_title: { ...value.volume_title, ms: selectedVol.title.ms, ar: selectedVol.title.ar }})*/}
-          {/*<Select onValueChange={(selectedVol) => onSelectChange(selectedVol)}>*/}
-          {/*  <SelectTrigger className="w-[180px]">*/}
-          {/*    <SelectValue placeholder="Volume" />*/}
-          {/*  </SelectTrigger>*/}
-          {/*  <SelectContent>*/}
-          {/*    {volume?.length && volume.map((vol, i) => {*/}
-          {/*      return (*/}
-          {/*        <SelectItem key={vol.id} value={vol.title.ms}>{vol.title.ms}</SelectItem>*/}
-          {/*      )*/}
-          {/*    })}*/}
-          {/*  </SelectContent>*/}
-          {/*</Select>*/}
-
-          {/*<div className="flex items-center space-x-4">*/}
-          {/*  <p className="text-xs">Volume not found? Click here to add</p>*/}
-          {/*  <Button size={"sm"} variant={"outline"} onClick={(e) => {*/}
-          {/*    e.preventDefault()*/}
-          {/*    setToggle(true)}}>*/}
-          {/*    <p>+</p>*/}
-          {/*  </Button>*/}
-          {/*</div>*/}
-
           <div className="space-y-4">
             <Label>Chapter</Label>
+            <div className="space-y-4">
+              <Button size="sm" className="p-2 text-xs" onClick={(e) => setNewUUID(e)}>New ID</Button>
+              <Input value={value.chapter_id} onChange={(e) => setValue({ ...value, chapter_id: e.target.value }) }/>
+            </div>
             <div className="space-y-4">
               <Button size="sm" className="p-2 text-xs" onClick={(e) => replaceBracketChapterText(e)}>Replace</Button>
               <Input lang="ar" dir="rtl" className="font-arabic" value={value.chapter_title.ar} placeholder="Arabic" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, ar: e.target.value } }) }/>

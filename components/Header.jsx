@@ -136,15 +136,6 @@ export function Header() {
                             {/*</MobileNavLink>*/}
                             <MobileNavLink href="#faqs">FAQs</MobileNavLink>
                           </div>
-                          <div className="mt-8 flex flex-col gap-4">
-                            {/*<Button href="/login" variant="outline">*/}
-                            {/*  Log in*/}
-                            {/*</Button>*/}
-                            <form onSubmit={handleSubmit} className="flex space-x-2">
-                              <input onChange={handleChange} value={searchTerm} className="text-sm border-gray-300 border rounded-md p-2" placeholder="Search..."/>
-                              <button className="bg-royal-blue text-white p-2 rounded-md text-sm">Search</button>
-                            </form>
-                          </div>
                         </Popover.Panel>
                       </>
                     )}
@@ -154,6 +145,15 @@ export function Header() {
             </Popover>
           </div>
         </Container>
+        <div className="lg:hidden px-4 py-4 flex flex-col">
+          {/*<Button href="/login" variant="outline">*/}
+          {/*  Log in*/}
+          {/*</Button>*/}
+          <form onSubmit={handleSubmit} className="flex space-x-2">
+            <input onChange={handleChange} value={searchTerm} className="w-full text-sm border-gray-300 border rounded-md p-2" placeholder="Search..."/>
+            <button className="bg-royal-blue text-white p-2 rounded-md text-sm">Search</button>
+          </form>
+        </div>
       </nav>
     </header>
   )

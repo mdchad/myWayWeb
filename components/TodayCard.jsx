@@ -10,13 +10,13 @@ async function getData(){
 }
 export const dynamic = "force-dynamic";
 
-async function TodayCard({ path}) {
+async function TodayCard() {
   const data =  await getData()
 
   return (
-    // <Link
-    //   href={{ pathname: `/(default)/hadith` }}
-    // >
+    <Link
+      href={{ pathname: `/${data?.book_id}/${data.volume_id}`, hash: data.number }}
+    >
       <div className="bg-white border border-royal-blue rounded-md overflow-hidden">
         <div className="p-3">
           <div className="flex flex-row flex-wrap mb-4 items-center">
@@ -32,36 +32,15 @@ async function TodayCard({ path}) {
               {data?.volume_title.ms}
             </p>
           </div>
-          <p className="mb-4 text-xl font-arabic" lang="ar" dir="rtl">
+          <p className="mb-4 text-xl line-clamp-7 font-arabic" lang="ar" dir="rtl">
             {data?.content[0].ar}
           </p>
-          <p className="font-arabicSymbol">
+          <p className="font-arabicSymbol line-clamp-7">
             {data?.content[0].ms}
           </p>
         </div>
         <div className="flex flex-row justify-between items-center bg-royal-blue">
           <div className="flex flex-row items-center">
-            {/*<TouchableHighlight className="p-1" underlayColor="#333">*/}
-            {/*  <Share2*/}
-            {/*    color="white"*/}
-            {/*    absoluteStrokeWidth={2}*/}
-            {/*    size={16}*/}
-            {/*  />*/}
-            {/*</TouchableHighlight>*/}
-            {/*<TouchableHighlight className="p-1" underlayColor="#333">*/}
-            {/*  <Heart*/}
-            {/*    color="white"*/}
-            {/*    absoluteStrokeWidth={2}*/}
-            {/*    size={16}*/}
-            {/*  />*/}
-            {/*</TouchableHighlight>*/}
-            {/*<TouchableHighlight className="p-1" underlayColor="#333">*/}
-            {/*  <Bookmark*/}
-            {/*    color="white"*/}
-            {/*    absoluteStrokeWidth={2}*/}
-            {/*    size={16}*/}
-            {/*  />*/}
-            {/*</TouchableHighlight>*/}
           </div>
           <div className="flex flex-row items-center space-x-2">
             <p className="text-white">
@@ -71,7 +50,7 @@ async function TodayCard({ path}) {
           </div>
         </div>
       </div>
-    // </Link>
+    </Link>
   );
 };
 
