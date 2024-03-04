@@ -8,6 +8,7 @@ async function getData(){
   const hadith = await kv.get('todayHadith');
   return hadith
 }
+
 export const dynamic = "force-dynamic";
 
 async function TodayCard() {
@@ -32,10 +33,10 @@ async function TodayCard() {
               {data?.volume_title.ms}
             </p>
           </div>
-          <p className="mb-4 text-xl line-clamp-7 font-arabic" lang="ar" dir="rtl">
+          <p className="mb-4 text-xl line-clamp-5 font-arabic" lang="ar" dir="rtl">
             {data?.content[0].ar}
           </p>
-          <p className="font-arabicSymbol line-clamp-7">
+          <p className="font-arabicSymbol line-clamp-5">
             {data?.content[0].ms}
           </p>
         </div>
