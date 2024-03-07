@@ -10,6 +10,7 @@ export async function GET(request) {
   const limit = Number(searchParams.get('limit'))
   const query = searchParams.get('query')
   const books = searchParams.get('books')
+  const selectedBooks = books ? books.split(',') : []
 
   const skip = (page - 1) * limit;
 
@@ -21,28 +22,25 @@ export async function GET(request) {
           {
             text: {
               query: query,
-              // path: ['content', 'volumeTitle'] // Search in both content and volume title
               path: ['content.ms', 'content.ar']
             }
           }
         ],
-        filter: [],
-        // minimumShouldMatch: 1 // Adjust based on your filtering logic
+        filter: {
+          compound: {
+            should: selectedBooks.map(book => ({
+              text: {
+                path: 'book_name',
+                query: book
+              }
+            }))
+          }
+        }
       }
     }
   };
 
-  if (books.length > 0) {
-    books.forEach(book => {
-      searchQuery.$search.compound.filter.push({
-        text: {
-          path: 'book_name', // Assuming 'title' is the field with the book title
-          query: book
-        }
-      });
-    });
-  } else {
-    // If no specific books are selected, adjust minimumShouldMatch
+  if (selectedBooks.length < 1) {
     delete searchQuery.$search.compound.filter;
   }
 
@@ -65,13 +63,6 @@ export async function GET(request) {
         currentPage: page // Add the current page number to the result
       }
     }
-    // {
-    //   $project: {
-    //     "content.ms": 1,
-    //     "_id": 0,
-    //     "highlights": { "$meta": "searchHighlights" }
-    //   }
-    // }
   ]);
 
   const data = await cursor.toArray();
