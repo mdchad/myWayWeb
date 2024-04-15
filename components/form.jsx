@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/popover"
 import {CopyCheckIcon} from "lucide-react";
 import { v4 as uuidv4 } from 'uuid';
+import {symbolArabic} from "@/lib/symbolUtil";
 
 // This can come from your database or API.
 const defaultValue = {
@@ -53,99 +54,6 @@ const defaultValue = {
 }
 
 const MIN_TEXTAREA_HEIGHT = 32;
-
-const symbol = [
-  'ﷻ',
-  'ﷺ',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
- '',
-  '«',
-  '»',
-]
 
 const correction = {
   "«": "»",
@@ -249,7 +157,7 @@ export function HadithForm({ data }) {
   function replaceSymbol(e, text, index) {
     e.preventDefault()
     const reg = new RegExp(Object.keys(symbolToReplace).join("|"), "g");
-    const replacedText = value.content[index].ms.replace(reg, (matched) => symbol[symbolToReplace[matched]]);
+    const replacedText = value.content[index].ms.replace(reg, (matched) => symbolArabic[symbolToReplace[matched]]);
 
     // const replacedText = value.content[index].ar.replaceAll("»", "«")
     const updatedContent = [...value.content];
@@ -286,7 +194,7 @@ export function HadithForm({ data }) {
         <p className="font-semibold">Helper</p>
         <p className="text-slate-500 text-xs mb-2">Copy paste the following:</p>
         <div className="flex flex-wrap">
-          {symbol.map((s, i) => {
+          {symbolArabic.map((s, i) => {
             return (
               <Popover key={i}>
                 <PopoverTrigger asChild>

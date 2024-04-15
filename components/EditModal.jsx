@@ -15,7 +15,6 @@ import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 
 function HadithItem({ hadith, chapterNumber, value, submittedValue, setSubmittedValue, setValue}) {
-  console.log('oiiii', value)
   async function valueChanged(hadithId, chapterNumber) {
     let pushedValue = submittedValue.concat([{ [hadithId]: value[chapterNumber] }])
     setSubmittedValue(pushedValue)
@@ -46,10 +45,6 @@ function HadithItem({ hadith, chapterNumber, value, submittedValue, setSubmitted
 function EditModal({ chapterId, hadiths}) {
   const [value, setValue] = useState([])
   const [submittedValue, setSubmittedValue] = useState([])
-
-  useEffect(() => {
-    console.log(value)
-  }, [value])
 
   function onChangeTransliteration(e) {
     let value = e.target.value.trim()
