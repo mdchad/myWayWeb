@@ -15,7 +15,7 @@ function SpecialText({ text }) {
     }
   });
 
-  return <p className="text-sm text-justify text-gray-500">{segments}</p>;
+  return <p className="text-sm text-justify text-royal-blue">{segments}</p>;
 }
 
 export default SpecialText

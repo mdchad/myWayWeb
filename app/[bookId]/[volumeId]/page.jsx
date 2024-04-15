@@ -40,12 +40,12 @@ export default async function Hadiths({ params }) {
                       <SpecialText text={hadith?.chapter_title?.ms} />
                       <p className="font-sans font-normal text-sm text-justify text-gray-500">{hadith?.chapter_transliteration?.ms}</p>
                     </div>
-                    <p lang="ar" dir="rtl" className="order-1 sm:order-2 font-bold text-gray-500 text-lg text-justify font-arabic">{hadith?.chapter_title?.ar}</p>
+                    <p lang="ar" dir="rtl" className="order-1 sm:order-2 font-bold text-royal-blue text-lg text-justify font-arabic">{hadith?.chapter_title?.ar}</p>
                     {
                       hadith?.chapter_metadata.ms && (
                         <>
-                          <p className="order-4 sm:order-3 text-md text-justify whitespace-pre-line font-arabicSymbol">{hadith?.chapter_metadata?.ms}</p>
-                          <p lang="ar" dir="rtl" className="order-3 sm:order-4 text-xl text-justify whitespace-pre-line font-arabic">{hadith?.chapter_metadata?.ar}</p>
+                          <p className="order-4 sm:order-3 text-md text-justify whitespace-pre-line font-arabicSymbol text-gray-600">{hadith?.chapter_metadata?.ms}</p>
+                          <p lang="ar" dir="rtl" className="order-3 sm:order-4 text-xl text-justify whitespace-pre-line font-arabic text-gray-600">{hadith?.chapter_metadata?.ar}</p>
                         </>
                       )
                     }
