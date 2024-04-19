@@ -4,6 +4,7 @@ import {Button} from "@/components/Button";
 import EditModal from "@/components/EditModal";
 import SpecialText from "@/components/SpecialText";
 import ScrollTopButton from "@/components/ScrollTopButton";
+import QuranText from "@/components/QuranText";
 
 export const dynamic = "force-dynamic";
 export const revalidate = false
@@ -40,12 +41,16 @@ export default async function Hadiths({ params }) {
                       <SpecialText text={hadith?.chapter_title?.ms} />
                       <p className="font-sans font-normal text-sm text-justify text-gray-500">{hadith?.chapter_transliteration?.ms}</p>
                     </div>
-                    <p lang="ar" dir="rtl" className="order-1 sm:order-2 font-bold text-royal-blue text-lg text-justify font-arabic">{hadith?.chapter_title?.ar}</p>
+                    <p lang="ar" dir="rtl" className="order-1 sm:order-2 font-bold text-royal-blue text-lg text-justify font-arabic">
+                      <QuranText text={hadith?.chapter_title?.ar} />
+                    </p>
                     {
                       hadith?.chapter_metadata.ms && (
                         <>
                           <p className="order-4 sm:order-3 text-md text-justify whitespace-pre-line font-arabicSymbol text-gray-600">{hadith?.chapter_metadata?.ms}</p>
-                          <p lang="ar" dir="rtl" className="order-3 sm:order-4 text-xl text-justify whitespace-pre-line font-arabic text-gray-600">{hadith?.chapter_metadata?.ar}</p>
+                          <p lang="ar" dir="rtl" className="order-3 sm:order-4 text-xl text-justify whitespace-pre-line font-arabic text-gray-600">
+                            <QuranText text={hadith?.chapter_metadata?.ar} />
+                          </p>
                         </>
                       )
                     }
@@ -60,7 +65,9 @@ export default async function Hadiths({ params }) {
                         <div key={i} className="bg-white shadow-sm px-4 py-8 sm:py-8 sm:px-8 space-y-2">
                           <div id={hadith.number} className="grid-cols-1 lg:grid-cols-2 gap-12 grid">
                             <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">{content.ms}</p>
-                            <p lang="ar" dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic">{content.ar}</p>
+                            <p lang="ar" dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic">
+                              <QuranText text={content.ar} />
+                            </p>
                           </div>
                         </div>
                       )
@@ -87,7 +94,9 @@ export default async function Hadiths({ params }) {
                       <div key={i} className={`px-4 py-8 sm:py-8 sm:px-8 bg-white shadow-sm ${length < 2 && "rounded-lg"}`}>
                         <div id={hadith.number} className={`grid-cols-1 lg:grid-cols-2 gap-12 grid`}>
                           <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">{content.ms}</p>
-                          <p lang="ar" dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic">{content.ar}</p>
+                          <p lang="ar" dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic">
+                            <QuranText text={content.ar} />
+                          </p>
                         </div>
                       </div>
                     )

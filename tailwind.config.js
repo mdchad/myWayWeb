@@ -62,6 +62,7 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
         arabic: ['var(--font-arabic)', ...defaultTheme.fontFamily.sans],
+        hafs: ['var(--font-hafs)', ...defaultTheme.fontFamily.sans],
         arabicSymbol: ['var(--font-arabic-symbol)'],
       },
       keyframes: {

@@ -3,6 +3,7 @@ import Link from "next/link";
 import {ArrowRight, ChevronRightSquare} from "lucide-react";
 import { kv } from '@vercel/kv';
 import { NextResponse } from 'next/server';
+import QuranText from "@/components/QuranText";
 
 async function getData(){
   const hadith = await kv.get('todayHadith');
@@ -34,7 +35,7 @@ async function TodayCard() {
             </p>
           </div>
           <p className="mb-4 text-xl line-clamp-5 font-arabic" lang="ar" dir="rtl">
-            {data?.content[0].ar}
+            <QuranText text={data?.content[0].ar} />
           </p>
           <p className="font-arabicSymbol line-clamp-5">
             {data?.content[0].ms}

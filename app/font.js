@@ -15,6 +15,14 @@ export const arabicFont = localFont(
   }
 )
 
+export const hafs = localFont(
+  {
+    src: [{ path: '../public/fonts/uthmanic_hafs_v22.ttf', weight: '400' }],
+    display: 'swap',
+    variable: '--font-hafs'
+  }
+)
+
 export const arabicSymbolFont = localFont(
   {
     src: '../public/fonts/kfgqpc-arabic-symbols.ttf',

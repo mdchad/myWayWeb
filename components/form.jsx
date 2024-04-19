@@ -15,6 +15,7 @@ import {
 import {CopyCheckIcon} from "lucide-react";
 import { v4 as uuidv4 } from 'uuid';
 import {symbolArabic} from "@/lib/symbolUtil";
+import QuranText from "@/components/QuranText";
 
 // This can come from your database or API.
 const defaultValue = {
@@ -334,9 +335,13 @@ export function HadithForm({ data }) {
               <p className="font-sans font-bold text-sm text-justify text-gray-500">{value?.chapter_title?.ms}</p>
               <p className="font-sans font-normal text-sm text-justify text-gray-500">{value?.chapter_transliteration?.ms}</p>
             </div>
-            <p lang="ar" dir="rtl" className="font-bold text-gray-500 text-lg text-justify font-arabic">{value?.chapter_title?.ar}</p>
+            <p lang="ar" dir="rtl" className="font-bold text-gray-500 text-lg text-justify font-arabic">
+              <QuranText text={value?.chapter_title?.ar} />
+            </p>
             <>
-              <p lang="ar" dir="rtl" className="text-xl text-justify whitespace-pre-line font-arabic">{value?.chapter_metadata?.ar}</p>
+              <p lang="ar" dir="rtl" className="text-xl text-justify whitespace-pre-line font-arabic">
+                <QuranText text={value?.chapter_metadata?.ar} />
+              </p>
               <p className="text-md text-justify whitespace-pre-line font-arabicSymbol">{value?.chapter_metadata?.ms}</p>
             </>
           </div>
@@ -349,7 +354,9 @@ export function HadithForm({ data }) {
               return (
                 <div key={i} className="bg-white shadow-sm p-8 space-y-2">
                   <div id={value.number} className="space-y-4">
-                    <p lang="ar" dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic">{content.ar}</p>
+                    <p lang="ar" dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic">
+                      <QuranText text={content.ar} />
+                    </p>
                     <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">{content.ms}</p>
                   </div>
                 </div>
