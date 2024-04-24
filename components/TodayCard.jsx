@@ -34,7 +34,7 @@ async function TodayCard() {
               {data?.volume_title.ms}
             </p>
           </div>
-          <p className="mb-4 text-xl line-clamp-5 font-arabic" lang="ar" dir="rtl">
+          <p className="mb-4 text-xl line-clamp-5 font-arabic leading-relaxed" lang="ar" dir="rtl">
             <QuranText text={data?.content[0].ar} />
           </p>
           <p className="font-arabicSymbol line-clamp-5">
