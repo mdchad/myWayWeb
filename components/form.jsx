@@ -220,7 +220,7 @@ export function HadithForm({ data }) {
           </div>
           {
             value.content.map((contentItem, index) => (
-              <div key={index} className="space-y-8">
+              <div key={index} className="space-y-8 border-b border-black pb-8">
                 <div>
                   <div className="flex justify-between items-center mb-2">
                     <Label htmlFor="ar">Arabic</Label>
