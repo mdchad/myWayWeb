@@ -5,6 +5,8 @@ import EditModal from "@/components/EditModal";
 import SpecialText from "@/components/SpecialText";
 import ScrollTopButton from "@/components/ScrollTopButton";
 import QuranText from "@/components/QuranText";
+import EditVolumeModal from "@/components/EditVolumeModal";
+import {Toaster} from "@/components/ui/toaster";
 
 export const dynamic = "force-dynamic";
 export const revalidate = false
@@ -26,6 +28,7 @@ export default async function Hadiths({ params }) {
     <>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-24 mb-20 py-4 sm:py-6 lg:py-12">
         <EditModal chapterId={chapterId} hadiths={hadiths} />
+        <EditVolumeModal chapterId={chapterId} hadiths={hadiths} />
         <div className="bg-royal-blue py-4 px-2">
           <p className="text-2xl font-bold text-white text-center capitalize font-sans">{hadiths[0]?.volume_title.ms.toLowerCase()}</p>
           <p lang="ar" className="text-3xl font-arabic font-bold text-white text-center">{hadiths[0]?.volume_title.ar}</p>
@@ -115,6 +118,7 @@ export default async function Hadiths({ params }) {
         </div>
       </div>
       <ScrollTopButton />
+      <Toaster />
     </>
   )
 }
