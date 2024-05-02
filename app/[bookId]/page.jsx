@@ -1,6 +1,10 @@
 import connectToDatabase from "@/lib/mongodb";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+export const revalidate = false
+export const fetchCache = 'force-no-store'
+
 async function getData(bookId) {
   const db = await connectToDatabase();
 
