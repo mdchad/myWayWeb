@@ -26,3 +26,19 @@ export async function PATCH(request ) {
     data: result
   })
 }
+
+export async function GET(request) {
+  const db = await connectToDatabase();
+  const searchParams = request.nextUrl.searchParams
+
+  const bookName = searchParams.get('bookName')
+  const number = Number(searchParams.get('number'))
+
+  // Perform the bulk operation
+  const result = await db.collection('Hadiths').findOne({ book_name: bookName, number: number})
+
+  return NextResponse.json({
+    success: true,
+    data: result
+  })
+}

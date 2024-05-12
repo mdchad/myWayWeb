@@ -31,7 +31,7 @@ export default async function Hadiths({ params }) {
         <EditVolumeModal chapterId={chapterId} hadiths={hadiths} />
         <div className="bg-royal-blue py-4 px-2">
           <p className="text-2xl font-bold text-white text-center capitalize font-sans">{hadiths[0]?.volume_title.ms.toLowerCase()}</p>
-          <p lang="ar" className="text-3xl font-arabic font-bold text-white text-center">{hadiths[0]?.volume_title.ar}</p>
+          <p lang="ar" className="mt-2 text-3xl font-arabic font-bold text-white text-center">{hadiths[0]?.volume_title.ar}</p>
         </div>
         <div className="mt-12 p-2 lg:p-4 bg-gray-100 grid gap-3">
           {hadiths.map(hadith => {
@@ -50,7 +50,9 @@ export default async function Hadiths({ params }) {
                     {
                       hadith?.chapter_metadata.ms && (
                         <>
-                          <p className="order-4 sm:order-3 text-md text-justify whitespace-pre-line font-arabicSymbol text-gray-600">{hadith?.chapter_metadata?.ms}</p>
+                          <p className="order-4 sm:order-3 text-md text-justify whitespace-pre-line font-arabicSymbol text-gray-600">
+                            <QuranText text={hadith?.chapter_metadata?.ms} font="font-arabicSymbol"/>
+                          </p>
                           <p lang="ar" dir="rtl" className="order-3 sm:order-4 text-xl text-justify whitespace-pre-line font-arabic text-gray-600 leading-relaxed">
                             <QuranText text={hadith?.chapter_metadata?.ar} />
                           </p>
@@ -67,7 +69,9 @@ export default async function Hadiths({ params }) {
                       return (
                         <div key={i} className="bg-white shadow-sm px-4 py-8 sm:py-8 sm:px-8 space-y-2">
                           <div id={hadith.number} className="grid-cols-1 lg:grid-cols-2 gap-12 grid">
-                            <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">{content.ms}</p>
+                            <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">
+                              <QuranText text={content.ms} font="font-arabicSymbol" />
+                            </p>
                             <p lang="ar" dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic leading-relaxed">
                               <QuranText text={content.ar} />
                             </p>
@@ -81,7 +85,6 @@ export default async function Hadiths({ params }) {
                       Edit
                       <FileEditIcon size={16} color={'white'} />
                     </Button>
-                    {/*<EditBracketButton hadith={hadith}/>*/}
                   </div>
                 </div>
               )
@@ -96,7 +99,9 @@ export default async function Hadiths({ params }) {
                     return (
                       <div key={i} className={`px-4 py-8 sm:py-8 sm:px-8 bg-white shadow-sm ${length < 2 && "rounded-lg"}`}>
                         <div id={hadith.number} className={`grid-cols-1 lg:grid-cols-2 gap-12 grid`}>
-                          <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">{content.ms}</p>
+                          <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">
+                            <QuranText text={content.ms} font="font-arabicSymbol" />
+                          </p>
                           <p lang="ar" dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic leading-relaxed">
                             <QuranText text={content.ar} />
                           </p>

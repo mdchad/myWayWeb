@@ -188,6 +188,36 @@ export function HadithForm({ data }) {
     setValue((prevState) => ({ ...prevState, chapter_id: newId }))
   }
 
+  async function setChapterAsPrevious(e) {
+    e.preventDefault()
+    try {
+      const response = await fetch(`/api/hadiths?bookName=${data.book_name}&number=${data.number - 1}`, {
+        method: 'GET',
+      })
+
+      if (response.ok) {
+        console.log('Get successfully');
+        const res = await response.json()
+        setValue((prevValue) => ({ ...prevValue, chapter_title: res.data.chapter_title, chapter_id: res.data.chapter_id, chapter_metadata: res.data.chapter_metadata, chapter_transliteration: res.data.chapter_transliteration}))
+        // Handle success
+      } else {
+        console.error('Error with file');
+        // Handle error
+      }
+    } catch (error) {
+      console.error('Error file:', error);
+      // Handle error
+    }
+    toast({
+      title: "Successfully get!",
+      description: (
+        <div className="mt-2 w-[340px] bg-slate-950 rounded-md p-4">
+          <p className="text-white">Get the previous hadith</p>
+        </div>
+      ),
+    })
+  }
+
   return (
     <div className="grid grid-cols-2 gap-8">
       <StickySubmitButton submit={onSubmit}/>
@@ -278,7 +308,10 @@ export function HadithForm({ data }) {
           <div className="space-y-4">
             <Label>Chapter</Label>
             <div className="space-y-4">
-              <Button size="sm" className="p-2 text-xs" onClick={(e) => setNewUUID(e)}>New ID</Button>
+              <div className="flex justify-between">
+                <Button size="sm" className="p-2 text-xs" onClick={(e) => setNewUUID(e)}>New ID</Button>
+                <Button size="sm" className="p-2 text-xs" onClick={(e) => setChapterAsPrevious(e)}>Same chapter as previous hadith</Button>
+              </div>
               <Input value={value.chapter_id} onChange={(e) => setValue({ ...value, chapter_id: e.target.value }) }/>
             </div>
             <div className="space-y-4">
@@ -342,7 +375,9 @@ export function HadithForm({ data }) {
               <p lang="ar" dir="rtl" className="text-xl text-justify whitespace-pre-line font-arabic">
                 <QuranText text={value?.chapter_metadata?.ar} />
               </p>
-              <p className="text-md text-justify whitespace-pre-line font-arabicSymbol">{value?.chapter_metadata?.ms}</p>
+              <p className="text-md text-justify whitespace-pre-line font-arabicSymbol">
+                <QuranText text={value?.chapter_metadata?.ms} font="font-arabicSymbol"/>
+              </p>
             </>
           </div>
           {

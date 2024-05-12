@@ -20,7 +20,7 @@ const ScrollTopButton = () => {
   }, [] )
 
   return (
-    <div className={showGoTop ? 'sticky bottom-4 grid justify-end px-4' : ''}>
+    <div className={showGoTop ? 'fixed bottom-4 right-0 px-4' : ''}>
       <Button className="bg-royal-blue"  onClick={ handleScrollUp }>
         <ArrowBigUp size={24} color={'white'}/>
       </Button>

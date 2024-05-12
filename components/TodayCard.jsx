@@ -38,7 +38,7 @@ async function TodayCard() {
             <QuranText text={data?.content[0].ar} />
           </p>
           <p className="font-arabicSymbol line-clamp-5">
-            {data?.content[0].ms}
+            <QuranText text={data?.content[0].ms} font="font-arabicSymbol" />
           </p>
         </div>
         <div className="flex flex-row justify-between items-center bg-royal-blue">

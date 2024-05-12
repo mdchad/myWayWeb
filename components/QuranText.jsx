@@ -1,4 +1,4 @@
-function QuranText({ text }) {
+function QuranText({ text, font = 'font-arabic'}) {
   const regex = /([\uFD3F].*?[\uFD3E])/; // These are the Unicode points for the Arabic brackets
   const parts = text.split(regex);
 
@@ -6,7 +6,7 @@ function QuranText({ text }) {
     if (part.startsWith('\uFD3F') && part.endsWith('\uFD3E')) {
       // Remove the special brackets and apply a different style
       return (
-        <span key={index}>
+        <span key={index} dir="rtl">
           <span className="font-arabic">{part.slice(0, 1)}</span>
           <span className="font-hafs">{part.slice(1, -1)}</span>
           <span className="font-arabic">{part.slice(-1)}</span>
@@ -14,7 +14,7 @@ function QuranText({ text }) {
       )
     }
     // Render the rest of the text normally
-    return <span key={index} className="font-arabic">{part}</span>;
+    return <span key={index} className={font}>{part}</span>;
   })
 }
 

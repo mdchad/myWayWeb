@@ -9,7 +9,7 @@ export async function PATCH(request, { params }) {
   console.log(body)
   console.log(id)
 
-  const data = await db.collection('Volumes').updateOne({ id: id }, { $set: { ...body }})
+  const data = await db.collection('Volumes').updateOne({ id: id }, { $set: { title: { ar: body.volume_title.ar, ms: body.volume_title.ms, en: "" } }})
   const hadithVolume = await db.collection('Hadiths').updateMany({ volume_id: id }, { $set: { ...body }})
 
   return NextResponse.json({
