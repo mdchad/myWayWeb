@@ -11,7 +11,7 @@ async function Card({ path, title, description , gradient = false }) {
       className={`${gradient ? 'text-white bg-gradient-to-b from-[#22276E] to-[#008080]' : ''} flex flex-col flex-grow from-[#22276E] to-[#008080] border border-royal-blue rounded-md overflow-hidden`}
     >
       <div className="p-4 flex-1">
-        <p className="text-lg">{title}</p>
+        <p className="text-lg font-semibold">{title}</p>
         <p className="text-sm">{description}</p>
       </div>
       <div className="bg-royal-blue w-full h-[20px]">

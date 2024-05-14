@@ -29,7 +29,7 @@ export default async function Book({ params }) {
                   <p className="text-xl leading-5 font-sans capitalize">{vol.title.ms.toLowerCase().trim()}</p>
                   <p className="text-xs text-gray-500 capitalize font-sans">{vol.transliteration.ms.trim().toUpperCase()}</p>
                 </div>
-                <p lang="ar" className="text-xl text-2xl max-w-xs text-right font-arabic">{vol.title.ar}</p>
+                <p lang="ar" className="text-2xl text-2xl max-w-xs text-right font-arabic">{vol.title.ar}</p>
               </div>
             </Link>
           )
