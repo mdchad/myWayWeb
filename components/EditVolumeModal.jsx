@@ -18,7 +18,7 @@ import {useToast} from "@/components/ui/use-toast";
 import {DialogClose} from "@radix-ui/react-dialog";
 
 function EditVolumeModal({ chapterId, hadiths}) {
-  const [value, setValue] = useState({ ar: hadiths[0].volume_title.ar, ms: hadiths[0].volume_title.ms})
+  const [value, setValue] = useState({ ar: hadiths ?? hadiths[0].volume_title.ar, ms: hadiths ?? hadiths[0].volume_title.ms})
   const { toast } = useToast()
 
   async function submitForm() {

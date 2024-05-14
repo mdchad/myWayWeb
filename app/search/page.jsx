@@ -101,7 +101,8 @@ async function getData(terms, page, selectedBooks = [], limit = 10) {
 export default async function Search({ searchParams }) {
   const selectedBooks = searchParams?.books ? searchParams.books.split(',') : []
   const result = await getData(searchParams.term, searchParams.page, selectedBooks)
-  const [{ documents, totalCount: [{count}] } ] = result
+  const [{ documents = [], totalCount = [{}] } = {}] = result || [{}];
+  const [{ count = 0 } = {}] = totalCount;
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-32 mb-20 py-4 sm:py-6 lg:py-12">
@@ -150,7 +151,7 @@ export default async function Search({ searchParams }) {
         <Pagination count={count} />
       </div>
       <div className="mt-2 p-4 bg-gray-100 grid gap-2">
-        {documents.map(data => {
+        {!! documents.length ? documents.map(data => {
           const id = data._id
           return (
             // <Link key={id} href={`/${params.bookId}/${vol.id}`}>
@@ -178,7 +179,7 @@ export default async function Search({ searchParams }) {
                 }
               </div>
           )
-        })}
+        }) : <p>No search found</p>}
       </div>
       <Pagination count={count} />
     </div>

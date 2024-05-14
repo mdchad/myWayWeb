@@ -12,7 +12,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import {CopyCheckIcon} from "lucide-react";
+import {CopyCheckIcon, MinusIcon, PlusIcon} from "lucide-react";
 import { v4 as uuidv4 } from 'uuid';
 import {symbolArabic} from "@/lib/symbolUtil";
 import QuranText from "@/components/QuranText";
@@ -86,6 +86,7 @@ export function HadithForm({ data }) {
   const [value, setValue] = useState(data ? data : defaultValue)
 
   async function onSubmit(e) {
+    console.log(value)
     e.preventDefault()
 
     try {
@@ -218,6 +219,23 @@ export function HadithForm({ data }) {
     })
   }
 
+  function addContent(e) {
+    e.preventDefault()
+    refs.current = refs.current.concat([[null, null, null]]);
+    const newContent = [{ en: "", ms: "", ar: ""}]
+    setValue((prevValue) => ({ ...prevValue, content: [...prevValue.content, ...newContent ]}))
+  }
+
+  function removeContent(e) {
+    e.preventDefault()
+    // console.log(refs.current)
+    // refs.current = refs.current.slice(0, -1);
+    // console.log(refs.current)
+    const newContent = value.content.slice(0, -1)
+    console.log(newContent)
+    setValue((prevValue) => ({ ...prevValue, content: newContent }))
+  }
+
   return (
     <div className="grid grid-cols-2 gap-8">
       <StickySubmitButton submit={onSubmit}/>
@@ -249,62 +267,67 @@ export function HadithForm({ data }) {
             <Input value={value.number} type="number" onChange={(e) => setValue({ ...value, number: e.target.value ? parseInt(e.target.value) : "" })}/>
           </div>
           {
-            value.content.map((contentItem, index) => (
-              <div key={index} className="space-y-8 border-b border-black pb-8">
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <Label htmlFor="ar">Arabic</Label>
-                    <Button size="sm" className="p-2 text-xs" onClick={(e) => replaceBracketText(e, value, index)}>Replace</Button>
+            value.content.map((contentItem, index) => {
+              return (
+                <div key={index} className="space-y-8 border-b border-black pb-8">
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <Label htmlFor="ar">Arabic</Label>
+                      <Button size="sm" className="p-2 text-xs" onClick={(e) => replaceBracketText(e, value, index)}>Replace</Button>
+                    </div>
+                    <Textarea value={value.content[index].ar}
+                              lang="ar"
+                              dir="rtl"
+                              className="font-arabic"
+                              onChange={(e) => {
+                                const updatedContent = [...value.content];
+                                updatedContent[index].ar = e.target.value;
+                                console.log(updatedContent)
+                                setValue((prevValue) => ({ ...prevValue, content: updatedContent }));
+                              }}
+                              ref={el => refs.current[index][0] = el} // Assign Arabic ref
+                              style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
+                    />
                   </div>
-                  <Textarea value={value.content[index].ar}
-                            lang="ar"
-                            dir="rtl"
-                            className="font-arabic"
-                            onChange={(e) => {
-                              const updatedContent = [...value.content];
-                              updatedContent[index].ar = e.target.value;
-                              setValue((prevValue) => ({ ...prevValue, content: updatedContent }));
-                            }}
-                            ref={el => refs.current[index][0] = el} // Assign Arabic ref
-                            style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
-                  />
-                </div>
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <Label htmlFor="ar">Malay</Label>
-                    <Button size="sm" className="p-2 text-xs" onClick={(e) => replaceSymbol(e, value, index)}>Replace</Button>
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <Label htmlFor="ar">Malay</Label>
+                      <Button size="sm" className="p-2 text-xs" onClick={(e) => replaceSymbol(e, value, index)}>Replace</Button>
+                    </div>
+                    <Textarea value={value.content[index].ms}
+                              className="font-arabicSymbol"
+                              onChange={(e) => {
+                                const updatedContent = [...value.content];
+                                updatedContent[index].ms = e.target.value;
+                                setValue((prevValue) => ({ ...prevValue, content: updatedContent }));
+                              }}
+                              ref={el => refs.current[index][1] = el} // Assign Malay ref
+                              style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
+                    />
                   </div>
-                  <Textarea value={value.content[index].ms}
-                            className="font-arabicSymbol"
-                            onChange={(e) => {
-                              const updatedContent = [...value.content];
-                              updatedContent[index].ms = e.target.value;
-                              setValue((prevValue) => ({ ...prevValue, content: updatedContent }));
-                            }}
-                            ref={el => refs.current[index][1] = el} // Assign Malay ref
-                            style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
-                  />
+                  <div>
+                    <Label htmlFor="ms">English</Label>
+                    <Textarea value={value.content[index].en}
+                              className="font-arabicSymbol"
+                              onChange={(e) => {
+                                const updatedContent = [...value.content];
+                                updatedContent[index].en = e.target.value;
+                                setValue((prevValue) => ({ ...prevValue, content: updatedContent }));
+                              }}
+                              ref={el => refs.current[index][2] = el} // Assign English ref
+                              style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
+                    />
+                  </div>
+                  {/*<div className="flex justify-end items-center">*/}
+                  {/*  { index > 0 && <Button onClick={() => removeHadith(index)} size={'sm'} className="bg-red-500 text-white hover:bg-red-700">- Remove hadith</Button> }*/}
+                  {/*</div>*/}
+                  {/*<hr className="h-[2px] bg-gray-500"/>*/}
                 </div>
-                <div>
-                  <Label htmlFor="ms">English</Label>
-                  <Textarea value={value.content[index].en}
-                            className="font-arabicSymbol"
-                            onChange={(e) => {
-                              const updatedContent = [...value.content];
-                              updatedContent[index].en = e.target.value;
-                              setValue((prevValue) => ({ ...prevValue, content: updatedContent }));
-                            }}
-                            ref={el => refs.current[index][2] = el} // Assign English ref
-                            style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
-                  />
-                </div>
-                {/*<div className="flex justify-end items-center">*/}
-                {/*  { index > 0 && <Button onClick={() => removeHadith(index)} size={'sm'} className="bg-red-500 text-white hover:bg-red-700">- Remove hadith</Button> }*/}
-                {/*</div>*/}
-                {/*<hr className="h-[2px] bg-gray-500"/>*/}
-              </div>
-            ))}
+              )
+            })}
 
+          <Button size="icon" variant="ghost" onClick={addContent}><PlusIcon size={16} color={'black'}/></Button>
+          <Button size="icon" variant="ghost" onClick={removeContent}><MinusIcon size={16} color={'black'}/></Button>
           <div className="space-y-4">
             <Label>Chapter</Label>
             <div className="space-y-4">
