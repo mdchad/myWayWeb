@@ -29,7 +29,10 @@ export function Logo() {
     // </svg>
     <div className="flex items-center">
       <Logomark />
-      <p className="ml-2 font-bold text-lg">My Way</p>
+      <div>
+        <p className="ml-2 font-bold leading-4 text-xl">My</p>
+        <p className="ml-2 font-bold text-xl">Way</p>
+      </div>
     </div>
   )
 }

@@ -15,6 +15,7 @@
     "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
+    "@radix-ui/react-tooltip": "^1.0.7",
     "@vercel/kv": "^1.0.0",
     "@wojtekmaj/react-hooks": "^1.18.1",
     "class-variance-authority": "^0.7.0",

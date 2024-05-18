@@ -72,7 +72,7 @@ export function Header() {
   return (
     <header>
       <nav>
-        <Container className="relative z-50 flex justify-between py-8">
+        <Container className="border-b-royal-blue/50 border-b relative z-50 flex justify-between pt-8 pb-4 mb-4">
           <div className="relative z-10 flex items-center gap-16">
             <Link href="/" aria-label="Home">
               <Logo className="h-10 w-auto" />
@@ -80,7 +80,7 @@ export function Header() {
             <div className="hidden lg:flex lg:gap-10">
               <NavLinks />
             </div>
-            <form onSubmit={handleSubmit} className="hidden lg:flex space-x-2">
+            <form onSubmit={handleSubmit} className="justify-self-end hidden lg:flex space-x-2">
               <input onChange={handleChange} value={searchTerm} className="w-72 text-sm border-gray-300 border rounded-md p-2" placeholder="Search..."/>
               <button className="bg-royal-blue text-white p-2 rounded-md text-sm">Search</button>
             </form>
