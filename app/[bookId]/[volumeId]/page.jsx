@@ -15,7 +15,6 @@ async function getData(volumeId, bookId) {
 
 export default async function Hadiths({ params }) {
   const hadiths = await getData(params.volumeId, params.bookId)
-  let chapterId = ""
 
   return (
     <HadithContainer hadiths={hadiths} />

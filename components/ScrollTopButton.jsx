@@ -64,6 +64,11 @@ const ScrollTopButton = ({ divRef, setCurrentId, currentId, hadiths }) => {
         const blockPosition = elementHeight > viewportHeight ? 'start' : 'end';
 
         element.scrollIntoView({ behavior: 'instant', block: blockPosition });
+
+        if (blockPosition === 'start') {
+          const elementTop = element.getBoundingClientRect().top;
+          window.scrollBy({ top: elementTop - 70, behavior: 'smooth' });
+        }
       }
     }
   };

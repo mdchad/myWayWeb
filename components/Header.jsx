@@ -124,7 +124,7 @@ export function Header() {
           <SheetContent side="left">
             <nav className="grid gap-6 text-lg font-medium">
               <Link
-                href="#"
+                href="/"
                 className="flex items-center gap-2 text-lg font-semibold"
               >
                 <Logomark />
