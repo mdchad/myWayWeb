@@ -22,7 +22,7 @@ export default function Hadith40() {
               <div key={index} className="mb-4">
                 <p className="mb-4">{item.narrators[index].ms}</p>
                 <div className="bg-gray-200 rounded-md px-4 py-6">
-                  <p className="text-2xl text-right font-arabic" lang="ar" dir="rtl">{cnt.ar}</p>
+                  <p className="text-2xl text-right font-arabic leading-10" lang="ar" dir="rtl">{cnt.ar}</p>
                   <p className="text-slate-500 text-md font-arabic mt-4" lang="ar" dir="rtl">{item.narratedBy[index].ar}</p>
                   <div className="mt-8 flex items-center justify-center">
                     <audio controls src={item.number === 5 && index === 1 ?  `/audio/${item.number}_content_ar.mp3`: uriAr } />
