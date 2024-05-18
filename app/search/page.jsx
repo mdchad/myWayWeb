@@ -105,11 +105,11 @@ export default async function Search({ searchParams }) {
   const [{ count = 0 } = {}] = totalCount;
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-32 mb-20 py-4 sm:py-6 lg:py-12">
-      <div className="bg-royal-blue py-6 px-4">
+    <div className="mb-20">
+      <div className="bg-royal-blue p-8">
         <p className="text-xl font-bold text-white">Search Result: {searchParams.term}</p>
       </div>
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-2">
+      <div className="py-8 px-8 lg:px-40 grid grid-cols-1 md:grid-cols-2">
         <div className="flex flex-wrap flex-col md:flex-row gap-2">
           <Link
             className={`text-sm rounded-md border border-royal-blue p-2 ${searchParams.books === 'sahih_bukhari' ? 'bg-royal-blue text-white' : ''}`}
@@ -150,7 +150,7 @@ export default async function Search({ searchParams }) {
         </div>
         <Pagination count={count} />
       </div>
-      <div className="mt-2 p-4 bg-gray-100 grid gap-2">
+      <div className="py-16 px-8 lg:px-40 bg-gray-100 grid gap-2">
         {!! documents.length ? documents.map(data => {
           const id = data._id
           return (
@@ -166,22 +166,24 @@ export default async function Search({ searchParams }) {
                 {
                   data.content?.map((content, i) => {
                     return (
-                      <div key={i} className="grid-cols-1 lg:grid-cols-2 gap-12 grid p-8 bg-white shadow-sm">
+                      <Link href={`/${data.book_id}/${data.volume_id}#${data.number}`} key={i} className="grid-cols-1 lg:grid-cols-2 gap-12 grid p-8 bg-white shadow-sm">
                         <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">
                           <QuranText text={content.ms} font="font-arabicSymbol" />
                         </p>
                         <p lang="ar" dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic leading-relaxed">
                           <QuranText text={content.ar} />
                         </p>
-                      </div>
+                      </Link>
                     )
                   })
                 }
               </div>
           )
         }) : <p>No search found</p>}
+        <div className="mt-10">
+          <Pagination count={count} />
+        </div>
       </div>
-      <Pagination count={count} />
     </div>
   )
 }

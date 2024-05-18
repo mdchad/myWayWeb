@@ -15,11 +15,11 @@ export default async function Book({ params }) {
   const volumes = await getData(params.bookId)
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-32 mb-20 py-4 sm:py-6 lg:py-12">
+    <div className="mb-20">
       <div className="bg-royal-blue py-4 px-2">
         <p className="text-2xl font-bold text-white text-center py-4">{volumes[0]?.book_title}</p>
       </div>
-      <div className="mt-12 p-4 bg-gray-100 grid gap-2">
+      <div className="py-16 px-8 lg:px-40 bg-gray-100 grid gap-2">
         {volumes.map(vol => {
           const id = vol.id_
           return (

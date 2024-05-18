@@ -49,7 +49,7 @@ const Pagination = ({ count }) => {
             ) : (
               <Link
                 href={`/search?term=${encodeURIComponent(term)}&page=${number}&books=${books}`}
-                className={`${currentPage === number ? 'bg-royal-blue text-white' : 'hover:bg-gray-100 text-black'} text-sm px-2 py-1 mx-1 rounded`}
+                className={`${currentPage === number ? 'border-0 bg-royal-blue text-white' : 'hover:bg-gray-100 text-black'} border border-gray-100 text-sm px-2 py-1 mx-1 rounded`}
               >
                 {number}
               </Link>

@@ -15,10 +15,12 @@ export default function RootLayout({ children }) {
       <html lang="en" className={`${inter.variable} ${arabicFont.variable} ${arabicSymbolFont.variable} ${hafs.variable}`} content="text/html; charset=utf-8">
         <body>
           <NextTopLoader />
+        <div className="flex min-h-screen w-full flex-col">
           <Header />
           {children}
           <Footer />
           <Toaster />
+        </div>
         </body>
       </html>
   )
