@@ -67,7 +67,7 @@ const ScrollTopButton = ({ divRef, setCurrentId, currentId, hadiths }) => {
 
         if (blockPosition === 'start') {
           const elementTop = element.getBoundingClientRect().top;
-          window.scrollBy({ top: elementTop - 70, behavior: 'smooth' });
+          window.scrollBy({ top: elementTop - 70, behavior: 'auto' });
         }
       }
     }

@@ -26,7 +26,7 @@ function HadithContainer({ hadiths }) {
           <p className="text-2xl font-bold text-white text-center capitalize font-sans">{hadiths[0]?.volume_title.ms.toLowerCase()}</p>
           <p lang="ar" className="mt-2 text-3xl font-arabic font-bold text-white text-center">{hadiths[0]?.volume_title.ar}</p>
         </div>
-        <div className="py-16 px-4 lg:px-16 xl:px-48 bg-gray-100 grid gap-3">
+        <div className="py-16 px-4 md:px-12 lg:px-36 xl:px-48 bg-gray-100 grid gap-3">
           {hadiths.map((hadith, index) => {
             if (chapterId !== hadith.chapter_id) {
               chapterId = hadith.chapter_id
