@@ -1,5 +1,5 @@
 import connectToDatabase from "@/lib/mongodb";
-import Volume from "@/components/Volume";
+import HadithContainer from "@/components/HadithContainer";
 
 export const dynamic = "force-dynamic";
 export const revalidate = false
@@ -18,6 +18,6 @@ export default async function Hadiths({ params }) {
   let chapterId = ""
 
   return (
-    <Volume hadiths={hadiths} />
+    <HadithContainer hadiths={hadiths} />
   )
 }

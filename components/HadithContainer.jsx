@@ -11,7 +11,7 @@ import {Toaster} from "@/components/ui/toaster";
 import {useRef, useState} from "react";
 
 
-function Volume({ hadiths }) {
+function HadithContainer({ hadiths }) {
   const [currentId, setCurrentId] = useState({ id: 1, number: hadiths[1].number});
   const refs = useRef({});
 
@@ -123,4 +123,4 @@ function Volume({ hadiths }) {
   )
 }
 
-export default Volume
+export default HadithContainer

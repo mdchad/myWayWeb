@@ -8,6 +8,9 @@ dependencies:
   '@headlessui/react':
     specifier: ^1.7.17
     version: 1.7.17(react-dom@18.0.0)(react@18.0.0)
+  '@nozbe/microfuzz':
+    specifier: ^1.0.0
+    version: 1.0.0
   '@radix-ui/react-dialog':
     specifier: ^1.0.5
     version: 1.0.5(react-dom@18.0.0)(react@18.0.0)
@@ -299,6 +302,10 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
+
+  /@nozbe/microfuzz@1.0.0:
+    resolution: {integrity: sha512-XKIg/guk+s1tkPTkHch9hfGOWgsKojT7BqSQddXTppOfVr3SWQhhTCqbgQaPTbppf9gc2kFeG0gpBZZ612UXHA==}
+    dev: false
 
   /@radix-ui/primitive@1.0.1:
     resolution: {integrity: sha512-yQ8oGX2GVsEYMWGxcovu1uGWPCxV5BFfeeYxqPmuAzUyLT9qmaMXSAhXpb0WrspIeqYzdJpkh2vHModJPgRIaw==}

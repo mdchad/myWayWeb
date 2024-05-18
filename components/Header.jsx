@@ -73,97 +73,12 @@ export function Header() {
   }
 
   return (
-    // <header>
-    //   <nav>
-    //     <Container className="border-b-royal-blue/50 border-b relative z-50 flex justify-between pt-8 pb-4 mb-4">
-    //       <div className="relative z-10 flex items-center gap-16">
-    //         <Link href="/" aria-label="Home">
-    //           <Logo className="h-10 w-auto" />
-    //         </Link>
-    //         <div className="hidden lg:flex lg:gap-10">
-    //           <NavLinks />
-    //         </div>
-    //         <form onSubmit={handleSubmit} className="justify-self-end hidden lg:flex space-x-2">
-    //           <input onChange={handleChange} value={searchTerm} className="w-72 text-sm border-gray-300 border rounded-md p-2" placeholder="Search..."/>
-    //           <button className="bg-royal-blue text-white p-2 rounded-md text-sm">Search</button>
-    //         </form>
-    //       </div>
-    //       <div className="flex items-center gap-6">
-    //         <Popover className="lg:hidden">
-    //           {({ open }) => (
-    //             <>
-    //               <Popover.Button
-    //                 className="relative z-10 -m-2 inline-flex items-center rounded-lg stroke-gray-900 p-2 hover:bg-gray-200/50 hover:stroke-gray-600 active:stroke-gray-900 [&:not(:focus-visible)]:focus:outline-none"
-    //                 aria-label="Toggle site navigation"
-    //               >
-    //                 {({ open }) =>
-    //                   open ? (
-    //                     <ChevronUpIcon className="h-6 w-6" />
-    //                   ) : (
-    //                     <MenuIcon className="h-6 w-6" />
-    //                   )
-    //                 }
-    //               </Popover.Button>
-    //               <AnimatePresence initial={false}>
-    //                 {open && (
-    //                   <>
-    //                     <Popover.Overlay
-    //                       static
-    //                       as={motion.div}
-    //                       initial={{ opacity: 0 }}
-    //                       animate={{ opacity: 1 }}
-    //                       exit={{ opacity: 0 }}
-    //                       className="fixed inset-0 z-0 bg-gray-300/60 backdrop-blur"
-    //                     />
-    //                     <Popover.Panel
-    //                       static
-    //                       as={motion.div}
-    //                       initial={{ opacity: 0, y: -32 }}
-    //                       animate={{ opacity: 1, y: 0 }}
-    //                       exit={{
-    //                         opacity: 0,
-    //                         y: -32,
-    //                         transition: { duration: 0.2 },
-    //                       }}
-    //                       className="absolute inset-x-0 top-0 z-0 origin-top rounded-b-2xl bg-gray-50 px-6 pb-6 pt-32 shadow-2xl shadow-gray-900/20"
-    //                     >
-    //                       <div className="space-y-4">
-    //                         {/*<MobileNavLink href="#features">*/}
-    //                         {/*  Features*/}
-    //                         {/*</MobileNavLink>*/}
-    //                         <MobileNavLink href="#reviews">
-    //                           Reviews
-    //                         </MobileNavLink>
-    //                         {/*<MobileNavLink href="#pricing">*/}
-    //                         {/*  Pricing*/}
-    //                         {/*</MobileNavLink>*/}
-    //                         <MobileNavLink href="#faqs">FAQs</MobileNavLink>
-    //                       </div>
-    //                     </Popover.Panel>
-    //                   </>
-    //                 )}
-    //               </AnimatePresence>
-    //             </>
-    //           )}
-    //         </Popover>
-    //       </div>
-    //     </Container>
-    //     <div className="lg:hidden px-4 py-4 flex flex-col">
-    //       <form onSubmit={handleSubmit} className="flex space-x-2">
-    //         <input onChange={handleChange} value={searchTerm} className="w-full text-sm border-gray-300 border rounded-md p-2" placeholder="Search..."/>
-    //         <button className="bg-royal-blue text-white p-2 rounded-md text-sm">Search</button>
-    //       </form>
-    //     </div>
-    //   </nav>
-    // </header>
-      <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 py-12">
+     <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 py-12">
         <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
           <Link
             href="/"
             className="flex items-center gap-2 font-semibold md:text-base mr-28"
           >
-            {/*<Package2 className="h-6 w-6" />*/}
-            {/*<span className="sr-only">Acme Inc</span>*/}
             <Logomark />
             <div>
               <p className="ml-2 font-bold text-xl">My</p>

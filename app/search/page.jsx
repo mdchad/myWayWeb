@@ -6,7 +6,6 @@ import React from "react";
 import QuranText from "@/components/QuranText";
 
 async function getData(terms, page, selectedBooks = [], limit = 10) {
-  console.log('selected', selectedBooks)
   const db = await connectToDatabase();
 
   const skip = (page - 1) * limit;
