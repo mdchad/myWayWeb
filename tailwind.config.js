@@ -64,6 +64,7 @@ module.exports = {
         arabic: ['var(--font-arabic)', ...defaultTheme.fontFamily.sans],
         hafs: ['var(--font-hafs)', ...defaultTheme.fontFamily.sans],
         arabicSymbol: ['var(--font-arabic-symbol)'],
+        surah: ['var(--font-surah)'],
       },
       keyframes: {
         "accordion-down": {

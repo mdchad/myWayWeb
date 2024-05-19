@@ -30,3 +30,11 @@ export const arabicSymbolFont = localFont(
     variable: '--font-arabic-symbol'
   }
 )
+
+export const surahFont = localFont(
+  {
+    src: [{ path: '../public/fonts/surah-names/v1/sura_names.woff2' }],
+    display: 'swap',
+    variable: '--font-surah',
+  }
+)
