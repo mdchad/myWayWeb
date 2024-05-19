@@ -23,6 +23,8 @@ async function getSurah(volumeId) {
 
   if (volumeId === "be728413-131c-43a6-8481-d7c4704fa228") {
     return await db.collection('Surah').find({}).toArray();
+  } else {
+    return []
   }
 }
 
