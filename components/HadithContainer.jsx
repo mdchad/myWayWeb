@@ -46,10 +46,10 @@ function HadithContainer({ hadiths, volumes, surahs }) {
         {
           volumes.metadata?.ms && (
             <div className="bg-royal-blue/20 gap-20 text-royal-blue/90 md:py-16 md:px-20 px-4 py-8 grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
-              <p className="order-2 sm:order-1 font-semibold text-md text-justify leading-relaxed">
+              <p className="order-2 sm:order-1 font-semibold text-md text-justify">
                 <SpecialText text={volumes.metadata.ms}/>
               </p>
-              <p className="text-xl order-1 sm:order-2 font-semibold text-justify" dir="rtl">
+              <p className="text-xl order-1 sm:order-2 font-semibold text-justify leading-relaxed" dir="rtl">
                 <QuranText text={volumes.metadata.ar} />
               </p>
             </div>
