@@ -21,7 +21,7 @@ export default async function Book({ params }) {
       <div className="bg-royal-blue py-4 px-2">
         <p className="text-2xl font-bold text-white text-center py-4">{volumes[0]?.book_title}</p>
       </div>
-      { volumes && <VolumeContainer volumes={volumes}/> }
+      { volumes && <VolumeContainer volumes={JSON.parse(JSON.stringify(volumes))}/> }
     </div>
   )
 }

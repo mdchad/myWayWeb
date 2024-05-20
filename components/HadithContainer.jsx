@@ -43,14 +43,18 @@ function HadithContainer({ hadiths, volumes, surahs }) {
           <p className="text-2xl font-bold text-white text-center capitalize font-sans">{hadiths[0]?.volume_title.ms.toLowerCase()}</p>
           <p lang="ar" className="mt-2 text-3xl font-arabic font-bold text-white text-center">{hadiths[0]?.volume_title.ar}</p>
         </div>
-        <div className="bg-royal-blue/20 gap-6 text-royal-blue md:py-16 md:px-20 p-4 grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
-          <div className="order-2 sm:order-1 font-bold text-lg">
-            <SpecialText text={volumes.metadata.ms}/>
-          </div>
-          <p className="text-xl order-1 sm:order-2 font-bold" dir="rtl">
-            <QuranText text={volumes.metadata.ar} />
-          </p>
-        </div>
+        {
+          volumes.metadata?.ms && (
+            <div className="bg-royal-blue/20 gap-20 text-royal-blue/90 md:py-16 md:px-20 px-4 py-8 grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
+              <p className="order-2 sm:order-1 font-semibold text-md text-justify leading-relaxed">
+                <SpecialText text={volumes.metadata.ms}/>
+              </p>
+              <p className="text-xl order-1 sm:order-2 font-semibold text-justify" dir="rtl">
+                <QuranText text={volumes.metadata.ar} />
+              </p>
+            </div>
+          )
+        }
         <div className="py-16 px-4 md:px-12 lg:px-36 xl:px-48 bg-gray-100 grid gap-3">
           {hadiths.map((hadith, index) => {
             if (chapterId !== hadith.chapter_id) {
@@ -61,7 +65,9 @@ function HadithContainer({ hadiths, volumes, surahs }) {
                   <div key={hadith._id} id={index + 1} ref={(el) => (refs.current[index + 1] = el)}>
                     <div className="gap-6 grid-cols-[repeat(auto-fit,minmax(280px,1fr))] lg:gap-12 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] my-6 border-x-2 border-royal-blue grid px-2 lg:px-4 py-2">
                       <div className="order-2 sm:order-1">
-                        <SpecialText text={hadith?.chapter_title?.ms} />
+                        <p className="text-sm text-justify text-royal-blue font-bold">
+                          <SpecialText text={hadith?.chapter_title?.ms} />
+                        </p>
                         <p className="font-sans font-normal text-sm text-justify text-gray-500">{hadith?.chapter_transliteration?.ms}</p>
                       </div>
                       <p lang="ar" dir="rtl" className="order-1 sm:order-2 font-bold text-royal-blue text-lg text-justify font-arabic">

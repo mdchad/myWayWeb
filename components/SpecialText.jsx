@@ -11,11 +11,11 @@ function SpecialText({ text }) {
       return <span key={index} className="font-arabicSymbol">{segment}</span>;
     } else {
       // Otherwise, use the default font
-      return <span key={index} className="font-sans font-bold">{segment}</span>;
+      return <span key={index} className="font-sans">{segment}</span>;
     }
   });
 
-  return <p className="text-sm text-justify text-royal-blue">{segments}</p>;
+  return <span>{segments}</span>;
 }
 
 export default SpecialText
