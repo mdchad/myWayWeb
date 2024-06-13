@@ -69,8 +69,31 @@ const symbolToReplace = {
 };
 
 function StickySubmitButton({ submit }) {
+  async function copyToClipboard(value) {
+    await navigator.clipboard.writeText(value)
+  }
+
+  let indexStrings = [1, 42, 48, 49, 50, 51]
+
   return (
-    <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 m-4">
+    <div className="fixed flex flex-col items-center bottom-0 left-1/2 transform -translate-x-1/2 m-4">
+      <div className="flex flex-wrap">
+        {indexStrings.map((s, i) => {
+          return (
+            <Popover key={i}>
+              <PopoverTrigger asChild>
+                <button onClick={() => copyToClipboard(symbolArabic[s])} className="hover:bg-gray-200 bg-gray-100 mb-2 mr-2 px-1 border rounded-md font-arabicSymbol text-lg">
+                  {symbolArabic[s]}
+                </button>
+              </PopoverTrigger>
+              <PopoverContent className="w-fit p-2 flex gap-1">
+                <CopyCheckIcon size={14}/>
+                <p className="text-xs">Copied to clipboard</p>
+              </PopoverContent>
+            </Popover>
+          )
+        })}
+      </div>
        <Button onClick={(e) => submit(e)} size="lg" className="hover:bg-red-400 bg-red-500 text-lg font-arabicSymbol">
         Submit
       </Button>
@@ -86,7 +109,6 @@ export function HadithForm({ data }) {
   const [value, setValue] = useState(data ? data : defaultValue)
 
   async function onSubmit(e) {
-    console.log(value)
     e.preventDefault()
 
     try {
@@ -180,7 +202,7 @@ export function HadithForm({ data }) {
     const reg = new RegExp(Object.keys(correction).join("|"), "g");
     value.chapter_metadata.ar = value.chapter_metadata.ar.replace(reg, (matched) => correction[matched]);
 
-    setValue((prevValue) => ({ ...prevValue, chapter_metadata: value.chapter_title }));
+    setValue((prevValue) => ({ ...prevValue, chapter_metadata: value.chapter_metadata }));
   }
 
   function setNewUUID(e) {
@@ -391,8 +413,8 @@ export function HadithForm({ data }) {
               <p className="font-sans font-bold text-sm text-justify text-gray-500">{value?.chapter_title?.ms}</p>
               <p className="font-sans font-normal text-sm text-justify text-gray-500">{value?.chapter_transliteration?.ms}</p>
             </div>
-            <p lang="ar" dir="rtl" className="font-bold text-gray-500 text-lg text-justify font-arabic">
-              <QuranText text={value?.chapter_title?.ar} />
+            <p lang="ar" dir="rtl" className="text-gray-500 text-lg text-justify font-arabic">
+              <QuranText text={value?.chapter_title?.ar} className="font-bold" />
             </p>
             <>
               <p lang="ar" dir="rtl" className="text-xl text-justify whitespace-pre-line font-arabic">

@@ -9,6 +9,7 @@ import {FileEditIcon} from "lucide-react";
 import ScrollTopButton from "@/components/ScrollTopButton";
 import {Toaster} from "@/components/ui/toaster";
 import {useRef, useState} from "react";
+import {Separator} from "@/components/ui/separator";
 
 function SurahContainer({ surahs = [], hadith }) {
   let surahData = surahs.filter(surah => surah.hadith_number === hadith.number) || [];
@@ -37,7 +38,7 @@ function HadithContainer({ hadiths, volumes, surahs }) {
   return (
     <>
       <div className="mb-20">
-        {/*<EditModal chapterId={chapterId} hadiths={hadiths} />*/}
+        <EditModal chapterId={chapterId} hadiths={hadiths} />
         {/*<EditVolumeModal chapterId={chapterId} hadiths={hadiths} />*/}
         <div className="bg-royal-blue py-4 px-2">
           <p className="text-2xl font-bold text-white text-center capitalize font-sans">{hadiths[0]?.volume_title.ms.toLowerCase()}</p>
@@ -49,8 +50,8 @@ function HadithContainer({ hadiths, volumes, surahs }) {
               <p className="order-2 sm:order-1 font-semibold text-md text-justify">
                 <SpecialText text={volumes.metadata.ms}/>
               </p>
-              <p className="text-xl order-1 sm:order-2 font-semibold text-justify leading-relaxed" dir="rtl">
-                <QuranText text={volumes.metadata.ar} />
+              <p className="text-xl order-1 sm:order-2 text-justify leading-relaxed" dir="rtl">
+                <QuranText text={volumes.metadata.ar} className="font-semibold"/>
               </p>
             </div>
           )
@@ -70,8 +71,9 @@ function HadithContainer({ hadiths, volumes, surahs }) {
                         </p>
                         <p className="font-sans font-normal text-sm text-justify text-gray-500">{hadith?.chapter_transliteration?.ms}</p>
                       </div>
-                      <p lang="ar" dir="rtl" className="order-1 sm:order-2 font-bold text-royal-blue text-lg text-justify font-arabic">
-                        <QuranText text={hadith?.chapter_title?.ar} />
+
+                      <p lang="ar" dir="rtl" className="order-1 sm:order-2 text-xl text-royal-blue text-lg text-justify font-arabic">
+                        <QuranText text={hadith?.chapter_title?.ar} className="font-bold"/>
                       </p>
                       {
                         hadith?.chapter_metadata.ms && (

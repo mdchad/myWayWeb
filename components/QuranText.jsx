@@ -1,4 +1,6 @@
-function QuranText({ text, font = 'font-arabic'}) {
+import {cn} from "@/lib/utils";
+
+function QuranText({ text, className, font = 'font-arabic'}) {
   const regex = /([\uFD3F].*?[\uFD3E])/; // These are the Unicode points for the Arabic brackets
   const parts = text.split(regex);
 
@@ -14,7 +16,10 @@ function QuranText({ text, font = 'font-arabic'}) {
       )
     }
     // Render the rest of the text normally
-    return <span key={index} className={font}>{part}</span>;
+    return <span key={index} className={cn(
+      font,
+      className
+    )}>{part}</span>;
   })
 }
 

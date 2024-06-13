@@ -25,6 +25,15 @@ function HadithItem({ hadith, chapterNumber, value, submittedValue, setSubmitted
     setValue(newValues)
   }
 
+  function onChangeValue(e, chapter) {
+    let updatedArray = [
+      ...value.slice(0, chapter),
+      e.target.value,
+      ...value.slice(chapter + 1)
+    ];
+    setValue(updatedArray)
+  }
+
   return (
     <div key={hadith._id} className="grid grid-cols-2 space-y-4 items-center">
       <div>
@@ -33,7 +42,7 @@ function HadithItem({ hadith, chapterNumber, value, submittedValue, setSubmitted
       </div>
       { value.length > 1 && (
         <div className="flex gap-2">
-          <Input defaultValue={value[chapterNumber]} />
+          <Input defaultValue={value[chapterNumber]} onChange={(e) => onChangeValue(e, chapterNumber)}/>
           {submittedValue[chapterNumber] ? <Button variant={'secondary'} onClick={() => valueChanged(hadith._id, chapterNumber)}><CheckIcon size={12} color={'black'} /></Button> : <Button onClick={() => valueChanged(hadith._id, chapterNumber)}><CheckIcon size={12} color={'white'} /></Button> }
           {submittedValue[chapterNumber] ? <Button variant={'secondary'} onClick={() => removeValue(value, chapterNumber)}><MinusIcon size={12} color={'black'} /></Button> : <Button onClick={() => removeValue(value, chapterNumber)}><MinusIcon size={12} color={'white'} /></Button> }
         </div>
