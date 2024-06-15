@@ -29,12 +29,24 @@ function VolumeContainer({ volumes }) {
         const id = vol._id
         return (
           <Link key={id} href={`/${vol.book_id}/${vol.id}`}>
-            <div key={vol.id} style={{ cursor: "pointer"}} className="w-full flex items-center justify-between space-x-4 p-4 bg-white shadow-sm rounded-lg">
+            <div key={vol.id} style={{ cursor: "pointer"}} className="w-full grid grid-cols-2 md:grid-cols-[1fr_1fr_150px] gap-10 space-x-4 p-4 bg-white shadow-sm rounded-lg">
               <div className="space-y-1 flex flex-col items-start text-left max-w-xs">
                 <p className="text-xl leading-5 font-sans capitalize">{vol.title.ms.toLowerCase().trim()}</p>
                 <p className="text-xs text-gray-500 capitalize font-sans">{vol.transliteration.ms.trim().toUpperCase()}</p>
               </div>
-              <p lang="ar" className="text-2xl text-2xl max-w-xs text-right font-arabic">{vol.title.ar}</p>
+              <div className="text-right flex flex-col items-end">
+                <p lang="ar" className="text-2xl text-right font-arabic">{vol.title.ar}</p>
+                <div className="md:hidden grid grid-cols-3 gap-2 text-right mt-4 w-40">
+                  <p className="text-sm text-[#31498B] font-sans">{vol?.hadith?.first}</p>
+                  <p className="text-sm text-[#31498B] font-sans">to</p>
+                  <p className="text-sm text-[#31498B] font-sans">{vol?.hadith?.last}</p>
+                </div>
+              </div>
+              <div className="hidden md:grid grid-cols-3 gap-2 text-right">
+                <p className="text-sm text-[#31498B] font-sans">{vol?.hadith?.first}</p>
+                <p className="text-sm text-[#31498B] font-sans">to</p>
+                <p className="text-sm text-[#31498B] font-sans">{vol?.hadith?.last}</p>
+              </div>
             </div>
           </Link>
         )
