@@ -38,7 +38,7 @@ function HadithContainer({ hadiths, volumes, surahs }) {
   return (
     <>
       <div className="mb-20">
-        <EditModal chapterId={chapterId} hadiths={hadiths} />
+        {/*<EditModal chapterId={chapterId} hadiths={hadiths} />*/}
         {/*<EditVolumeModal chapterId={chapterId} hadiths={hadiths} />*/}
         <div className="bg-royal-blue py-4 px-2">
           <p className="text-2xl font-bold text-white text-center capitalize font-sans">{hadiths[0]?.volume_title.ms.toLowerCase()}</p>
