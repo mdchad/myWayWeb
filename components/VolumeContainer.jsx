@@ -61,13 +61,13 @@ function VolumeContainer({ volumes }) {
                 <p lang="ar" className="text-2xl text-right font-arabic">{vol.title.ar}</p>
                 <div className="md:hidden grid grid-cols-3 gap-2 text-center mt-4 w-28">
                   <p className="text-sm text-[#31498B] font-sans">{vol?.hadith?.first}</p>
-                  <p className="text-sm text-[#31498B] font-sans">hingga</p>
+                  <p className="text-sm text-[#31498B] font-sans">ke</p>
                   <p className="text-sm text-[#31498B] font-sans">{vol?.hadith?.last}</p>
                 </div>
               </div>
               <div className="hidden md:grid grid-cols-3 gap-2 text-center">
                 <p className="text-sm text-[#31498B] font-sans">{vol?.hadith?.first}</p>
-                <p className="text-sm text-[#31498B] font-sans">hingga</p>
+                <p className="text-sm text-[#31498B] font-sans">ke</p>
                 <p className="text-sm text-[#31498B] font-sans">{vol?.hadith?.last}</p>
               </div>
             </div>
