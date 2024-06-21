@@ -1,31 +1,54 @@
 'use client'
 
 import Link from "next/link";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Input} from "@/components/ui/input";
 import {useFuzzySearchList} from "@nozbe/microfuzz/react";
 
 function VolumeContainer({ volumes }) {
   const [queryText, setQueryText] = useState('')
+  const [queryNumber, setQueryNumber] = useState(0)
+  const [list, setList] = useState(volumes)
 
   function onFilter(e) {
-    setQueryText(e.target.value)
+    if (!isNaN(parseInt(e.target.value))) {
+      setQueryNumber(parseInt(e.target.value))
+      setQueryText('')
+    } else if (e.target.value === '') {
+      setQueryNumber(0)
+      setQueryText(e.target.value)
+    } else {
+      setQueryNumber(0)
+      setQueryText(e.target.value)
+    }
+  }
+
+  function filterVolumesByNumber(volumes, number) {
+    if (number === 0) {
+      setList(volumes)
+    } else {
+      setList(volumes.filter(volume => number >= volume.hadith.first && number <= volume.hadith.last))
+    }
   }
 
   const filteredList = useFuzzySearchList({
-    list: volumes,
+    list: list,
     // If `queryText` is blank, `list` is returned in whole
     queryText,
     // optional `getText` or `key`, same as with `createFuzzySearch`
     getText: (item) => [item.title.ms],
     // arbitrary mapping function, takes `FuzzyResult<T>` as input
-    mapResultItem: ({ item, score, matches: [highlightRanges] }) => ({ ...item, highlightRanges })
+    mapResultItem: ({item, score, matches: [highlightRanges]}) => ({...item})
   })
+
+  useEffect(() => {
+    filterVolumesByNumber(volumes, queryNumber)
+  }, [queryNumber])
 
   return (
     <div className="py-16 px-4 lg:px-40 bg-gray-100 grid gap-2">
-      <Input onChange={onFilter} className="mb-6" placeholder="Search Chapter"/>
-      {filteredList.map(vol => {
+      <Input onChange={(e) => onFilter(e)} className="mb-6" placeholder="Cari kitab atau nombor hadis"/>
+      {!!filteredList.length ? filteredList.map(vol => {
         const id = vol._id
         return (
           <Link key={id} href={`/${vol.book_id}/${vol.id}`}>
@@ -50,7 +73,11 @@ function VolumeContainer({ volumes }) {
             </div>
           </Link>
         )
-      })}
+      }) : (
+        <div className="w-full p-20 bg-white shadow-sm rounded-lg text-center border">
+          <p className="text-2xl ">Kitab tidak dijumpai</p>
+        </div>
+      )}
     </div>
   )
 }

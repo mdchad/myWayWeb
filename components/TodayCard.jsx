@@ -30,8 +30,8 @@ async function TodayCard() {
               size={16}
               className={'mr-2'}
             />
-            <p className="font-bold text-royal-blue">
-              {data?.volume_title.ms}
+            <p className="font-bold text-royal-blue capitalize">
+              {data?.volume_title.ms.toLowerCase()}
             </p>
           </div>
           <p className="mb-4 text-xl line-clamp-5 font-arabic leading-relaxed" lang="ar" dir="rtl">

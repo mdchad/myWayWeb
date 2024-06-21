@@ -40,7 +40,7 @@ const Pagination = ({ count }) => {
 
   return (
     <nav className="flex flex-col">
-      <p className="text-right my-2 font-sans text-sm">Showing {startIndex} - {endIndex} of {totalCount}</p>
+      <p className="text-right my-2 font-sans text-sm">Hasil {startIndex} - {endIndex} dari {totalCount}</p>
       <ul className='flex list-none justify-end'>
         {pageNumbers.map((number, i) => (
           <li key={i}>

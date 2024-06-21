@@ -168,7 +168,7 @@ export function Header() {
                 value={searchTerm}
                 onChange={handleChange}
                 type="search"
-                placeholder="Search..."
+                placeholder="Cari..."
                 className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
               />
             </div>

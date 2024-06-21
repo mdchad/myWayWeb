@@ -16,14 +16,28 @@ function SurahContainer({ surahs = [], hadith }) {
 
   if (surahData.length > 0) {
     return surahData.map(val => (
-      <div key={val.number} className="mt-10 rounded-xl bg-white flex flex-col items-center border border-royal-blue p-6">
-        <p className="font-surah text-6xl" dir="rtl">
-          <span>{val.number.toString().padStart(3, '0')}</span>
-          <span>{'surah'.toString().padStart(3, '0')}</span>
-        </p>
-        <p className="text-lg font-sans">
-          {val.title.ms}
-        </p>
+      <div key={val.number}>
+        <div className="mt-10 rounded-xl bg-white flex flex-col items-center border border-royal-blue p-6">
+          <p className="font-surah text-6xl" dir="rtl">
+            <span>{val.number.toString().padStart(3, '0')}</span>
+            <span>{'surah'.toString().padStart(3, '0')}</span>
+          </p>
+          <p className="text-lg font-sans">
+            {val.title.ms}
+          </p>
+          {val.content.map((cnt, i) => {
+            return (
+              <div key={i} className="flex flex-col gap-12 mt-16">
+                <p className="text-xl text-justify whitespace-pre-line font-arabic text-gray-600" dir="rtl">
+                  <QuranText text={cnt?.ar} />
+                </p>
+                <p className="text-md text-justify whitespace-pre-line font-arabicSymbol text-gray-600">
+                  <QuranText text={cnt?.ms} font="font-arabicSymbol"/>
+                </p>
+              </div>
+            )
+          })}
+        </div>
       </div>
     ))
   }

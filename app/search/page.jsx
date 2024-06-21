@@ -105,8 +105,8 @@ export default async function Search({ searchParams }) {
 
   return (
     <div className="mb-20">
-      <div className="bg-royal-blue p-8">
-        <p className="text-xl font-bold text-white">Search Result: {searchParams.term}</p>
+      <div className="bg-royal-blue p-8 px-40">
+        <p className="text-2xl font-bold text-white">Hasil carian: "{searchParams.term}"</p>
       </div>
       <div className="py-8 px-8 lg:px-40 grid grid-cols-1 md:grid-cols-2">
         <div className="flex flex-wrap flex-col md:flex-row gap-2">
@@ -158,7 +158,7 @@ export default async function Search({ searchParams }) {
                 <div className="flex flex-wrap items-center gap-1 pt-4 pb-2">
                   <Link href={`/${data.book_id}`}><p className="text-royal-blue hover:underline font-sans text-sm font-semibold">{data.book_title?.ms}</p></Link>
                   <span className="text-xs"><ChevronRightSquare color="black" size={18} /></span>
-                  <Link href={`/${data.book_id}/${data.volume_id}`}><p className="text-royal-blue hover:underline font-sans text-sm font-semibold">{data.volume_title?.ms}</p></Link>
+                  <Link href={`/${data.book_id}/${data.volume_id}`}><p className="text-royal-blue hover:underline font-sans text-sm font-semibold capitalize">{data.volume_title?.ms.toLowerCase()}</p></Link>
                   <span className="text-xs"><ChevronRightSquare color="black" size={18} /></span>
                   <Link href={`/${data.book_id}/${data.volume_id}#${data.number}`}><p className="text-royal-blue hover:underline font-sans text-sm font-semibold">{data.number}</p></Link>
                 </div>
@@ -178,7 +178,7 @@ export default async function Search({ searchParams }) {
                 }
               </div>
           )
-        }) : <p>No search found</p>}
+        }) : <p>Tiada carian dijumpai</p>}
         <div className="mt-10">
           <Pagination count={count} />
         </div>
