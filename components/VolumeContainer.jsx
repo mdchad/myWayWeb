@@ -51,7 +51,7 @@ function VolumeContainer({ volumes }) {
       {!!filteredList.length ? filteredList.map(vol => {
         const id = vol._id
         return (
-          <Link key={id} href={`/${vol.book_id}/${vol.id}`}>
+          <Link key={id} href={`/${vol.book_id}/${vol.id}${queryNumber ? `#${queryNumber}` : ''}`}>
             <div key={vol.id} style={{ cursor: "pointer"}} className="w-full grid grid-cols-2 md:grid-cols-[1fr_1fr_150px] gap-10 space-x-4 p-4 bg-white shadow-sm rounded-lg">
               <div className="space-y-1 flex flex-col items-start text-left max-w-xs">
                 <p className="text-xl leading-5 font-sans capitalize">{vol.title.ms.toLowerCase().trim()}</p>
