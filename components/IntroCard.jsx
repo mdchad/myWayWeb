@@ -8,7 +8,11 @@ async function IntroCard() {
 
   return (
       <div className="bg-white border border-royal-blue rounded-md overflow-hidden">
-        <Link href="/intro-malay.pdf" >
+        <Link
+          href="/intro-malay.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <div className="p-3">
             <div className="flex flex-row flex-wrap mb-4 items-center">
               <p className="font-semibold text-royal-blue mr-2 underline">
@@ -31,27 +35,6 @@ async function IntroCard() {
           </div>
           <div className="flex flex-row justify-between items-center bg-royal-blue">
             <div className="flex flex-row items-center">
-              {/*<TouchableHighlight className="p-1" underlayColor="#333">*/}
-              {/*  <Share2*/}
-              {/*    color="white"*/}
-              {/*    absoluteStrokeWidth={2}*/}
-              {/*    size={16}*/}
-              {/*  />*/}
-              {/*</TouchableHighlight>*/}
-              {/*<TouchableHighlight className="p-1" underlayColor="#333">*/}
-              {/*  <Heart*/}
-              {/*    color="white"*/}
-              {/*    absoluteStrokeWidth={2}*/}
-              {/*    size={16}*/}
-              {/*  />*/}
-              {/*</TouchableHighlight>*/}
-              {/*<TouchableHighlight className="p-1" underlayColor="#333">*/}
-              {/*  <Bookmark*/}
-              {/*    color="white"*/}
-              {/*    absoluteStrokeWidth={2}*/}
-              {/*    size={16}*/}
-              {/*  />*/}
-              {/*</TouchableHighlight>*/}
             </div>
             <div className="flex flex-row items-center space-x-2">
               <p className="text-white">

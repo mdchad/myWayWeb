@@ -9,7 +9,6 @@ import {FileEditIcon} from "lucide-react";
 import ScrollTopButton from "@/components/ScrollTopButton";
 import {Toaster} from "@/components/ui/toaster";
 import {useRef, useState} from "react";
-import {Separator} from "@/components/ui/separator";
 
 function SurahContainer({ surahs = [], hadith }) {
   let surahData = surahs.filter(surah => surah.hadith_number === hadith.number) || [];
@@ -25,7 +24,7 @@ function SurahContainer({ surahs = [], hadith }) {
           <p className="text-lg font-sans">
             {val.title.ms}
           </p>
-          {val.content.map((cnt, i) => {
+          {!!val.content[0].ms && val.content.map((cnt, i) => {
             return (
               <div key={i} className="flex flex-col gap-12 mt-16">
                 <p className="text-xl text-justify whitespace-pre-line font-arabic text-gray-600" dir="rtl">
