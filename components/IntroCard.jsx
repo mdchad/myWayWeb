@@ -3,6 +3,7 @@ import Link from "next/link";
 import {ArrowRight, ChevronRightSquare} from "lucide-react";
 import { kv } from '@vercel/kv';
 import { NextResponse } from 'next/server';
+import SeeMoreBar from "@/components/SeeMoreBar";
 
 async function IntroCard() {
 
@@ -33,16 +34,7 @@ async function IntroCard() {
               [Surah an-Nahl: 16:44]
             </p>
           </div>
-          <div className="flex flex-row justify-between items-center bg-royal-blue">
-            <div className="flex flex-row items-center">
-            </div>
-            <div className="flex flex-row items-center space-x-2">
-              <p className="text-white">
-                Lihat Lagi
-              </p>
-              <ArrowRight size={18} color={'white'} />
-            </div>
-          </div>
+          <SeeMoreBar />
         </Link>
       </div>
   );

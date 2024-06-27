@@ -4,6 +4,7 @@ import {ArrowRight, ChevronRightSquare} from "lucide-react";
 import { kv } from '@vercel/kv';
 import { NextResponse } from 'next/server';
 import QuranText from "@/components/QuranText";
+import SeeMoreBar from "@/components/SeeMoreBar";
 
 async function getData(){
   const hadith = await kv.get('todayHadith');
@@ -21,8 +22,9 @@ async function TodayCard() {
     >
       <div className="bg-white border border-royal-blue rounded-md overflow-hidden">
         <div className="p-3">
+          <p className="font-bold text-royal-blue text-xl">Hadis Hari Ini</p>
           <div className="flex flex-row flex-wrap mb-4 items-center">
-            <p className="font-bold text-royal-blue mr-2">
+            <p className="text-royal-blue mr-2">
               {data?.book_title.ms}
             </p>
             <ChevronRightSquare
@@ -30,7 +32,7 @@ async function TodayCard() {
               size={16}
               className={'mr-2'}
             />
-            <p className="font-bold text-royal-blue capitalize">
+            <p className="text-royal-blue capitalize">
               {data?.volume_title.ms.toLowerCase()}
             </p>
           </div>
@@ -41,16 +43,7 @@ async function TodayCard() {
             <QuranText text={data?.content[0].ms} font="font-arabicSymbol" />
           </p>
         </div>
-        <div className="flex flex-row justify-between items-center bg-royal-blue">
-          <div className="flex flex-row items-center">
-          </div>
-          <div className="flex flex-row items-center space-x-2">
-            <p className="text-white">
-              Lihat Lagi
-            </p>
-            <ArrowRight size={18} color={'white'} />
-          </div>
-        </div>
+        <SeeMoreBar />
       </div>
     </Link>
   );

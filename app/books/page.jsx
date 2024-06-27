@@ -1,6 +1,7 @@
 import connectToDatabase from "@/lib/mongodb";
 import Link from "next/link";
 import {ArrowRight} from "lucide-react";
+import SeeMoreBar from "@/components/SeeMoreBar";
 
 async function getData() {
   const db = await connectToDatabase();
@@ -23,10 +24,7 @@ export default async function Home() {
                 <div className="flex justify-center py-16 px-2">
                   <p className="text-2xl text-royal-blue font-semibold">{book.title}</p>
                 </div>
-                <div className="bg-royal-blue flex items-center justify-end px-2 py-0.5">
-                  <p className="text-white">Lihat Lagi</p>
-                  <ArrowRight size={18} color={'white'}/>
-                </div>
+                <SeeMoreBar />
               </div>
             </Link>
           )
