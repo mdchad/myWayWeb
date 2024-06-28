@@ -18,7 +18,7 @@ async function TodayCard() {
 
   return (
     <Link
-      href={{ pathname: `/${data?.book_id}/${data.volume_id}`, hash: data.number }}
+      href={{ pathname: `/${data?.book_id}/${data.volume_name.ms}`, hash: data.number }}
     >
       <div className="bg-white border border-royal-blue rounded-md overflow-hidden">
         <div className="p-3">

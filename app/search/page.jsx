@@ -158,14 +158,14 @@ export default async function Search({ searchParams }) {
                 <div className="flex flex-wrap items-center gap-1 pt-4 pb-2">
                   <Link href={`/${data.book_id}`}><p className="text-royal-blue hover:underline font-sans text-sm font-semibold">{data.book_title?.ms}</p></Link>
                   <span className="text-xs"><ChevronRightSquare color="black" size={18} /></span>
-                  <Link href={`/${data.book_id}/${data.volume_id}`}><p className="text-royal-blue hover:underline font-sans text-sm font-semibold capitalize">{data.volume_title?.ms.toLowerCase()}</p></Link>
+                  <Link href={`/${data.book_id}/${data.volume_name.ms}`}><p className="text-royal-blue hover:underline font-sans text-sm font-semibold capitalize">{data.volume_title?.ms.toLowerCase()}</p></Link>
                   <span className="text-xs"><ChevronRightSquare color="black" size={18} /></span>
-                  <Link href={`/${data.book_id}/${data.volume_id}#${data.number}`}><p className="text-royal-blue hover:underline font-sans text-sm font-semibold">{data.number}</p></Link>
+                  <Link href={`/${data.book_id}/${data.volume_name.ms}#${data.number}`}><p className="text-royal-blue hover:underline font-sans text-sm font-semibold">{data.number}</p></Link>
                 </div>
                 {
                   data.content?.map((content, i) => {
                     return (
-                      <Link href={`/${data.book_id}/${data.volume_id}#${data.number}`} key={i} className="grid-cols-1 lg:grid-cols-2 gap-12 grid p-8 bg-white shadow-sm">
+                      <Link href={`/${data.book_id}/${data.volume_name.ms}#${data.number}`} key={i} className="grid-cols-1 lg:grid-cols-2 gap-12 grid p-8 bg-white shadow-sm">
                         <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">
                           <QuranText text={content.ms} font="font-arabicSymbol" />
                         </p>
@@ -178,7 +178,7 @@ export default async function Search({ searchParams }) {
                 }
               </div>
           )
-        }) : <p>Tiada carian dijumpai</p>}
+        }) : <p>Tiada hasil carian dijumpai</p>}
         <div className="mt-10">
           <Pagination count={count} />
         </div>
