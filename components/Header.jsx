@@ -88,8 +88,10 @@ export function Header() {
           <Link
             href="/intro-malay.pdf"
             className="text-muted-foreground transition-colors hover:text-foreground"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Introduction
+            Pengenalan
           </Link>
           <Link
             href="/hadis40"
@@ -101,13 +103,13 @@ export function Header() {
             href="/terms"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            Terms
+            Terma
           </Link>
           <Link
             href="/privacy"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            Privacy
+            Privasi
           </Link>
         </nav>
         <Sheet>
@@ -135,6 +137,8 @@ export function Header() {
               </Link>
               <Link
                 href="/intro-malay.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-muted-foreground transition-colors hover:text-foreground"
               >
                 Pengenalan
