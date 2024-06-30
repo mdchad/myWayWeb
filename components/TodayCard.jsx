@@ -12,6 +12,8 @@ async function getData(){
 }
 
 export const dynamic = "force-dynamic";
+export const revalidate = false
+export const fetchCache = 'force-no-store'
 
 async function TodayCard() {
   const data =  await getData()
