@@ -8,7 +8,10 @@ export async function GET() {
   const db = await connectToDatabase();
 
   console.log('hit cron')
-  const hadith = await db.collection('Hadiths').aggregate([{ $sample: { size: 1 } }]).toArray();
+  const hadith = await db.collection('Hadiths').aggregate([
+    { $match: { "content.ms": { $ne: "" } } },
+    { $sample: { size: 1 } }
+  ]).toArray();
   console.log('hadith', hadith)
 
   // Cache the Hadith in Vercel KV
