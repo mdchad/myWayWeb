@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import { Container } from '@/components/Container'
-import { Logomark } from '@/components/Logo'
-import { NavLinks } from '@/components/NavLinks'
-import {PlayStoreLink} from "./PlayStoreLink";
-import {AppStoreLink} from "./AppStoreLink";
+import { Container } from "@/components/Container";
+import { Logomark } from "@/components/Logo";
+import { NavLinks } from "@/components/NavLinks";
+import { PlayStoreLink } from "./PlayStoreLink";
+import { AppStoreLink } from "./AppStoreLink";
 
 export function Footer() {
   return (
@@ -16,7 +16,9 @@ export function Footer() {
               <Logomark className="h-10 w-10 flex-none fill-cyan-500" />
               <div className="ml-4">
                 <p className="text-base font-semibold">My Way</p>
-                <p className="mt-1 text-sm">Learn Hadeeth from trusted sources.</p>
+                <p className="mt-1 text-sm">
+                  Learn Hadeeth from trusted sources.
+                </p>
               </div>
             </div>
             <nav className="mt-11 flex gap-8">
@@ -49,5 +51,5 @@ export function Footer() {
         </div>
       </Container>
     </footer>
-  )
+  );
 }

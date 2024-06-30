@@ -1,4 +1,4 @@
-const DEFAULT_LANGUAGE = 'ms';
+const DEFAULT_LANGUAGE = "ms";
 
 export default function getTranslation(item, currentLang) {
   if (item && item?.[currentLang]) {

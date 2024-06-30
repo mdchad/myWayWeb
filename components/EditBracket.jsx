@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import {CheckIcon, FileEditIcon} from "lucide-react";
-import {useState} from "react";
-import {Button} from "@/components/ui/button";
+import { CheckIcon, FileEditIcon } from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import * as React from "react";
-import {useToast} from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 
 const correction = {
   "«": "»",
@@ -12,26 +12,26 @@ const correction = {
 };
 
 function EditBracketButton({ hadith }) {
-  const { toast } = useToast()
-  const [value, setValue] = useState(hadith)
+  const { toast } = useToast();
+  const [value, setValue] = useState(hadith);
 
   async function submitForm(updateValue) {
-    console.log(updateValue)
+    console.log(updateValue);
     try {
       const response = await fetch(`/api/hadiths/${updateValue._id}`, {
-        method: 'PUT',
-        body: JSON.stringify(updateValue)
-      })
+        method: "PUT",
+        body: JSON.stringify(updateValue),
+      });
 
       if (response.ok) {
-        console.log('Add successfully');
+        console.log("Add successfully");
         // Handle success
       } else {
-        console.error('Error with file');
+        console.error("Error with file");
         // Handle error
       }
     } catch (error) {
-      console.error('Error file:', error);
+      console.error("Error file:", error);
       // Handle error
     } finally {
       toast({
@@ -41,35 +41,35 @@ function EditBracketButton({ hadith }) {
             <p className="text-white">Hadith number {value.number}</p>
           </div>
         ),
-      })
+      });
     }
   }
 
   async function submitBracketFix(e) {
-    e.preventDefault()
+    e.preventDefault();
     const reg = new RegExp(Object.keys(correction).join("|"), "g");
 
-    const replacedText = value.content.map(cnt => {
-      console.log(cnt)
+    const replacedText = value.content.map((cnt) => {
+      console.log(cnt);
       return {
         ...cnt,
-        ar: cnt.ar.replace(reg, (matched) => correction[matched])
-      }
-    })
+        ar: cnt.ar.replace(reg, (matched) => correction[matched]),
+      };
+    });
 
-    console.log(replacedText)
+    console.log(replacedText);
     // const replacedText = value.content[index].ar.replaceAll("»", "«")
     const updatedContent = [...replacedText];
     // updatedContent[index].ar = replacedText;
-    await submitForm({ ...value, content: updatedContent})
+    await submitForm({ ...value, content: updatedContent });
     // setValue((prevValue) => ({ ...prevValue, content: updatedContent }));
   }
 
   return (
     <Button onClick={(e) => submitBracketFix(e)}>
-      <CheckIcon size={16} color={'white'} />
+      <CheckIcon size={16} color={"white"} />
     </Button>
-  )
+  );
 }
 
-export default EditBracketButton
+export default EditBracketButton;

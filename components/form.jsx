@@ -1,38 +1,40 @@
-"use client"
+"use client";
 
-import { Button } from "./ui/button"
-import { Input } from "./ui/input"
-import { Textarea } from "./ui/textarea"
-import {Label} from "@/components/ui/label";
-import {useEffect, useState} from "react";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
+import { Label } from "@/components/ui/label";
+import { useEffect, useState } from "react";
 import * as React from "react";
-import {useToast} from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import {CopyCheckIcon, MinusIcon, PlusIcon} from "lucide-react";
-import { v4 as uuidv4 } from 'uuid';
-import {symbolArabic} from "@/lib/symbolUtil";
+} from "@/components/ui/popover";
+import { CopyCheckIcon, MinusIcon, PlusIcon } from "lucide-react";
+import { v4 as uuidv4 } from "uuid";
+import { symbolArabic } from "@/lib/symbolUtil";
 import QuranText from "@/components/QuranText";
 
 // This can come from your database or API.
 const defaultValue = {
   footnotes: [],
   number: "",
-  content: [{
-    en: "",
-    ms: "",
-    ar: ""
-  }],
+  content: [
+    {
+      en: "",
+      ms: "",
+      ar: "",
+    },
+  ],
   chapter_id: "",
   chapter_name: "",
   chapter_metadata: "",
   chapter_title: {
     en: "",
     ms: "",
-    ar: ""
+    ar: "",
   },
   chapter_transliteration: {
     en: "",
@@ -43,16 +45,16 @@ const defaultValue = {
   volume_title: {
     en: "",
     ms: "",
-    ar: ""
+    ar: "",
   },
   book_id: "240360e4-50b4-47a9-9506-9850b0e3bfd7",
   book_name: "sahih_muslim",
   book_title: {
     en: "",
     ms: "Sahih Muslim",
-    ar: ""
-  }
-}
+    ar: "",
+  },
+};
 
 const MIN_TEXTAREA_HEIGHT = 32;
 
@@ -65,15 +67,15 @@ const symbolToReplace = {
   "/s": "1",
   "/ra": "48",
   "/rh": "49",
-  "/r2": "51"
+  "/r2": "51",
 };
 
 function StickySubmitButton({ submit }) {
   async function copyToClipboard(value) {
-    await navigator.clipboard.writeText(value)
+    await navigator.clipboard.writeText(value);
   }
 
-  let indexStrings = [1, 42, 48, 49, 50, 51]
+  let indexStrings = [1, 42, 48, 49, 50, 51];
 
   return (
     <div className="fixed flex flex-col items-center bottom-0 left-1/2 transform -translate-x-1/2 m-4">
@@ -82,50 +84,57 @@ function StickySubmitButton({ submit }) {
           return (
             <Popover key={i}>
               <PopoverTrigger asChild>
-                <button onClick={() => copyToClipboard(symbolArabic[s])} className="hover:bg-gray-200 bg-gray-100 mb-2 mr-2 px-1 border rounded-md font-arabicSymbol text-lg">
+                <button
+                  onClick={() => copyToClipboard(symbolArabic[s])}
+                  className="hover:bg-gray-200 bg-gray-100 mb-2 mr-2 px-1 border rounded-md font-arabicSymbol text-lg"
+                >
                   {symbolArabic[s]}
                 </button>
               </PopoverTrigger>
               <PopoverContent className="w-fit p-2 flex gap-1">
-                <CopyCheckIcon size={14}/>
+                <CopyCheckIcon size={14} />
                 <p className="text-xs">Copied to clipboard</p>
               </PopoverContent>
             </Popover>
-          )
+          );
         })}
       </div>
-       <Button onClick={(e) => submit(e)} size="lg" className="hover:bg-red-400 bg-red-500 text-lg font-arabicSymbol">
+      <Button
+        onClick={(e) => submit(e)}
+        size="lg"
+        className="hover:bg-red-400 bg-red-500 text-lg font-arabicSymbol"
+      >
         Submit
       </Button>
     </div>
   );
-};
+}
 
 export default StickySubmitButton;
 
 export function HadithForm({ data }) {
-  const { toast } = useToast()
+  const { toast } = useToast();
 
-  const [value, setValue] = useState(data ? data : defaultValue)
+  const [value, setValue] = useState(data ? data : defaultValue);
 
   async function onSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
       const response = await fetch(`/api/hadiths/${data._id}`, {
-        method: 'PUT',
-        body: JSON.stringify(value)
-      })
+        method: "PUT",
+        body: JSON.stringify(value),
+      });
 
       if (response.ok) {
-        console.log('Add successfully');
+        console.log("Add successfully");
         // Handle success
       } else {
-        console.error('Error with file');
+        console.error("Error with file");
         // Handle error
       }
     } catch (error) {
-      console.error('Error file:', error);
+      console.error("Error file:", error);
       // Handle error
     }
     toast({
@@ -135,14 +144,14 @@ export function HadithForm({ data }) {
           <p className="text-white">Hadith number {value.number}</p>
         </div>
       ),
-    })
+    });
   }
 
   const refs = React.useRef(value.content.map(() => [null, null, null]));
 
   React.useLayoutEffect(() => {
     refs.current.forEach(([arabicRef, malayRef]) => {
-      [arabicRef, malayRef].forEach(ref => {
+      [arabicRef, malayRef].forEach((ref) => {
         if (ref) {
           ref.style.height = "inherit"; // Reset height
           ref.style.height = `${Math.max(ref.scrollHeight, MIN_TEXTAREA_HEIGHT)}px`; // Set height
@@ -154,23 +163,26 @@ export function HadithForm({ data }) {
   const chapterRefs = React.useRef([null, null, null]);
 
   React.useLayoutEffect(() => {
-      const [arabicRef, malayRef] = chapterRefs.current;
-      [arabicRef, malayRef].forEach(ref => {
-        if (ref) {
-          ref.style.height = 'inherit'; // Reset height
-          ref.style.height = `${Math.max(ref.scrollHeight, MIN_TEXTAREA_HEIGHT)}px`; // Set height
-        }
-      });
+    const [arabicRef, malayRef] = chapterRefs.current;
+    [arabicRef, malayRef].forEach((ref) => {
+      if (ref) {
+        ref.style.height = "inherit"; // Reset height
+        ref.style.height = `${Math.max(ref.scrollHeight, MIN_TEXTAREA_HEIGHT)}px`; // Set height
+      }
+    });
   }, [value]);
 
   async function copyToClipboard(value) {
-    await navigator.clipboard.writeText(value)
+    await navigator.clipboard.writeText(value);
   }
 
   function replaceBracketText(e, text, index) {
-    e.preventDefault()
+    e.preventDefault();
     const reg = new RegExp(Object.keys(correction).join("|"), "g");
-    const replacedText = value.content[index].ar.replace(reg, (matched) => correction[matched]);
+    const replacedText = value.content[index].ar.replace(
+      reg,
+      (matched) => correction[matched],
+    );
 
     // const replacedText = value.content[index].ar.replaceAll("»", "«")
     const updatedContent = [...value.content];
@@ -179,9 +191,12 @@ export function HadithForm({ data }) {
   }
 
   function replaceSymbol(e, text, index) {
-    e.preventDefault()
+    e.preventDefault();
     const reg = new RegExp(Object.keys(symbolToReplace).join("|"), "g");
-    const replacedText = value.content[index].ms.replace(reg, (matched) => symbolArabic[symbolToReplace[matched]]);
+    const replacedText = value.content[index].ms.replace(
+      reg,
+      (matched) => symbolArabic[symbolToReplace[matched]],
+    );
 
     // const replacedText = value.content[index].ar.replaceAll("»", "«")
     const updatedContent = [...value.content];
@@ -190,45 +205,66 @@ export function HadithForm({ data }) {
   }
 
   function replaceBracketChapterText(e) {
-    e.preventDefault()
+    e.preventDefault();
     const reg = new RegExp(Object.keys(correction).join("|"), "g");
-    value.chapter_title.ar = value.chapter_title.ar.replace(reg, (matched) => correction[matched]);
+    value.chapter_title.ar = value.chapter_title.ar.replace(
+      reg,
+      (matched) => correction[matched],
+    );
 
-    setValue((prevValue) => ({ ...prevValue, chapter_title: value.chapter_title }));
+    setValue((prevValue) => ({
+      ...prevValue,
+      chapter_title: value.chapter_title,
+    }));
   }
 
   function replaceBracketMetadataText(e) {
-    e.preventDefault()
+    e.preventDefault();
     const reg = new RegExp(Object.keys(correction).join("|"), "g");
-    value.chapter_metadata.ar = value.chapter_metadata.ar.replace(reg, (matched) => correction[matched]);
+    value.chapter_metadata.ar = value.chapter_metadata.ar.replace(
+      reg,
+      (matched) => correction[matched],
+    );
 
-    setValue((prevValue) => ({ ...prevValue, chapter_metadata: value.chapter_metadata }));
+    setValue((prevValue) => ({
+      ...prevValue,
+      chapter_metadata: value.chapter_metadata,
+    }));
   }
 
   function setNewUUID(e) {
-    e.preventDefault()
-    const newId = uuidv4()
-    setValue((prevState) => ({ ...prevState, chapter_id: newId }))
+    e.preventDefault();
+    const newId = uuidv4();
+    setValue((prevState) => ({ ...prevState, chapter_id: newId }));
   }
 
   async function setChapterAsPrevious(e) {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      const response = await fetch(`/api/hadiths?bookName=${data.book_name}&number=${data.number - 1}`, {
-        method: 'GET',
-      })
+      const response = await fetch(
+        `/api/hadiths?bookName=${data.book_name}&number=${data.number - 1}`,
+        {
+          method: "GET",
+        },
+      );
 
       if (response.ok) {
-        console.log('Get successfully');
-        const res = await response.json()
-        setValue((prevValue) => ({ ...prevValue, chapter_title: res.data.chapter_title, chapter_id: res.data.chapter_id, chapter_metadata: res.data.chapter_metadata, chapter_transliteration: res.data.chapter_transliteration}))
+        console.log("Get successfully");
+        const res = await response.json();
+        setValue((prevValue) => ({
+          ...prevValue,
+          chapter_title: res.data.chapter_title,
+          chapter_id: res.data.chapter_id,
+          chapter_metadata: res.data.chapter_metadata,
+          chapter_transliteration: res.data.chapter_transliteration,
+        }));
         // Handle success
       } else {
-        console.error('Error with file');
+        console.error("Error with file");
         // Handle error
       }
     } catch (error) {
-      console.error('Error file:', error);
+      console.error("Error file:", error);
       // Handle error
     }
     toast({
@@ -238,29 +274,32 @@ export function HadithForm({ data }) {
           <p className="text-white">Get the previous hadith</p>
         </div>
       ),
-    })
+    });
   }
 
   function addContent(e) {
-    e.preventDefault()
+    e.preventDefault();
     refs.current = refs.current.concat([[null, null, null]]);
-    const newContent = [{ en: "", ms: "", ar: ""}]
-    setValue((prevValue) => ({ ...prevValue, content: [...prevValue.content, ...newContent ]}))
+    const newContent = [{ en: "", ms: "", ar: "" }];
+    setValue((prevValue) => ({
+      ...prevValue,
+      content: [...prevValue.content, ...newContent],
+    }));
   }
 
   function removeContent(e) {
-    e.preventDefault()
+    e.preventDefault();
     // console.log(refs.current)
     // refs.current = refs.current.slice(0, -1);
     // console.log(refs.current)
-    const newContent = value.content.slice(0, -1)
-    console.log(newContent)
-    setValue((prevValue) => ({ ...prevValue, content: newContent }))
+    const newContent = value.content.slice(0, -1);
+    console.log(newContent);
+    setValue((prevValue) => ({ ...prevValue, content: newContent }));
   }
 
   return (
     <div className="grid grid-cols-2 gap-8">
-      <StickySubmitButton submit={onSubmit}/>
+      <StickySubmitButton submit={onSubmit} />
       <div>
         <p className="font-semibold">Helper</p>
         <p className="text-slate-500 text-xs mb-2">Copy paste the following:</p>
@@ -269,16 +308,19 @@ export function HadithForm({ data }) {
             return (
               <Popover key={i}>
                 <PopoverTrigger asChild>
-                  <button onClick={() => copyToClipboard(s)} className="bg-gray-100 mb-2 mr-2 pd-2 border rounded-md font-arabicSymbol text-lg">
+                  <button
+                    onClick={() => copyToClipboard(s)}
+                    className="bg-gray-100 mb-2 mr-2 pd-2 border rounded-md font-arabicSymbol text-lg"
+                  >
                     {s}
                   </button>
                 </PopoverTrigger>
                 <PopoverContent className="w-fit p-2 flex gap-1">
-                  <CopyCheckIcon size={14}/>
+                  <CopyCheckIcon size={14} />
                   <p className="text-xs">Copied to clipboard</p>
                 </PopoverContent>
               </Popover>
-            )
+            );
           })}
         </div>
 
@@ -286,112 +328,246 @@ export function HadithForm({ data }) {
         <form onSubmit={onSubmit} className="space-y-8">
           <div>
             <Label htmlFor="ar">Number</Label>
-            <Input value={value.number} type="number" onChange={(e) => setValue({ ...value, number: e.target.value ? parseInt(e.target.value) : "" })}/>
+            <Input
+              value={value.number}
+              type="number"
+              onChange={(e) =>
+                setValue({
+                  ...value,
+                  number: e.target.value ? parseInt(e.target.value) : "",
+                })
+              }
+            />
           </div>
-          {
-            value.content.map((contentItem, index) => {
-              return (
-                <div key={index} className="space-y-8 border-b border-black pb-8">
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <Label htmlFor="ar">Arabic</Label>
-                      <Button size="sm" className="p-2 text-xs" onClick={(e) => replaceBracketText(e, value, index)}>Replace</Button>
-                    </div>
-                    <Textarea value={value.content[index].ar}
-                              lang="ar"
-                              dir="rtl"
-                              className="font-arabic"
-                              onChange={(e) => {
-                                const updatedContent = [...value.content];
-                                updatedContent[index].ar = e.target.value;
-                                console.log(updatedContent)
-                                setValue((prevValue) => ({ ...prevValue, content: updatedContent }));
-                              }}
-                              ref={el => refs.current[index][0] = el} // Assign Arabic ref
-                              style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
-                    />
+          {value.content.map((contentItem, index) => {
+            return (
+              <div key={index} className="space-y-8 border-b border-black pb-8">
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <Label htmlFor="ar">Arabic</Label>
+                    <Button
+                      size="sm"
+                      className="p-2 text-xs"
+                      onClick={(e) => replaceBracketText(e, value, index)}
+                    >
+                      Replace
+                    </Button>
                   </div>
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <Label htmlFor="ar">Malay</Label>
-                      <Button size="sm" className="p-2 text-xs" onClick={(e) => replaceSymbol(e, value, index)}>Replace</Button>
-                    </div>
-                    <Textarea value={value.content[index].ms}
-                              className="font-arabicSymbol"
-                              onChange={(e) => {
-                                const updatedContent = [...value.content];
-                                updatedContent[index].ms = e.target.value;
-                                setValue((prevValue) => ({ ...prevValue, content: updatedContent }));
-                              }}
-                              ref={el => refs.current[index][1] = el} // Assign Malay ref
-                              style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="ms">English</Label>
-                    <Textarea value={value.content[index].en}
-                              className="font-arabicSymbol"
-                              onChange={(e) => {
-                                const updatedContent = [...value.content];
-                                updatedContent[index].en = e.target.value;
-                                setValue((prevValue) => ({ ...prevValue, content: updatedContent }));
-                              }}
-                              ref={el => refs.current[index][2] = el} // Assign English ref
-                              style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
-                    />
-                  </div>
-                  {/*<div className="flex justify-end items-center">*/}
-                  {/*  { index > 0 && <Button onClick={() => removeHadith(index)} size={'sm'} className="bg-red-500 text-white hover:bg-red-700">- Remove hadith</Button> }*/}
-                  {/*</div>*/}
-                  {/*<hr className="h-[2px] bg-gray-500"/>*/}
+                  <Textarea
+                    value={value.content[index].ar}
+                    lang="ar"
+                    dir="rtl"
+                    className="font-arabic"
+                    onChange={(e) => {
+                      const updatedContent = [...value.content];
+                      updatedContent[index].ar = e.target.value;
+                      console.log(updatedContent);
+                      setValue((prevValue) => ({
+                        ...prevValue,
+                        content: updatedContent,
+                      }));
+                    }}
+                    ref={(el) => (refs.current[index][0] = el)} // Assign Arabic ref
+                    style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
+                  />
                 </div>
-              )
-            })}
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <Label htmlFor="ar">Malay</Label>
+                    <Button
+                      size="sm"
+                      className="p-2 text-xs"
+                      onClick={(e) => replaceSymbol(e, value, index)}
+                    >
+                      Replace
+                    </Button>
+                  </div>
+                  <Textarea
+                    value={value.content[index].ms}
+                    className="font-arabicSymbol"
+                    onChange={(e) => {
+                      const updatedContent = [...value.content];
+                      updatedContent[index].ms = e.target.value;
+                      setValue((prevValue) => ({
+                        ...prevValue,
+                        content: updatedContent,
+                      }));
+                    }}
+                    ref={(el) => (refs.current[index][1] = el)} // Assign Malay ref
+                    style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="ms">English</Label>
+                  <Textarea
+                    value={value.content[index].en}
+                    className="font-arabicSymbol"
+                    onChange={(e) => {
+                      const updatedContent = [...value.content];
+                      updatedContent[index].en = e.target.value;
+                      setValue((prevValue) => ({
+                        ...prevValue,
+                        content: updatedContent,
+                      }));
+                    }}
+                    ref={(el) => (refs.current[index][2] = el)} // Assign English ref
+                    style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
+                  />
+                </div>
+                {/*<div className="flex justify-end items-center">*/}
+                {/*  { index > 0 && <Button onClick={() => removeHadith(index)} size={'sm'} className="bg-red-500 text-white hover:bg-red-700">- Remove hadith</Button> }*/}
+                {/*</div>*/}
+                {/*<hr className="h-[2px] bg-gray-500"/>*/}
+              </div>
+            );
+          })}
 
-          <Button size="icon" variant="ghost" onClick={addContent}><PlusIcon size={16} color={'black'}/></Button>
-          <Button size="icon" variant="ghost" onClick={removeContent}><MinusIcon size={16} color={'black'}/></Button>
+          <Button size="icon" variant="ghost" onClick={addContent}>
+            <PlusIcon size={16} color={"black"} />
+          </Button>
+          <Button size="icon" variant="ghost" onClick={removeContent}>
+            <MinusIcon size={16} color={"black"} />
+          </Button>
           <div className="space-y-4">
             <Label>Chapter</Label>
             <div className="space-y-4">
               <div className="flex justify-between">
-                <Button size="sm" className="p-2 text-xs" onClick={(e) => setNewUUID(e)}>New ID</Button>
-                <Button size="sm" className="p-2 text-xs" onClick={(e) => setChapterAsPrevious(e)}>Same chapter as previous hadith</Button>
+                <Button
+                  size="sm"
+                  className="p-2 text-xs"
+                  onClick={(e) => setNewUUID(e)}
+                >
+                  New ID
+                </Button>
+                <Button
+                  size="sm"
+                  className="p-2 text-xs"
+                  onClick={(e) => setChapterAsPrevious(e)}
+                >
+                  Same chapter as previous hadith
+                </Button>
               </div>
-              <Input value={value.chapter_id} onChange={(e) => setValue({ ...value, chapter_id: e.target.value }) }/>
+              <Input
+                value={value.chapter_id}
+                onChange={(e) =>
+                  setValue({ ...value, chapter_id: e.target.value })
+                }
+              />
             </div>
             <div className="space-y-4">
-              <Button size="sm" className="p-2 text-xs" onClick={(e) => replaceBracketChapterText(e)}>Replace</Button>
-              <Input lang="ar" dir="rtl" className="font-arabic" value={value.chapter_title.ar} placeholder="Arabic" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, ar: e.target.value } }) }/>
+              <Button
+                size="sm"
+                className="p-2 text-xs"
+                onClick={(e) => replaceBracketChapterText(e)}
+              >
+                Replace
+              </Button>
+              <Input
+                lang="ar"
+                dir="rtl"
+                className="font-arabic"
+                value={value.chapter_title.ar}
+                placeholder="Arabic"
+                onChange={(e) =>
+                  setValue({
+                    ...value,
+                    chapter_title: {
+                      ...value.chapter_title,
+                      ar: e.target.value,
+                    },
+                  })
+                }
+              />
             </div>
-            <Input value={value.chapter_title.ms} placeholder="Malay" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, ms: e.target.value } }) }/>
-            <Input value={value.chapter_title.en} placeholder="English" onChange={(e) => setValue({ ...value, chapter_title: { ...value.chapter_title, en: e.target.value } }) }/>
-            <Input value={value.chapter_transliteration.ms} placeholder="Transliteration" onChange={(e) => setValue({ ...value, chapter_transliteration: { ...value.chapter_transliteration, ms: e.target.value } }) }/>
-            <Button size="sm" className="p-2 text-xs" onClick={(e) => replaceBracketMetadataText(e)}>Replace</Button>
+            <Input
+              value={value.chapter_title.ms}
+              placeholder="Malay"
+              onChange={(e) =>
+                setValue({
+                  ...value,
+                  chapter_title: { ...value.chapter_title, ms: e.target.value },
+                })
+              }
+            />
+            <Input
+              value={value.chapter_title.en}
+              placeholder="English"
+              onChange={(e) =>
+                setValue({
+                  ...value,
+                  chapter_title: { ...value.chapter_title, en: e.target.value },
+                })
+              }
+            />
+            <Input
+              value={value.chapter_transliteration.ms}
+              placeholder="Transliteration"
+              onChange={(e) =>
+                setValue({
+                  ...value,
+                  chapter_transliteration: {
+                    ...value.chapter_transliteration,
+                    ms: e.target.value,
+                  },
+                })
+              }
+            />
+            <Button
+              size="sm"
+              className="p-2 text-xs"
+              onClick={(e) => replaceBracketMetadataText(e)}
+            >
+              Replace
+            </Button>
             <Textarea
               value={value.chapter_metadata.ar}
               className="font-arabic"
               dir="rtl"
               lang="ar"
               placeholder="Metadata Arabic"
-              onChange={(e) => setValue({ ...value, chapter_metadata: { ...value.chapter_metadata, ar: e.target.value } }) }
+              onChange={(e) =>
+                setValue({
+                  ...value,
+                  chapter_metadata: {
+                    ...value.chapter_metadata,
+                    ar: e.target.value,
+                  },
+                })
+              }
               style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
-              ref={el => chapterRefs.current[0] = el}
+              ref={(el) => (chapterRefs.current[0] = el)}
             />
             <Textarea
               value={value.chapter_metadata.ms}
               className="font-arabicSymbol"
               placeholder="Metadata Malay"
-              onChange={(e) => setValue({ ...value, chapter_metadata: { ...value.chapter_metadata, ms: e.target.value } }) }
+              onChange={(e) =>
+                setValue({
+                  ...value,
+                  chapter_metadata: {
+                    ...value.chapter_metadata,
+                    ms: e.target.value,
+                  },
+                })
+              }
               style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
-              ref={el => chapterRefs.current[1] = el}
+              ref={(el) => (chapterRefs.current[1] = el)}
             />
             <Textarea
               value={value.chapter_metadata.en}
               className="font-arabicSymbol"
               placeholder="Metadata English"
-              onChange={(e) => setValue({ ...value, chapter_metadata: { ...value.chapter_metadata, en: e.target.value } }) }
+              onChange={(e) =>
+                setValue({
+                  ...value,
+                  chapter_metadata: {
+                    ...value.chapter_metadata,
+                    en: e.target.value,
+                  },
+                })
+              }
               style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
-              ref={el => chapterRefs.current[2] = el}
+              ref={(el) => (chapterRefs.current[2] = el)}
             />
           </div>
 
@@ -408,46 +584,71 @@ export function HadithForm({ data }) {
         </form>
       </div>
       <div className="bg-slate-100 rounded-md p-4">
-          <div style={{ gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "3rem"}} className="my-6 border-x-2 border-royal-blue grid px-4 py-2">
-            <div>
-              <p className="font-sans font-bold text-sm text-justify text-gray-500">{value?.chapter_title?.ms}</p>
-              <p className="font-sans font-normal text-sm text-justify text-gray-500">{value?.chapter_transliteration?.ms}</p>
-            </div>
-            <p lang="ar" dir="rtl" className="text-gray-500 text-lg text-justify font-arabic">
-              <QuranText text={value?.chapter_title?.ar} className="font-bold" />
+        <div
+          style={{
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gap: "3rem",
+          }}
+          className="my-6 border-x-2 border-royal-blue grid px-4 py-2"
+        >
+          <div>
+            <p className="font-sans font-bold text-sm text-justify text-gray-500">
+              {value?.chapter_title?.ms}
             </p>
-            <>
-              <p lang="ar" dir="rtl" className="text-xl text-justify whitespace-pre-line font-arabic">
-                <QuranText text={value?.chapter_metadata?.ar} />
-              </p>
-              <p className="text-md text-justify whitespace-pre-line font-arabicSymbol">
-                <QuranText text={value?.chapter_metadata?.ms} font="font-arabicSymbol"/>
-              </p>
-            </>
+            <p className="font-sans font-normal text-sm text-justify text-gray-500">
+              {value?.chapter_transliteration?.ms}
+            </p>
           </div>
-          {
-            value.content.map((content, i) => {
-              if (!content.ar) {
-                return
-              }
-
-              return (
-                <div key={i} className="bg-white shadow-sm p-8 space-y-2">
-                  <div id={value.number} className="space-y-4">
-                    <p lang="ar" dir="rtl" className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic">
-                      <QuranText text={content.ar} />
-                    </p>
-                    <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">{content.ms}</p>
-                  </div>
-                </div>
-              )
-            })
+          <p
+            lang="ar"
+            dir="rtl"
+            className="text-gray-500 text-lg text-justify font-arabic"
+          >
+            <QuranText text={value?.chapter_title?.ar} className="font-bold" />
+          </p>
+          <>
+            <p
+              lang="ar"
+              dir="rtl"
+              className="text-xl text-justify whitespace-pre-line font-arabic"
+            >
+              <QuranText text={value?.chapter_metadata?.ar} />
+            </p>
+            <p className="text-md text-justify whitespace-pre-line font-arabicSymbol">
+              <QuranText
+                text={value?.chapter_metadata?.ms}
+                font="font-arabicSymbol"
+              />
+            </p>
+          </>
+        </div>
+        {value.content.map((content, i) => {
+          if (!content.ar) {
+            return;
           }
+
+          return (
+            <div key={i} className="bg-white shadow-sm p-8 space-y-2">
+              <div id={value.number} className="space-y-4">
+                <p
+                  lang="ar"
+                  dir="rtl"
+                  className="order-1 lg:order-2 text-xl text-justify whitespace-pre-line font-arabic"
+                >
+                  <QuranText text={content.ar} />
+                </p>
+                <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">
+                  {content.ms}
+                </p>
+              </div>
+            </div>
+          );
+        })}
         {/*{value && <pre>{JSON.stringify(value, null , 2)}</pre> }*/}
         {/*<pre className="mt-2 rounded-md bg-slate-950 p-4">*/}
         {/*  {value && <code className="text-white">{JSON.stringify(value, null, 2)}</code> }*/}
         {/*</pre>*/}
       </div>
     </div>
-  )
+  );
 }
