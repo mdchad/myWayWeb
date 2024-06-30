@@ -144,7 +144,7 @@ function HadithContainer({ hadiths, volumes, surahs }) {
                         <div
                           id={hadith.number}
                           key={i}
-                          className="bg-white shadow-sm px-4 py-8 sm:py-8 sm:px-8 space-y-2 scroll-my-[30vh] target:border-2 target:border-blue-500"
+                          className="bg-white shadow-sm px-4 py-8 sm:py-8 sm:px-8 space-y-2 scroll-my-[30vh] target:animate-brief-highlight"
                         >
                           <div className="grid-cols-1 lg:grid-cols-2 gap-12 grid">
                             <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">
@@ -188,7 +188,7 @@ function HadithContainer({ hadiths, volumes, surahs }) {
                     <div
                       id={hadith.number}
                       key={i}
-                      className={`px-4 py-8 sm:py-8 sm:px-8 bg-white shadow-sm ${length < 2 && "rounded-lg"} scroll-my-[30vh]`}
+                      className={`px-4 py-8 sm:py-8 sm:px-8 bg-white shadow-sm ${length < 2 && "rounded-lg"} scroll-my-[30vh] target:animate-brief-highlight`}
                     >
                       <div className={`grid-cols-1 lg:grid-cols-2 gap-12 grid`}>
                         <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">

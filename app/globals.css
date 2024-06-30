@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes brief-highlight {
+  0%, 100% {
+    background-color: rgb(255 255 255); /* gray-100 */
+  }
+  50% {
+    background-color: rgb(253 224 71 / 0.8); /* yellow-100 */
+  }
+}
+
+@layer utilities {
+  .animate-brief-highlight {
+    animation: brief-highlight 800ms ease-in;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
