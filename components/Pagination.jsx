@@ -1,12 +1,12 @@
-'use client'
+"use client";
 
-import React from 'react';
+import React from "react";
 import Link from "next/link";
-import {useSearchParams} from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 const Pagination = ({ count }) => {
   const searchParams = useSearchParams();
-  const term = searchParams.get('term');
+  const term = searchParams.get("term");
   const currentPage = parseInt(searchParams.get("page"), 10) || 1;
   const books = searchParams.get("books") || "";
 
@@ -18,7 +18,10 @@ const Pagination = ({ count }) => {
   const endIndex = Math.min(startIndex + itemsPerPage - 1, totalCount);
 
   let pageNumbers = [];
-  let startPage = Math.max(1, currentPage - Math.floor(maxPageNumberWindow / 2));
+  let startPage = Math.max(
+    1,
+    currentPage - Math.floor(maxPageNumberWindow / 2),
+  );
   let endPage = Math.min(totalPages, startPage + maxPageNumberWindow - 1);
 
   if (endPage - startPage + 1 < maxPageNumberWindow) {
@@ -26,7 +29,7 @@ const Pagination = ({ count }) => {
   }
 
   if (startPage > 1) {
-    pageNumbers = [1, '...'];
+    pageNumbers = [1, "..."];
   }
 
   for (let i = startPage; i <= endPage; i++) {
@@ -34,22 +37,24 @@ const Pagination = ({ count }) => {
   }
 
   if (endPage < totalPages) {
-    pageNumbers.push('...');
+    pageNumbers.push("...");
     pageNumbers.push(totalPages);
   }
 
   return (
     <nav className="flex flex-col">
-      <p className="text-right my-2 font-sans text-sm">Hasil {startIndex} - {endIndex} dari {totalCount}</p>
-      <ul className='flex list-none justify-end'>
+      <p className="text-right my-2 font-sans text-sm">
+        Hasil carian{startIndex} - {endIndex} dari {totalCount}
+      </p>
+      <ul className="flex list-none justify-end">
         {pageNumbers.map((number, i) => (
           <li key={i}>
-            {number === '...' ? (
+            {number === "..." ? (
               <span className="px-4 py-2 mx-1">{number}</span>
             ) : (
               <Link
                 href={`/search?term=${encodeURIComponent(term)}&page=${number}&books=${books}`}
-                className={`${currentPage === number ? 'border-0 bg-royal-blue text-white' : 'hover:bg-gray-100 text-black'} border border-gray-100 text-sm px-2 py-1 mx-1 rounded`}
+                className={`${currentPage === number ? "border-0 bg-royal-blue text-white" : "hover:bg-gray-100 text-black"} border border-gray-100 text-sm px-2 py-1 mx-1 rounded`}
               >
                 {number}
               </Link>

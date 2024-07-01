@@ -1,6 +1,6 @@
-import defaultLocale from './locales/ms.json'
+import defaultLocale from "./locales/ms.json";
 
-let SHARED_TEXT = { ...defaultLocale }
+let SHARED_TEXT = { ...defaultLocale };
 
 for (let key in SHARED_TEXT) {
   if (SHARED_TEXT.hasOwnProperty(key)) {
@@ -8,4 +8,4 @@ for (let key in SHARED_TEXT) {
   }
 }
 
-export default SHARED_TEXT
+export default SHARED_TEXT;

@@ -1,31 +1,35 @@
 import connectToDatabase from "@/lib/mongodb";
-import {NextResponse} from "next/server";
-import {ObjectId} from "mongodb";
+import { NextResponse } from "next/server";
+import { ObjectId } from "mongodb";
 
 export async function GET(request, { params }) {
   const db = await connectToDatabase();
-  const id = params.id
+  const id = params.id;
 
-  const data = await db.collection('Hadiths').findOne({ _id: new ObjectId(id) })
+  const data = await db
+    .collection("Hadiths")
+    .findOne({ _id: new ObjectId(id) });
 
   return NextResponse.json({
     success: true,
-    data: data
-  })
+    data: data,
+  });
 }
 
 export async function PUT(request, { params }) {
   const db = await connectToDatabase();
-  const id = params.id
-  const body = await request.json()
-  delete body._id
-  console.log(body)
-  console.log(id)
+  const id = params.id;
+  const body = await request.json();
+  delete body._id;
+  console.log(body);
+  console.log(id);
 
-  const data = await db.collection('Hadiths').updateOne({ _id: new ObjectId(id) }, { $set: { ...body }})
+  const data = await db
+    .collection("Hadiths")
+    .updateOne({ _id: new ObjectId(id) }, { $set: { ...body } });
 
   return NextResponse.json({
     success: true,
-    data: body
-  })
+    data: body,
+  });
 }
