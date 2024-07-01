@@ -3,10 +3,10 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{js,jsx}',
-    './components/**/*.{js,jsx}',
-    './app/**/*.{js,jsx}',
-    './src/**/*.{js,jsx}',
+    "./pages/**/*.{js,jsx}",
+    "./components/**/*.{js,jsx}",
+    "./app/**/*.{js,jsx}",
+    "./src/**/*.{js,jsx}",
   ],
   prefix: "",
   theme: {
@@ -19,7 +19,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        'royal-blue': '#1C2A4F',
+        "royal-blue": "#1C2A4F",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -60,11 +60,11 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
-        arabic: ['var(--font-arabic)', ...defaultTheme.fontFamily.sans],
-        hafs: ['var(--font-hafs)', ...defaultTheme.fontFamily.sans],
-        arabicSymbol: ['var(--font-arabic-symbol)'],
-        surah: ['var(--font-surah)'],
+        sans: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
+        arabic: ["var(--font-arabic)", ...defaultTheme.fontFamily.sans],
+        hafs: ["var(--font-hafs)", ...defaultTheme.fontFamily.sans],
+        arabicSymbol: ["var(--font-arabic-symbol)"],
+        surah: ["var(--font-surah)"],
       },
       keyframes: {
         "accordion-down": {
@@ -83,4 +83,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};

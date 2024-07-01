@@ -65,15 +65,15 @@ function VolumeContainer({ volumes, slug }) {
           return (
             <Link
               key={id}
+              className="group"
               href={`/${slug}/${vol.name.ms}${queryNumber ? `#${queryNumber}` : ""}`}
             >
               <div
                 key={vol.id}
-                style={{ cursor: "pointer" }}
-                className="w-full grid grid-cols-2 md:grid-cols-[1fr_1fr_150px] gap-10 space-x-4 p-4 bg-white shadow-sm rounded-lg"
+                className="w-full grid grid-cols-2 md:grid-cols-[1fr_1fr_150px] gap-10 space-x-4 p-4 bg-white shadow-sm rounded-lg cursor-pointer"
               >
                 <div className="space-y-1 flex flex-col items-start text-left max-w-xs">
-                  <p className="text-xl leading-5 font-sans capitalize">
+                  <p className="text-xl leading-5 font-sans capitalize transition-transform duration-300 ease-in-out group-hover:scale-105">
                     {vol.title.ms.toLowerCase().trim()}
                   </p>
                   <p className="text-xs text-gray-500 capitalize font-sans">
@@ -88,7 +88,9 @@ function VolumeContainer({ volumes, slug }) {
                     <p className="text-sm text-[#31498B] font-sans">
                       {vol?.hadith?.first}
                     </p>
-                    <p className="text-sm text-[#31498B] font-sans">{"->"}</p>
+                    <p className="text-sm text-[#31498B] font-sans transition-transform duration-300 ease-in-out group-hover:translate-x-1">
+                      {"->"}
+                    </p>
                     <p className="text-sm text-[#31498B] font-sans">
                       {vol?.hadith?.last}
                     </p>
@@ -98,7 +100,9 @@ function VolumeContainer({ volumes, slug }) {
                   <p className="text-sm text-[#31498B] font-sans">
                     {vol?.hadith?.first}
                   </p>
-                  <p className="text-sm text-[#31498B] font-sans">{"->"}</p>
+                  <p className="text-sm text-[#31498B] font-sans transition-transform duration-300 ease-in-out group-hover:translate-x-1">
+                    {"->"}
+                  </p>
                   <p className="text-sm text-[#31498B] font-sans">
                     {vol?.hadith?.last}
                   </p>
