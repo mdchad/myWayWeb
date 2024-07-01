@@ -7,7 +7,7 @@ import SeeMoreBar from "@/components/SeeMoreBar";
 
 async function IntroCard() {
   return (
-    <div className="bg-white border border-royal-blue rounded-md overflow-hidden">
+    <div className="bg-white border border-royal-blue rounded-md overflow-hidden group">
       <Link href="/intro-malay.pdf" target="_blank" rel="noopener noreferrer">
         <div className="p-3">
           <div className="flex flex-row flex-wrap mb-4 items-center">

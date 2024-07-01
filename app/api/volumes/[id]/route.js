@@ -9,16 +9,14 @@ export async function PATCH(request, { params }) {
   console.log(body);
   console.log(id);
 
-  const data = await db
-    .collection("Volumes")
-    .updateOne(
-      { id: id },
-      {
-        $set: {
-          title: { ar: body.volume_title.ar, ms: body.volume_title.ms, en: "" },
-        },
+  const data = await db.collection("Volumes").updateOne(
+    { id: id },
+    {
+      $set: {
+        title: { ar: body.volume_title.ar, ms: body.volume_title.ms, en: "" },
       },
-    );
+    },
+  );
   const hadithVolume = await db
     .collection("Hadiths")
     .updateMany({ volume_id: id }, { $set: { ...body } });
@@ -32,17 +30,12 @@ export async function PATCH(request, { params }) {
 export async function GET(request, { params }) {
   const db = await connectToDatabase();
   const id = params.id;
-  const body = await request.json();
-  console.log(body);
   console.log(id);
 
-  const data = await db
-    .collection("Volumes")
-    .findOne({ id: id });
+  const data = await db.collection("Volumes").find({ id: id }).toArray();
 
   return NextResponse.json({
     success: true,
     data,
   });
 }
-

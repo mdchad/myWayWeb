@@ -24,6 +24,7 @@ async function TodayCard() {
         pathname: `/${data?.book_id}/${data.volume_name.ms}`,
         hash: data.number,
       }}
+      className="group"
     >
       <div className="bg-white border border-royal-blue rounded-md overflow-hidden">
         <div className="p-3">

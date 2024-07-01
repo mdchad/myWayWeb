@@ -4,11 +4,12 @@ import EditModal from "@/components/EditModal";
 import EditVolumeModal from "@/components/EditVolumeModal";
 import SpecialText from "@/components/SpecialText";
 import QuranText from "@/components/QuranText";
-import { Button } from "@/components/Button";
-import { FileEditIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { FileEditIcon, Link as LinkIcon } from "lucide-react";
 import ScrollTopButton from "@/components/ScrollTopButton";
 import { Toaster } from "@/components/ui/toaster";
 import { useRef, useState } from "react";
+import Link from "next/link";
 
 function SurahContainer({ surahs = [], hadith }) {
   let surahData =
@@ -117,11 +118,10 @@ function renderChapter(hadith, chapterIdRef) {
   if (chapterIdRef.current !== hadith.chapter_id) {
     chapterIdRef.current = hadith.chapter_id;
     return (
-      <div
-        className="gap-6 grid-cols-[repeat(auto-fit,minmax(280px,1fr))] lg:gap-12 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] my-6 border-x-2 border-royal-blue grid px-2 lg:px-4 py-2">
+      <div className="gap-6 grid-cols-[repeat(auto-fit,minmax(280px,1fr))] lg:gap-12 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] my-6 border-x-2 border-royal-blue grid px-2 lg:px-4 py-2">
         <div className="order-2 sm:order-1">
           <p className="text-sm text-justify text-royal-blue font-bold">
-            <SpecialText text={hadith?.chapter_title?.ms}/>
+            <SpecialText text={hadith?.chapter_title?.ms} />
           </p>
           <p className="font-sans font-normal text-sm text-justify text-gray-500">
             {hadith?.chapter_transliteration?.ms}
@@ -133,10 +133,7 @@ function renderChapter(hadith, chapterIdRef) {
           dir="rtl"
           className="order-1 sm:order-2 text-xl text-royal-blue text-lg text-justify font-arabic"
         >
-          <QuranText
-            text={hadith?.chapter_title?.ar}
-            className="font-bold"
-          />
+          <QuranText text={hadith?.chapter_title?.ar} className="font-bold" />
         </p>
         {hadith?.chapter_metadata.ms && (
           <>
@@ -151,18 +148,19 @@ function renderChapter(hadith, chapterIdRef) {
               dir="rtl"
               className="order-3 sm:order-4 text-xl text-justify whitespace-pre-line font-arabic text-gray-600 leading-relaxed"
             >
-              <QuranText text={hadith?.chapter_metadata?.ar}/>
+              <QuranText text={hadith?.chapter_metadata?.ar} />
             </p>
           </>
         )}
       </div>
-    )
+    );
   } else {
-    return null
+    return null;
   }
 }
 
 function renderHadith(hadith) {
+  console.log(hadith._id);
   return (
     <div>
       {hadith.content.map((content, i) => {
@@ -174,14 +172,11 @@ function renderHadith(hadith) {
           <div
             id={hadith.number}
             key={i}
-            className="bg-white shadow-sm px-4 py-8 sm:py-8 sm:px-8 space-y-2 scroll-my-[30vh] target:animate-brief-highlight"
+            className="bg-white shadow-sm px-4 py-8 sm:py-8 sm:px-8 space-y-6 scroll-my-[30vh] target:animate-brief-highlight"
           >
             <div className="grid-cols-1 lg:grid-cols-2 gap-12 grid">
               <p className="order-2 lg:order-1 text-md text-justify whitespace-pre-line font-arabicSymbol">
-                <QuranText
-                  text={content.ms}
-                  font="font-arabicSymbol"
-                />
+                <QuranText text={content.ms} font="font-arabicSymbol" />
               </p>
               <p
                 lang="ar"
@@ -191,17 +186,24 @@ function renderHadith(hadith) {
                 <QuranText text={content.ar} />
               </p>
             </div>
+            {/*<div className="flex justify-end">*/}
+            {/*  <Button variant="ghost" size="sm">*/}
+            {/*    <LinkIcon size={18}/>*/}
+            {/*  </Button>*/}
+            {/*</div>*/}
           </div>
         );
       })}
       <div className="mt-2 flex gap-2">
-        <Button href={`/admin/${hadith._id}`}>
-          Edit
-          <FileEditIcon size={16} color={"white"} />
+        <Button asChild>
+          <Link href={`/admin/${hadith._id}`}>
+            Edit
+            <FileEditIcon size={16} color={"white"} />
+          </Link>
         </Button>
       </div>
     </div>
-  )
+  );
 }
 
 export default HadithContainer;
