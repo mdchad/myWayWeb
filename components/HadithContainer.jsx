@@ -131,43 +131,43 @@ function HadithContainer({ hadiths, volumes, surahs }) {
 }
 
 function renderChapter(hadith, chapterIdRef) {
-    return (
-      <div className="gap-6 grid-cols-[repeat(auto-fit,minmax(280px,1fr))] lg:gap-12 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] my-6 border-x-2 border-royal-blue grid px-2 lg:px-4 py-2">
-        <div className="order-2 sm:order-1">
-          <p className="text-sm text-justify text-royal-blue font-bold">
-            <SpecialText text={hadith?.chapter_title?.ms} />
-          </p>
-          <p className="font-sans font-normal text-sm text-justify text-gray-500">
-            {hadith?.chapter_transliteration?.ms}
-          </p>
-        </div>
-
-        <p
-          lang="ar"
-          dir="rtl"
-          className="order-1 sm:order-2 text-xl text-royal-blue text-lg text-justify font-arabic"
-        >
-          <QuranText text={hadith?.chapter_title?.ar} className="font-bold" />
+  return (
+    <div className="gap-6 grid-cols-[repeat(auto-fit,minmax(280px,1fr))] lg:gap-12 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] my-6 border-x-2 border-royal-blue grid px-2 lg:px-4 py-2">
+      <div className="order-2 sm:order-1">
+        <p className="text-sm text-justify text-royal-blue font-bold">
+          <SpecialText text={hadith?.chapter_title?.ms} />
         </p>
-        {hadith?.chapter_metadata.ms && (
-          <>
-            <p className="order-4 sm:order-3 text-md text-justify whitespace-pre-line font-arabicSymbol text-gray-600">
-              <QuranText
-                text={hadith?.chapter_metadata?.ms}
-                font="font-arabicSymbol"
-              />
-            </p>
-            <p
-              lang="ar"
-              dir="rtl"
-              className="order-3 sm:order-4 text-xl text-justify whitespace-pre-line font-arabic text-gray-600 leading-relaxed"
-            >
-              <QuranText text={hadith?.chapter_metadata?.ar} />
-            </p>
-          </>
-        )}
+        <p className="font-sans font-normal text-sm text-justify text-gray-500">
+          {hadith?.chapter_transliteration?.ms}
+        </p>
       </div>
-    );
+
+      <p
+        lang="ar"
+        dir="rtl"
+        className="order-1 sm:order-2 text-xl text-royal-blue text-lg text-justify font-arabic"
+      >
+        <QuranText text={hadith?.chapter_title?.ar} className="font-bold" />
+      </p>
+      {hadith?.chapter_metadata.ms && (
+        <>
+          <p className="order-4 sm:order-3 text-md text-justify whitespace-pre-line font-arabicSymbol text-gray-600">
+            <QuranText
+              text={hadith?.chapter_metadata?.ms}
+              font="font-arabicSymbol"
+            />
+          </p>
+          <p
+            lang="ar"
+            dir="rtl"
+            className="order-3 sm:order-4 text-xl text-justify whitespace-pre-line font-arabic text-gray-600 leading-relaxed"
+          >
+            <QuranText text={hadith?.chapter_metadata?.ar} />
+          </p>
+        </>
+      )}
+    </div>
+  );
 }
 
 function renderHadith(hadith) {
