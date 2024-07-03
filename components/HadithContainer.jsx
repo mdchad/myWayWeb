@@ -171,7 +171,6 @@ function renderChapter(hadith, chapterIdRef) {
 }
 
 function renderHadith(hadith) {
-  console.log(hadith._id);
   return (
     <div>
       {hadith.content.map((content, i) => {
