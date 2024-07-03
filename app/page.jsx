@@ -1,5 +1,3 @@
-import connectToDatabase from "@/lib/mongodb";
-import Link from "next/link";
 import TodayCard from "@/components/TodayCard";
 import Card from "@/components/Card";
 import IntroCard from "@/components/IntroCard";
