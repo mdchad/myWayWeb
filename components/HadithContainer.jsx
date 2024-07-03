@@ -170,6 +170,7 @@ function renderChapter(hadith) {
 }
 
 function renderHadith(hadith) {
+  console.log(process.env.NODE_ENV)
   return (
     <div>
       {hadith.content.map((content, i) => {
