@@ -10,7 +10,6 @@ import ScrollTopButton from "@/components/ScrollTopButton";
 import { Toaster } from "@/components/ui/toaster";
 import { useRef, useState } from "react";
 import Link from "next/link";
-import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
 function SurahContainer({ surahs = [], hadith }) {
   let surahData =
