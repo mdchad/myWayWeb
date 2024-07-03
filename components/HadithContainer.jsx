@@ -170,7 +170,7 @@ function renderChapter(hadith) {
 }
 
 function renderHadith(hadith) {
-  console.log(process.env.ENV_RUNTIME)
+  console.log(process.env.NEXT_PUBLIC_ENV_RUNTIME)
   return (
     <div>
       {hadith.content.map((content, i) => {
@@ -205,7 +205,7 @@ function renderHadith(hadith) {
         );
       })}
       {
-        process.env.ENV_RUNTIME === 'development' && (
+        process.env.NEXT_PUBLIC_ENV_RUNTIME === 'development' && (
           <div className="mt-2 flex gap-2">
             <Button asChild>
               <Link href={`/admin/${hadith._id}`}>
