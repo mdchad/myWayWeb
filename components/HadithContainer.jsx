@@ -53,7 +53,6 @@ function HadithContainer({ hadiths, volumes, surahs }) {
     number: hadiths[1].number,
   });
   const refs = useRef({});
-  const chapterIdRef = useRef("");
 
   let chapterId;
   return (
@@ -131,7 +130,7 @@ function HadithContainer({ hadiths, volumes, surahs }) {
   );
 }
 
-function renderChapter(hadith, chapterIdRef) {
+function renderChapter(hadith) {
   return (
     <div className="gap-6 grid-cols-[repeat(auto-fit,minmax(280px,1fr))] lg:gap-12 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] my-6 border-x-2 border-royal-blue grid px-2 lg:px-4 py-2">
       <div className="order-2 sm:order-1">
