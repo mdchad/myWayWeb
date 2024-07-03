@@ -10,6 +10,7 @@ import ScrollTopButton from "@/components/ScrollTopButton";
 import { Toaster } from "@/components/ui/toaster";
 import { useRef, useState } from "react";
 import Link from "next/link";
+import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
 function SurahContainer({ surahs = [], hadith }) {
   let surahData =
@@ -204,14 +205,18 @@ function renderHadith(hadith) {
           </div>
         );
       })}
-      <div className="mt-2 flex gap-2">
-        <Button asChild>
-          <Link href={`/admin/${hadith._id}`}>
-            Edit
-            <FileEditIcon size={16} color={"white"} />
-          </Link>
-        </Button>
-      </div>
+      {
+        process.env.NODE_ENV === 'development' && (
+          <div className="mt-2 flex gap-2">
+            <Button asChild>
+              <Link href={`/admin/${hadith._id}`}>
+                Edit
+                <FileEditIcon size={16} color={"white"} />
+              </Link>
+            </Button>
+          </div>
+        )
+      }
     </div>
   );
 }
