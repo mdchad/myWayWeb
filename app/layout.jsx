@@ -10,11 +10,16 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Toaster } from "@/components/ui/toaster";
 import NextTopLoader from "nextjs-toploader";
+import { Suspense } from 'react'
 
 export const metadata = {
   title: "My Way",
   description: "Hadiths of Prophet Muhammad",
 };
+
+function SearchBarFallback() {
+  return <>placeholder</>
+}
 
 export default function RootLayout({ children }) {
   return (
@@ -26,7 +31,9 @@ export default function RootLayout({ children }) {
       <body>
         <NextTopLoader />
         <div className="flex min-h-screen w-full flex-col">
-          <Header />
+          <Suspense fallback={<SearchBarFallback />}>
+            <Header />
+          </Suspense>
           {children}
           <Footer />
           <Toaster />
