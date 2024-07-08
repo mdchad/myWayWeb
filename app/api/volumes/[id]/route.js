@@ -6,8 +6,6 @@ export async function PATCH(request, { params }) {
   const db = await connectToDatabase();
   const id = params.id;
   const body = await request.json();
-  console.log(body);
-  console.log(id);
 
   const data = await db.collection("Volumes").updateOne(
     { id: id },

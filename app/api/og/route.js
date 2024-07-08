@@ -10,7 +10,6 @@ export async function GET(request) {
 
   const bookTitle = searchParams.get("book_title");
 
-  console.log(bookTitle)
   const text = bookTitle
   const fontData = await loadGoogleFont('Caveat', bookTitle);
 
