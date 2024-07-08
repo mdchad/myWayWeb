@@ -1,8 +1,7 @@
 import connectToDatabase from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
-export async function GET(request) {
-  console.log(request.url);
+export async function GET() {
   const db = await connectToDatabase();
 
   const data = await db.collection("Books").find({}).sort({ _id: 1 }).toArray();

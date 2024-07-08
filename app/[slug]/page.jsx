@@ -17,6 +17,24 @@ async function getData(slug) {
     .toArray();
 }
 
+export async function generateMetadata({ params, searchParams }) {
+  // read route params
+  const slug = params.slug
+  const bookId = mapBookId(slug);
+  const volumes = await getData(bookId)
+
+  return {
+    metadataBase: new URL('https://www.myway.my'),
+    title: volumes[0].book_title,
+    description: " Ketahui sunnah Nabi Muhammad SAW melalui koleksi hadis dari Kutub Sittah yang sahih dan dipercayai",
+    openGraph: {
+      images: process.env.NODE_ENV === 'production' ? `https://www.myway.my/api/og?book_title=${encodeURIComponent(volumes[0].book_title)}` : `http://localhost:3000/api/og?book_title=${encodeURIComponent(volumes[0].book_title)}`,
+      title: volumes[0].book_title,
+      description: 'Ketahui sunnah Nabi Muhammad SAW melalui koleksi hadis dari Kutub Sittah yang sahih dan dipercayai',
+    },
+  }
+}
+
 export default async function Book({ params }) {
   const slug = params.slug;
   const volumes = await getData(slug);

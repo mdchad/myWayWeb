@@ -170,7 +170,6 @@ function renderChapter(hadith) {
 }
 
 function renderHadith(hadith) {
-  console.log(process.env.NEXT_PUBLIC_ENV_RUNTIME)
   return (
     <div>
       {hadith.content.map((content, i) => {

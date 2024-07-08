@@ -13,8 +13,15 @@ import NextTopLoader from "nextjs-toploader";
 import { Suspense } from 'react'
 
 export const metadata = {
-  title: "My Way",
-  description: "Hadiths of Prophet Muhammad",
+  metadataBase: new URL('https://www.myway.my'),
+  title: "myWay.my | Koleksi Hadis Sahih",
+  description: " Ketahui sunnah Nabi Muhammad SAW melalui koleksi hadis dari Kutub Sittah yang sahih dan dipercayai",
+  openGraph: {
+    // images: process.env.NODE_ENV === 'production' ? 'https://www.tebuk.app/api/og' : 'http://localhost:3000/api/og',
+    // images: '',
+    title: 'myWay.my | Koleksi Hadis Sahih ',
+    description: 'Ketahui sunnah Nabi Muhammad SAW melalui koleksi hadis dari Kutub Sittah yang sahih dan dipercayai',
+  },
 };
 
 function SearchBarFallback() {

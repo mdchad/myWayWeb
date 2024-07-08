@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import SeeMoreBar from "@/components/SeeMoreBar";
 import { cn } from "@/lib/utils";
+import {Metadata} from "next";
 
 async function getData() {
   const db = await connectToDatabase();
