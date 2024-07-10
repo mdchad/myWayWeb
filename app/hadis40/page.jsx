@@ -32,7 +32,7 @@ export default function Hadith40() {
               <p className="mb-4">{item.narrators[index].ms}</p>
               <div className="bg-gray-200 rounded-md px-4 py-6">
                 <p
-                  className="text-2xl text-right font-arabic leading-10"
+                  className="text-2xl text-right font-arabic leading-10 select-none"
                   lang="ar"
                   dir="rtl"
                 >
@@ -57,7 +57,7 @@ export default function Hadith40() {
                 </div>
               </div>
               <div className="mt-12">
-                <p className="text-lg mb-2 font-arabicSymbol">{cnt.ms}</p>
+                <p className="text-lg mb-2 font-arabicSymbol select-none">{cnt.ms}</p>
                 <p className="text-slate-500 text-xs text-right font-arabicSymbol mt-4">
                   {item.narratedBy[index].ms}
                 </p>
@@ -80,7 +80,7 @@ export default function Hadith40() {
           {item.lesson.map((l, i) => {
             return (
               <div key={i}>
-                <p className="text-white text-lg">{`\u2022 ${l.ms}`}</p>
+                <p className="text-white text-lg select-none">{`\u2022 ${l.ms}`}</p>
               </div>
             );
           })}

@@ -113,7 +113,7 @@ export default async function Search({ searchParams }) {
 
   return (
     <div className="mb-20">
-      <div className="bg-royal-blue p-8 px-40">
+      <div className="bg-royal-blue p-8 px-8 md:px-40">
         <p className="text-2xl font-bold text-white">
           Hasil carian: "{searchParams.term}"
         </p>
