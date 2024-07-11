@@ -43,12 +43,16 @@ export default async function sitemap() {
       return {
         url: `${baseUrl}${item}`,
         lastModified: lastModifiedGlobal, // Use the global last modified date for static paths
+        chargeFrequency: 'monthly',
+        priority: 0.5
       };
     } else {
       // For dynamic paths, use the specific lastModified date if available
       return {
         url: `${baseUrl}${item.path}`,
         lastModified: item.lastModified || lastModifiedGlobal, // Fallback to the global date if not specified
+        chargeFrequency: 'weekly',
+        priority: 0.7
       };
     }
   });

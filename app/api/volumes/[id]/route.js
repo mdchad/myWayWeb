@@ -28,9 +28,8 @@ export async function PATCH(request, { params }) {
 export async function GET(request, { params }) {
   const db = await connectToDatabase();
   const id = params.id;
-  console.log(id);
 
-  const data = await db.collection("Volumes").find({ id: id }).toArray();
+  const data = await db.collection("Volumes").findOne({ id: id });
 
   return NextResponse.json({
     success: true,
