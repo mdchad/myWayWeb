@@ -14,14 +14,64 @@ export async function GET(request, { params }) {
     //check for sahih muslim because the data was inserted in a different way. this excludes the introduction/pengantar volume.
     data = await db
       .collection("Hadiths")
-      .find({ volume_id: volumeId, book_id: bookId })
-      .sort({ _id: 1 })
+      .aggregate([
+        {
+          $match: {
+            volume_id: volumeId,
+            book_id: bookId,
+          },
+        },
+        {
+          $sort: {
+            _id: 1,
+          },
+        },
+        {
+          $lookup: {
+            from: "Volumes",
+            let: { volumeId: "$volume_id" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$id", "$$volumeId"] } } },
+              { $project: { metadata: 1 } }
+            ],
+            as: "volume_details"
+          }
+        },
+        {
+          $unwind: "$volume_details",
+        },
+      ])
       .toArray();
   } else {
     data = await db
       .collection("Hadiths")
-      .find({ volume_id: volumeId, book_id: bookId })
-      .sort({ number: 1 })
+      .aggregate([
+        {
+          $match: {
+            volume_id: volumeId,
+            book_id: bookId,
+          },
+        },
+        {
+          $sort: {
+            number: 1,
+          },
+        },
+        {
+          $lookup: {
+            from: "Volumes",
+            let: { volumeId: "$volume_id" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$id", "$$volumeId"] } } },
+              { $project: { metadata: 1 } }
+            ],
+            as: "volume_details"
+          }
+        },
+        {
+          $unwind: "$volume_details",
+        },
+      ])
       .toArray();
   }
 

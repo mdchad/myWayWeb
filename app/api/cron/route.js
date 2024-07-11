@@ -13,6 +13,20 @@ export async function GET() {
     .aggregate([
       { $match: { "content.ms": { $ne: "" } } },
       { $sample: { size: 1 } },
+      {
+        $lookup: {
+          from: "Books",
+          let: { bookId: "$book_id" },
+          pipeline: [
+            { $match: { $expr: { $eq: ["$id", "$$bookId"] } } },
+            { $project: { name: 1, slug: 1 } }
+          ],
+          as: "book_details",
+        },
+      },
+      {
+        $unwind: "$book_details",
+      },
     ])
     .toArray();
   console.log("hadith", hadith);
