@@ -11,6 +11,7 @@ import { Header } from "@/components/Header";
 import { Toaster } from "@/components/ui/toaster";
 import NextTopLoader from "nextjs-toploader";
 import { Suspense } from 'react'
+import SearchBar from "@/components/SearchBar";
 
 export const metadata = {
   metadataBase: new URL('https://www.myway.my'),
@@ -38,8 +39,10 @@ export default function RootLayout({ children }) {
       <body>
         <NextTopLoader />
         <div className="flex min-h-screen w-full flex-col">
-          <Suspense fallback={<SearchBarFallback />}>
-            <Header />
+          <Suspense fallback={<Header />}>
+            <Header>
+              <SearchBar />
+            </Header>
           </Suspense>
           {children}
           <Footer />
