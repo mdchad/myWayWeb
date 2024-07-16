@@ -1,6 +1,7 @@
 import connectToDatabase from "@/lib/mongodb";
 import HadithContainer from "@/components/HadithContainer";
 import { mapBookId } from "@/data/slug";
+import { titleCase } from "title-case";
 
 export const dynamic = "force-dynamic";
 export const revalidate = false;
@@ -43,6 +44,42 @@ async function getSurah(volume) {
   } else {
     return [];
   }
+}
+
+export async function generateMetadata({ params }) {
+  const volumeValue = {
+    number: "",
+    name: {
+      ms: "",
+    },
+  };
+
+  if (!isNaN(params.volume)) {
+    volumeValue.number = parseInt(params.volume);
+    delete volumeValue.name;
+  } else {
+    volumeValue.name.ms = params.volume;
+    delete volumeValue.number;
+  }
+  // read route params
+  const volume = await getVolume(volumeValue, params.slug);
+  const title = volume.title.ms.toLowerCase();
+
+  return {
+    metadataBase: new URL("https://www.myway.my"),
+    title: `${titleCase(title)} | ${titleCase(volume.book_title)}`,
+    description:
+      "My Way - Koleksi Hadis Sahih | Pelajari sunnah Nabi Muhammad SAW melalui koleksi hadis dari Kutub Sittah yang sahih dan dipercayai",
+    openGraph: {
+      images:
+        process.env.NODE_ENV === "production"
+          ? `https://www.myway.my/api/og?title=${encodeURIComponent(titleCase(title))}&subtitle=${encodeURIComponent(titleCase(volume.book_title))}`
+          : `http://localhost:3000/api/og?title=${encodeURIComponent(titleCase(title))}&subtitle=${encodeURIComponent(titleCase(volume.book_title))}`,
+      title: `${titleCase(title)} | ${titleCase(volume.book_title)}`,
+      description:
+        "My Way - Koleksi Hadis Sahih | Pelajari sunnah Nabi Muhammad SAW melalui koleksi hadis dari Kutub Sittah yang sahih dan dipercayai",
+    },
+  };
 }
 
 export default async function Hadiths({ params }) {

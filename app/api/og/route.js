@@ -8,10 +8,12 @@ export const runtime = 'edge';
 export async function GET(request) {
   const searchParams = request.nextUrl.searchParams;
 
-  const bookTitle = searchParams.get("book_title");
+  const title = searchParams.get("title");
+  const subtitle = searchParams.get("subtitle");
 
-  const text = bookTitle
-  const fontData = await loadGoogleFont('Caveat', bookTitle);
+  const text = title
+  const fontData = await loadGoogleFont('Caveat', title);
+  const fontData1 = await loadGoogleFont('Raleway', subtitle);
 
   return new ImageResponse(
     (
@@ -25,12 +27,23 @@ export async function GET(request) {
           width: '100%',
           height: '100%',
           padding: '50px 200px',
+          display: 'flex',
+          flexDirection: "column",
           textAlign: 'center',
           justifyContent: 'center',
           alignItems: 'center',
         }}
       >
         {text}
+        <div
+          style={{
+            fontSize: 40,
+            fontWeight: 700,
+            fontFamily: 'Raleway',
+            display: "flex"
+          }}>
+          {subtitle}
+        </div>
       </div>
     ),
     {
@@ -42,6 +55,11 @@ export async function GET(request) {
           data: fontData,
           style: "normal",
         },
+        {
+          name: "Raleway",
+          data: fontData1,
+          style: "normal"
+        }
       ]
     }
   );

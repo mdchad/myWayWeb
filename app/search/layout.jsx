@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Search Results",
-  description: "Hadith of Prophet Muhammad",
+  title: "Hasil Carian | My Way - Koleksi Hadis Sahih",
+  description: "Koleksi Hadith Sahih",
 };
 
 export default function SearchLayout({ children }) {
