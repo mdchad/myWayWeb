@@ -31,7 +31,7 @@ export async function GET(request) {
           flexDirection: "column",
           textAlign: 'center',
           justifyContent: 'center',
-          alignItems: 'center',
+          alignItems: 'center'
         }}
       >
         {text}
