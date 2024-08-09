@@ -44,7 +44,7 @@ const Pagination = ({ count }) => {
   return (
     <nav className="flex flex-col">
       <p className="text-right my-2 font-sans text-sm">
-        Hasil carian{startIndex} - {endIndex} dari {totalCount}
+        Hasil carian {startIndex} - {endIndex} dari {totalCount}
       </p>
       <ul className="flex list-none justify-end">
         {pageNumbers.map((number, i) => (
