@@ -21,7 +21,7 @@ export default async function Home() {
       <div className="grid lg:grid-cols-2 lg:gap-20 gap-10">
         {books.map((book) => {
           return (
-            <Link key={book.id} href={`/${book.slug}`}>
+            <Link key={book.id} href={`/book/${book.slug}`}>
               <div
                 key={book.id}
                 className={cn(

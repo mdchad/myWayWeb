@@ -66,7 +66,7 @@ function VolumeContainer({ volumes, slug }) {
             <Link
               key={id}
               className="group"
-              href={`/${slug}/${vol.name.ms}${queryNumber ? `#${queryNumber}` : ""}`}
+              href={`/book/${slug}/${vol.name.ms}${queryNumber ? `#${queryNumber}` : ""}`}
             >
               <div
                 key={vol.id}

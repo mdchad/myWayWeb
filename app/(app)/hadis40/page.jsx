@@ -1,5 +1,5 @@
 import React from "react";
-import hadiths from "../../data/hadith40.json";
+import hadiths from "../../../data/hadith40.json";
 
 export default function Hadith40() {
   function Items({ item }) {

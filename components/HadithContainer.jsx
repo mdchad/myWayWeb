@@ -57,7 +57,6 @@ function HadithContainer({ hadiths, volumes, surahs }) {
   return (
     <>
       <div className="mb-20">
-        {/*<EditModal chapterId={chapterId} hadiths={hadiths} />*/}
         {/*<EditVolumeModal chapterId={chapterId} hadiths={hadiths} />*/}
         <div className="bg-royal-blue py-4 px-2">
           <p className="text-2xl font-bold text-white text-center capitalize font-sans">
@@ -204,7 +203,7 @@ function renderHadith(hadith) {
         );
       })}
       {
-        process.env.NEXT_PUBLIC_ENV_RUNTIME === 'development' && (
+        process.env.NEXT_PUBLIC_ENV_RUNTIME === 'development' || process.env.NEXT_PUBLIC_ENV_RUNTIME === 'localhost' && (
           <div className="mt-2 flex gap-2">
             <Button asChild>
               <Link href={`/admin/${hadith._id}`}>

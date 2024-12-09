@@ -21,8 +21,6 @@ export async function PUT(request, { params }) {
   const id = params.id;
   const body = await request.json();
   delete body._id;
-  console.log(body);
-  console.log(id);
 
   const data = await db
     .collection("Hadiths")

@@ -16,6 +16,13 @@ import { CopyCheckIcon, MinusIcon, PlusIcon } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import { symbolArabic } from "@/lib/symbolUtil";
 import QuranText from "@/components/QuranText";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 // This can come from your database or API.
 const defaultValue = {
@@ -116,6 +123,7 @@ export function HadithForm({ data }) {
   const { toast } = useToast();
 
   const [value, setValue] = useState(data ? data : defaultValue);
+  const [caretPosition, setCaretPosition] = useState(0);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -297,6 +305,21 @@ export function HadithForm({ data }) {
     setValue((prevValue) => ({ ...prevValue, content: newContent }));
   }
 
+  function addFootnote(e) {
+    e.preventDefault();
+    const newFootnote = [{}];
+    setValue((prevValue) => ({
+      ...prevValue,
+      footnotes: [...prevValue.footnotes, ...newFootnote],
+    }));
+  }
+
+  function removeFootnote(e) {
+    e.preventDefault();
+    const newFootnotes = value.footnotes.slice(0, -1);
+    setValue((prevValue) => ({ ...prevValue, footnotes: newFootnotes }));
+  }
+
   return (
     <div className="grid grid-cols-2 gap-8">
       <StickySubmitButton submit={onSubmit} />
@@ -361,7 +384,6 @@ export function HadithForm({ data }) {
                     onChange={(e) => {
                       const updatedContent = [...value.content];
                       updatedContent[index].ar = e.target.value;
-                      console.log(updatedContent);
                       setValue((prevValue) => ({
                         ...prevValue,
                         content: updatedContent,
@@ -392,10 +414,18 @@ export function HadithForm({ data }) {
                         ...prevValue,
                         content: updatedContent,
                       }));
+                      setCaretPosition(e.target.selectionStart);
+                    }}
+                    onKeyUp={(e) => {
+                      setCaretPosition(e.target.selectionStart)
+                    }}
+                    onClick={(e) => {
+                      setCaretPosition(e.target.selectionStart);
                     }}
                     ref={(el) => (refs.current[index][1] = el)} // Assign Malay ref
                     style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
                   />
+                  <p className="mt-2">Caret position: {caretPosition}</p>
                 </div>
                 <div>
                   <Label htmlFor="ms">English</Label>
@@ -428,6 +458,66 @@ export function HadithForm({ data }) {
           <Button size="icon" variant="ghost" onClick={removeContent}>
             <MinusIcon size={16} color={"black"} />
           </Button>
+
+
+          <div className="space-y-4">
+            <Label>Footnotes</Label>
+            {value.footnotes.map((footnote, i) => {
+              return (
+                <div className="space-y-2">
+                  <div className="flex gap-2">
+                    <Input value={caretPosition} placeholder={"Position"} />
+                    <Button onClick={(e) => {
+                      e.preventDefault()
+                      const updatedFootnote = [...value.footnotes];
+                      updatedFootnote[i].position = caretPosition;
+                      setValue((prevValue) => ({...prevValue, footnotes: updatedFootnote}))}
+                    }>
+                      Add position
+                    </Button>
+                  </div>
+                  <Input value={value.footnotes[i].ms}
+                         onChange={(e) => {
+                            const updatedFootnote = [...value.footnotes];
+                            updatedFootnote[i].ms = e.target.value;
+                            setValue((prevValue) => ({...prevValue, footnotes: updatedFootnote}))
+                          }}
+                         placeholder={'Malay'}/>
+                  <Input value={value.footnotes[i].number}
+                         type="number"
+                         onChange={(e) => {
+                           const updatedFootnote = [...value.footnotes];
+                           updatedFootnote[i].number = parseInt(e.target.value);
+                           setValue((prevValue) => ({...prevValue, footnotes: updatedFootnote}))
+                         }}
+                         placeholder={'Number'}/>
+                  <Select
+                    onValueChange={(e) => {
+                      const updatedFootnote = [...value.footnotes];
+                      updatedFootnote[i].type = e;
+                      setValue((prevValue) => ({...prevValue, footnotes: updatedFootnote}))
+                    }}
+                  >
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder="Select an option" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="content.ms">Content Malay</SelectItem>
+                      <SelectItem value="chapter_title.ms">Chapter</SelectItem>
+                      <SelectItem value="chapter_metadata.ms">Chapter Metadata</SelectItem>
+                    </SelectContent>
+                  </Select>
+
+                </div>
+              )
+            })}
+            <Button variant="ghost" onClick={addFootnote}>
+              <PlusIcon size={16} color={"black"} /> More footnote
+            </Button>
+            <Button variant="ghost" onClick={removeFootnote}>
+              <MinusIcon size={16} color={"black"} /> Less footnote
+            </Button>
+          </div>
           <div className="space-y-4">
             <Label>Chapter</Label>
             <div className="space-y-4">
@@ -482,12 +572,19 @@ export function HadithForm({ data }) {
             <Input
               value={value.chapter_title.ms}
               placeholder="Malay"
-              onChange={(e) =>
+              onChange={(e) => {
                 setValue({
                   ...value,
                   chapter_title: { ...value.chapter_title, ms: e.target.value },
                 })
-              }
+                setCaretPosition(e.target.selectionStart);
+              }}
+                onKeyUp={(e) => {
+                setCaretPosition(e.target.selectionStart)
+              }}
+                onClick={(e) => {
+                setCaretPosition(e.target.selectionStart);
+              }}
             />
             <Input
               value={value.chapter_title.en}
@@ -541,7 +638,7 @@ export function HadithForm({ data }) {
               value={value.chapter_metadata.ms}
               className="font-arabicSymbol"
               placeholder="Metadata Malay"
-              onChange={(e) =>
+              onChange={(e) => {
                 setValue({
                   ...value,
                   chapter_metadata: {
@@ -549,7 +646,14 @@ export function HadithForm({ data }) {
                     ms: e.target.value,
                   },
                 })
-              }
+                setCaretPosition(e.target.selectionStart);
+              }}
+              onKeyUp={(e) => {
+                setCaretPosition(e.target.selectionStart)
+              }}
+              onClick={(e) => {
+                setCaretPosition(e.target.selectionStart);
+              }}
               style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
               ref={(el) => (chapterRefs.current[1] = el)}
             />

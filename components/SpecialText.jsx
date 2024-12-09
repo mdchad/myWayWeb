@@ -1,8 +1,12 @@
 import { symbolArabic } from "@/lib/symbolUtil";
 
-function SpecialText({ text }) {
+function SpecialText({ text, font = "font-sans" }) {
   function containsSpecialSymbol(str) {
     return symbolArabic.some((symbol) => str.includes(symbol));
+  }
+
+  if (!text) {
+    return
   }
 
   const segments = text.split(/([ ,.!?;:"()]+)/).map((segment, index) => {
@@ -16,7 +20,7 @@ function SpecialText({ text }) {
     } else {
       // Otherwise, use the default font
       return (
-        <span key={index} className="font-sans">
+        <span key={index} className={font}>
           {segment}
         </span>
       );

@@ -21,7 +21,7 @@ async function TodayCard() {
   return (
     <Link
       href={{
-        pathname: `/${data?.book_details?.slug}/${data.volume_name.ms}`,
+        pathname: `/book/${data?.book_details?.slug}/${data.volume_name.ms}`,
         hash: data.number,
       }}
       className="group"
