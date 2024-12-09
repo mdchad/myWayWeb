@@ -17,7 +17,8 @@ async function getData(slug) {
     .toArray();
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   // read route params
   const slug = params.slug
   const bookId = mapBookId(slug);
@@ -35,7 +36,8 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function Book({ params }) {
+export default async function Book(props) {
+  const params = await props.params;
   const slug = params.slug;
   const volumes = await getData(slug);
 

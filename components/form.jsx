@@ -464,9 +464,9 @@ export function HadithForm({ data }) {
             <Label>Footnotes</Label>
             {value.footnotes.map((footnote, i) => {
               return (
-                <div className="space-y-2">
+                <div className="space-y-2" key={i}>
                   <div className="flex gap-2">
-                    <Input value={caretPosition} placeholder={"Position"} />
+                    <Input defaultValue={caretPosition} placeholder={"Position"} />
                     <Button onClick={(e) => {
                       e.preventDefault()
                       const updatedFootnote = [...value.footnotes];

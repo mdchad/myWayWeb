@@ -99,7 +99,8 @@ async function getData(terms, page, selectedBooks = [], limit = 10) {
   return await cursor.toArray();
 }
 
-export default async function Search({ searchParams }) {
+export default async function Search(props) {
+  const searchParams = await props.searchParams;
   const selectedBooks = searchParams?.books
     ? searchParams.books.split(",")
     : [];
@@ -112,7 +113,7 @@ export default async function Search({ searchParams }) {
   const [{ count = 0 } = {}] = totalCount;
 
   return (
-    <div className="mb-20">
+    (<div className="mb-20">
       <div className="bg-royal-blue p-8 px-8 md:px-40">
         <p className="text-2xl font-bold text-white">
           Hasil carian: "{searchParams.term}"
@@ -165,7 +166,7 @@ export default async function Search({ searchParams }) {
             const id = data._id;
             return (
               // <Link key={id} href={`/${params.bookId}/${vol.id}`}>
-              <div key={id} className="grid">
+              (<div key={id} className="grid">
                 <div className="flex flex-wrap items-center gap-1 pt-4 pb-2">
                   <Link href={`/book/${data.book_id}`}>
                     <p className="text-royal-blue hover:underline font-sans text-sm font-semibold">
@@ -211,7 +212,7 @@ export default async function Search({ searchParams }) {
                     </Link>
                   );
                 })}
-              </div>
+              </div>)
             );
           })
         ) : (
@@ -221,6 +222,6 @@ export default async function Search({ searchParams }) {
           <Pagination count={count} />
         </div>
       </div>
-    </div>
+    </div>)
   );
 }

@@ -9,12 +9,13 @@ async function getData(id) {
   return await db.collection("Hadiths").findOne({ _id: new ObjectId(id) });
 }
 
-export default async function Book({ params }) {
+export default async function Book(props) {
+  const params = await props.params;
   const hadith = await getData(params.hadithId);
 
   return (
     <div className="mx-auto max-w-7xl mb-20">
-      <HadithForm data={hadith} />
+      <HadithForm data={JSON.parse(JSON.stringify(hadith))} />
     </div>
   );
 }

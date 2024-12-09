@@ -1,4 +1,3 @@
-import "../globals.css";
 import {
   arabicFont,
   inter,
@@ -13,6 +12,7 @@ import NextTopLoader from "nextjs-toploader";
 import { Suspense } from "react";
 import SearchBar from "@/components/SearchBar";
 import { headers } from "next/headers";
+import "../globals.css";
 
 export const metadata = {
   metadataBase: new URL("https://www.myway.my"),
@@ -32,8 +32,8 @@ function SearchBarFallback() {
   return <>placeholder</>;
 }
 
-export default function RootLayout({ children }) {
-  const headersList = headers();
+export default async function RootLayout({ children }) {
+  const headersList = await headers();
 
   const fullPath =
    headersList.get("referrer") || "";

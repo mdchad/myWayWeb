@@ -46,7 +46,8 @@ async function getSurah(volume) {
   }
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const volumeValue = {
     number: "",
     name: {
@@ -82,7 +83,8 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function Hadiths({ params }) {
+export default async function Hadiths(props) {
+  const params = await props.params;
   const volumeValue = {
     number: "",
     name: {

@@ -57,7 +57,8 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function PDF({ searchParams }) {
+export default async function PDF(props) {
+  const searchParams = await props.searchParams;
   const volumeParams = searchParams?.volume
   const slug = searchParams?.slug
 

@@ -1,7 +1,8 @@
 import connectToDatabase from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
-export async function GET(request, { params }) {
+export async function GET(request, props) {
+  const params = await props.params;
   const db = await connectToDatabase();
   const bookId = params.bookId;
   const volumeId = params.volumeId;
