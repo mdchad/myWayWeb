@@ -34,30 +34,37 @@ function SearchBarFallback() {
 
 export default async function RootLayout({ children }) {
   const headersList = await headers();
+  const maintainance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE;
 
-  const fullPath =
-   headersList.get("referrer") || "";
+  const fullPath = headersList.get("referrer") || "";
 
   // Extract the last segment of the path
   const pathSegments = fullPath.split("/");
   const lastSegment = pathSegments[pathSegments.length - 1];
 
   // Check if the last segment is 'pdf'
-  const isPdfRoute = lastSegment === "pdf";
 
-  // if (isPdfRoute) {
-  //   return (
-  //     <html
-  //       lang="en"
-  //       className={`${inter.variable} ${arabicFont.variable} ${arabicSymbolFont.variable} ${hafs.variable} ${surahFont.variable}`}
-  //       content="text/html; charset=utf-8"
-  //     >
-  //       <body>
-  //         {children}
-  //       </body>
-  //     </html>
-  //   );
-  // } else {
+  if (maintainance === 'maintain') {
+    console.log("maintenance", maintainance)
+    return (
+      <html
+        lang="en"
+        className={`${inter.variable} ${arabicFont.variable} ${arabicSymbolFont.variable} ${hafs.variable} ${surahFont.variable}`}
+        content="text/html; charset=utf-8"
+      >
+        <body>
+          <div className="flex min-h-screen w-full flex-col">
+            <main className="px-4 sm:px-6 lg:px-32 mb-20 py-4 sm:py-6 lg:py-16">
+              <div className="text-center">
+                <p>Maintenance mode</p>
+                <p>Please contact the admin</p>
+              </div>
+            </main>
+          </div>
+        </body>
+      </html>
+    );
+  } else {
     return (
       <html
         lang="en"
@@ -79,5 +86,5 @@ export default async function RootLayout({ children }) {
         </body>
       </html>
     );
-  // }
+  }
 }
