@@ -3,11 +3,25 @@
 import Link from "next/link";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-import { Button } from "@/components/Button";
+import { Button } from "@/components/ui/button";
 import { Logomark } from "@/components/Logo";
 import { Menu } from "lucide-react";
+import {authClient} from "@/lib/auth-client";
+import {useRouter} from "next/navigation";
 
 export function Header({ children }) {
+  const router = useRouter()
+  const  { data: session } = authClient.useSession()
+
+ async  function signOut() {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/login"); // redirect to login page
+        },
+      },
+    });
+  }
 
   return (
     <header className="z-50 sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 py-12">
@@ -98,6 +112,7 @@ export function Header({ children }) {
         </SheetContent>
       </Sheet>
       {children}
+      { session && <Button variant={"link"} onClick={signOut}>Keluar</Button> }
     </header>
   );
 }

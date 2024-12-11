@@ -16,7 +16,7 @@
     "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-select": "^2.1.2",
     "@radix-ui/react-separator": "^1.0.3",
-    "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/react-tooltip": "^1.0.7",
     "@vercel/kv": "^3.0.0",
@@ -38,6 +38,7 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@types/react": "19.0.1",
     "autoprefixer": "^10.0.1",
     "postcss": "^8",
     "prettier": "3.3.2",
