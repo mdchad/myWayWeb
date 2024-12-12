@@ -1,7 +1,7 @@
-import connectToDatabase from "@/lib/mongodb";
+import connectToDatabase from "../../../../lib/mongodb";
 import Link from "next/link";
 import { ObjectId } from "mongodb";
-import { HadithForm } from "@/components/form";
+import { HadithForm } from "../../../../components/form";
 
 async function getData(id: any) {
   const db = await connectToDatabase();

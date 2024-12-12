@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import connectToDatabase from "@/lib/mongodb";
+import connectToDatabase from "../../../../../../lib/mongodb";
 import { NextResponse } from "next/server";
 
 export async function GET(request, props) {

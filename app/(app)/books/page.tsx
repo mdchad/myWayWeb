@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import connectToDatabase from "@/lib/mongodb";
+import connectToDatabase from "../../../lib/mongodb";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import SeeMoreBar from "@/components/SeeMoreBar";
