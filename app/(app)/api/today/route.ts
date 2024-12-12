@@ -62,18 +62,12 @@ export async function GET() {
   })
 
   if (!session) {
-    return NextResponse.json({
-      success: false,
-      data: emptyData
-    });
+    return NextResponse.json(emptyData);
   }
 
   const hadith = await kv.get("todayHadith");
 
   console.log(hadith);
-  return NextResponse.json({
-    success: true,
-    data: hadith
-  });
+  return NextResponse.json(hadith);
 }
 export const dynamic = "force-dynamic";
