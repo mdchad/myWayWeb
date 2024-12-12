@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import React from "react";
-import {Separator} from "@/components/ui/separator";
+import {Separator} from "../components/ui/separator";
 
 function FootnoteContainer({ footnotes }) {
   if (!footnotes[0].ms) {

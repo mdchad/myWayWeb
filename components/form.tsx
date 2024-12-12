@@ -13,7 +13,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "../components/ui/popover";
 import { CopyCheckIcon, MinusIcon, PlusIcon } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import { symbolArabic } from "../lib/symbolUtil";
@@ -24,7 +24,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "../components/ui/select"
 
 // This can come from your database or API.
 const defaultValue = {

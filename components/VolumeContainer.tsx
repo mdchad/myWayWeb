@@ -4,7 +4,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Input } from "@/components/ui/input";
+import { Input } from "../components/ui/input";
 import { useFuzzySearchList } from "@nozbe/microfuzz/react";
 
 function VolumeContainer({ volumes, slug }) {
