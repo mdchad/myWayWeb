@@ -31,7 +31,7 @@
     "nextjs-toploader": "^1.6.4",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "react-pdf": "^7.5.1",
+    "react-pdf": "^9.1.1",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
     "title-case": "^4.3.1",

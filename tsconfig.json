@@ -30,7 +30,7 @@
       "@/components/*": ["./components/*"],
       "@/app/*": ["./app/*"]
     },
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": false
   },
   "include": [
     "next-env.d.ts",
