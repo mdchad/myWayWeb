@@ -10,14 +10,13 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "../components/ui/dialog";
 import { CheckIcon, FileCogIcon, FileEditIcon, MinusIcon } from "lucide-react";
-import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { useToast } from "@/components/ui/use-toast";
+import { Input } from "../components/ui/input";
+import { Button } from "../components/ui/button";
+import { Label } from "../components/ui/label";
+import { useToast } from "../components/ui/use-toast";
 import { DialogClose } from "@radix-ui/react-dialog";
 
 function EditVolumeModal({ chapterId, hadiths }) {

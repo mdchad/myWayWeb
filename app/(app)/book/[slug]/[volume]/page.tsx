@@ -2,7 +2,7 @@
 
 import connectToDatabase from "../../../../../lib/mongodb";
 import HadithContainer from "../../../../../components/HadithContainer";
-import { mapBookId } from "@/data/slug";
+import { mapBookId } from "../../../../../data/slug";
 import { titleCase } from "title-case";
 
 export const dynamic = "force-dynamic";

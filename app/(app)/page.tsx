@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import TodayCard from "@/components/TodayCard";
-import Card from "@/components/Card";
-import IntroCard from "@/components/IntroCard";
+import TodayCard from "../../components/TodayCard";
+import Card from "../../components/Card";
+import IntroCard from "../../components/IntroCard";
 
 export default async function Home() {
   return (

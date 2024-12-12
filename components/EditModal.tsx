@@ -9,12 +9,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "../components/ui/dialog";
 import { CheckIcon, FileEditIcon, MinusIcon } from "lucide-react";
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "../components/ui/textarea";
 import { useEffect, useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Input } from "../components/ui/input";
+import { Button } from "../components/ui/button";
 
 function HadithItem({
   hadith,

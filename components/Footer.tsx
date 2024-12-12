@@ -2,9 +2,9 @@
 
 "use client";
 
-import { Container } from "@/components/Container";
-import { Logomark } from "@/components/Logo";
-import { NavLinks } from "@/components/NavLinks";
+import { Container } from "../components/Container";
+import { Logomark } from "../components/Logo";
+import { NavLinks } from "../components/NavLinks";
 import { PlayStoreLink } from "./PlayStoreLink";
 import { AppStoreLink } from "./AppStoreLink";
 

@@ -1,11 +1,11 @@
 // @ts-nocheck
 
-import connectToDatabase from "@/lib/mongodb";
+import connectToDatabase from "../../../lib/mongodb";
 import Link from "next/link";
 import { ChevronRightSquare } from "lucide-react";
-import Pagination from "@/components/Pagination";
+import Pagination from "../../../components/Pagination";
 import React from "react";
-import QuranText from "@/components/QuranText";
+import QuranText from "../../../components/QuranText";
 
 async function getData(terms: any, page: any, selectedBooks = [], limit = 10) {
   const db = await connectToDatabase();

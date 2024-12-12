@@ -2,14 +2,12 @@
 
 "use client";
 
-import EditModal from "@/components/EditModal";
-import EditVolumeModal from "@/components/EditVolumeModal";
-import SpecialText from "@/components/SpecialText";
-import QuranText from "@/components/QuranText";
-import { Button } from "@/components/ui/button";
+import SpecialText from "../components/SpecialText";
+import QuranText from "../components/QuranText";
+import { Button } from "../components/ui/button";
 import { FileEditIcon, Link as LinkIcon } from "lucide-react";
-import ScrollTopButton from "@/components/ScrollTopButton";
-import { Toaster } from "@/components/ui/toaster";
+import ScrollTopButton from "../components/ScrollTopButton";
+import { Toaster } from "../components/ui/toaster";
 import { useRef, useState } from "react";
 import Link from "next/link";
 
