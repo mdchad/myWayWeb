@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import connectToDatabase from "@/lib/mongodb";
 import HadithContainer from "@/components/HadithContainer";
 import { mapBookId } from "@/data/slug";

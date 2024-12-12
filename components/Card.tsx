@@ -1,8 +1,7 @@
+// @ts-nocheck
+
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, ChevronRightSquare } from "lucide-react";
-import { kv } from "@vercel/kv";
-import { NextResponse } from "next/server";
 
 async function Card({ path, title, description, gradient = false }) {
   return (

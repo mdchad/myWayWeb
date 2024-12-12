@@ -1,5 +1,7 @@
+// @ts-nocheck
+
 import { ImageResponse } from 'next/og';
-import {loadGoogleFont} from "@/lib/utils";
+import {loadGoogleFont} from "../../../../lib/utils";
 // App router includes @vercel/og.
 // No need to install it.
 

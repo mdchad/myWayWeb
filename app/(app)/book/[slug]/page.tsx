@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import connectToDatabase from "@/lib/mongodb";
 import VolumeContainer from "@/components/VolumeContainer";
 import { mapBookId } from "@/data/slug";
@@ -6,7 +8,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = false;
 export const fetchCache = "force-no-store";
 
-async function getData(slug) {
+async function getData(slug: any) {
   const db = await connectToDatabase();
   const bookId = mapBookId(slug);
 
@@ -17,7 +19,7 @@ async function getData(slug) {
     .toArray();
 }
 
-export async function generateMetadata(props) {
+export async function generateMetadata(props: any) {
   const params = await props.params;
   // read route params
   const slug = params.slug
@@ -36,7 +38,7 @@ export async function generateMetadata(props) {
   }
 }
 
-export default async function Book(props) {
+export default async function Book(props: any) {
   const params = await props.params;
   const slug = params.slug;
   const volumes = await getData(slug);

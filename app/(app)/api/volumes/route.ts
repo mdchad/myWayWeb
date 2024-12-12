@@ -1,13 +1,13 @@
 import connectToDatabase from "@/lib/mongodb";
-import { NextResponse } from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 import { ObjectId } from "mongodb";
 
-export async function PATCH(request) {
+export async function PATCH(request: NextRequest) {
   const db = await connectToDatabase();
   const body = await request.json();
 
   // const data = await db.collection('Hadiths').updateOne({ _id: new ObjectId(id) }, { $set: { ...body }})
-  const bulkOps = body.map((item) => {
+  const bulkOps = body.map((item: any) => {
     const key = Object.keys(item)[0];
     return {
       updateOne: {

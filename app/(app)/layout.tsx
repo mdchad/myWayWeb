@@ -32,8 +32,9 @@ function SearchBarFallback() {
   return <>placeholder</>;
 }
 
-export default async function RootLayout({ children }) {
+export default async function RootLayout({ children }: any) {
   const headersList = await headers();
+  // @ts-ignore
   const maintainance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE;
 
   const fullPath = headersList.get("referrer") || "";

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { symbolArabic } from "@/lib/symbolUtil";
 
 function SpecialText({ text, font = "font-sans" }) {

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import TodayCard from "@/components/TodayCard";
 import Card from "@/components/Card";
 import IntroCard from "@/components/IntroCard";

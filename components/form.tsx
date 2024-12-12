@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -158,7 +160,7 @@ export function HadithForm({ data }) {
   const refs = React.useRef(value.content.map(() => [null, null, null]));
 
   React.useLayoutEffect(() => {
-    refs.current.forEach(([arabicRef, malayRef]) => {
+    refs.current.forEach(([arabicRef, malayRef]: any) => {
       [arabicRef, malayRef].forEach((ref) => {
         if (ref) {
           ref.style.height = "inherit"; // Reset height

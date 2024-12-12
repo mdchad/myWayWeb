@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const slugToBookIdMapping = {
   bukhari: "ad6a2cc8-f34b-476b-9b7e-6756a3b7d43e",
   muslim: "240360e4-50b4-47a9-9506-9850b0e3bfd7",

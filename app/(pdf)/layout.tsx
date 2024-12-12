@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import "../globals.css"
 import {arabicFont, arabicSymbolFont, hafs, inter, surahFont} from "@/app/font";
 

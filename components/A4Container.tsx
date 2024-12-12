@@ -1,8 +1,10 @@
+// @ts-nocheck
+
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react';
 
-const A4PageContainer = ({ children, currentPage, elementId }) => {
+const A4PageContainer = ({ children, currentPage, elementId }: any) => {
   const a4Width = 794;
   const a4Height = 1123;
 

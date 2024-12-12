@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 
 import { useCallback, useState } from "react";
@@ -27,7 +29,7 @@ export default function Intro() {
   const [containerRef, setContainerRef] = useState(null);
   const [containerWidth, setContainerWidth] = useState();
 
-  const onResize = useCallback((entries) => {
+  const onResize = useCallback((entries: any) => {
     const [entry] = entries;
 
     if (entry) {
@@ -37,7 +39,7 @@ export default function Intro() {
 
   useResizeObserver(containerRef, resizeObserverOptions, onResize);
 
-  function onFileChange(event) {
+  function onFileChange(event: any) {
     const { files } = event.target;
 
     if (files && files[0]) {
@@ -45,7 +47,7 @@ export default function Intro() {
     }
   }
 
-  function onDocumentLoadSuccess({ numPages: nextNumPages }) {
+  function onDocumentLoadSuccess({ numPages: nextNumPages }: any) {
     setNumPages(nextNumPages);
   }
 

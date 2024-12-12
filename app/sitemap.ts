@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import connectToDatabase from "@/lib/mongodb";
 
 const staticPaths = ["/terms", "/privacy", "/hadis40"];

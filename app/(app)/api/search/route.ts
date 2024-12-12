@@ -1,7 +1,7 @@
 import connectToDatabase from "@/lib/mongodb";
-import { NextResponse } from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 
-export async function GET(request) {
+export async function GET(request: NextRequest) {
   const db = await connectToDatabase();
   const searchParams = request.nextUrl.searchParams;
 
@@ -40,6 +40,7 @@ export async function GET(request) {
   };
 
   if (selectedBooks.length < 1) {
+    // @ts-ignore
     delete searchQuery.$search.compound.filter;
   }
 

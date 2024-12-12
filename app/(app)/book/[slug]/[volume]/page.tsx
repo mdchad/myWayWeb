@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import connectToDatabase from "@/lib/mongodb";
 import HadithContainer from "@/components/HadithContainer";
 import { mapBookId } from "@/data/slug";
@@ -7,7 +9,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = false;
 export const fetchCache = "force-no-store";
 
-async function getData(volume, slug) {
+async function getData(volume: any, slug: any) {
   const bookId = mapBookId(slug);
 
   const db = await connectToDatabase();
@@ -29,14 +31,14 @@ async function getData(volume, slug) {
     .toArray();
 }
 
-async function getVolume(volume, slug) {
+async function getVolume(volume: any, slug: any) {
   const bookId = mapBookId(slug);
 
   const db = await connectToDatabase();
   return await db.collection("Volumes").findOne({ ...volume, book_id: bookId });
 }
 
-async function getSurah(volume) {
+async function getSurah(volume: any) {
   const db = await connectToDatabase();
 
   if (volume.id === "be728413-131c-43a6-8481-d7c4704fa228") {
@@ -46,10 +48,10 @@ async function getSurah(volume) {
   }
 }
 
-export async function generateMetadata(props) {
+export async function generateMetadata(props: any) {
   const params = await props.params;
   const volumeValue = {
-    number: "",
+    number: 0,
     name: {
       ms: "",
     },
@@ -57,9 +59,11 @@ export async function generateMetadata(props) {
 
   if (!isNaN(params.volume)) {
     volumeValue.number = parseInt(params.volume);
+    // @ts-ignore
     delete volumeValue.name;
   } else {
     volumeValue.name.ms = params.volume;
+    // @ts-ignore
     delete volumeValue.number;
   }
   // read route params
@@ -83,10 +87,10 @@ export async function generateMetadata(props) {
   };
 }
 
-export default async function Hadiths(props) {
+export default async function Hadiths(props: any) {
   const params = await props.params;
   const volumeValue = {
-    number: "",
+    number: 0,
     name: {
       ms: "",
     },
@@ -94,9 +98,11 @@ export default async function Hadiths(props) {
 
   if (!isNaN(params.volume)) {
     volumeValue.number = parseInt(params.volume);
+    // @ts-ignore
     delete volumeValue.name;
   } else {
     volumeValue.name.ms = params.volume;
+    // @ts-ignore
     delete volumeValue.number;
   }
 

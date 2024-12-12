@@ -16,7 +16,7 @@ export const revalidate = false;
 export const fetchCache = "force-no-store";
 
 async function TodayCard() {
-  const data = await getData();
+  const data: any = await getData();
 
   return (
     <Link

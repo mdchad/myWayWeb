@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 
 import { CheckIcon, FileEditIcon } from "lucide-react";

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import defaultLocale from "./locales/ms.json";
 
 let SHARED_TEXT = { ...defaultLocale };

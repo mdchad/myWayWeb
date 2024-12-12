@@ -1,5 +1,5 @@
-import { symbolArabic } from "@/lib/symbolUtil";
-import {cn} from "@/lib/utils";
+// @ts-nocheck
+
 import SpecialText from "@/components/SpecialText";
 
 function PDFSpecialText({ text, font = "font-sans" }) {

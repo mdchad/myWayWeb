@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import connectToDatabase from "@/lib/mongodb";
 import Link from "next/link";
 import { ChevronRightSquare } from "lucide-react";
@@ -5,7 +7,7 @@ import Pagination from "@/components/Pagination";
 import React from "react";
 import QuranText from "@/components/QuranText";
 
-async function getData(terms, page, selectedBooks = [], limit = 10) {
+async function getData(terms: any, page: any, selectedBooks = [], limit = 10) {
   const db = await connectToDatabase();
 
   const skip = (page - 1) * limit;
@@ -47,6 +49,7 @@ async function getData(terms, page, selectedBooks = [], limit = 10) {
     selectedBooks.forEach((book) => {
       searchQuery.$search.compound.filter.push({
         text: {
+          // @ts-ignore
           path: "book_name", // Assuming 'title' is the field with the book title
           query: book,
         },
@@ -54,6 +57,7 @@ async function getData(terms, page, selectedBooks = [], limit = 10) {
     });
   } else {
     // If no specific books are selected, adjust minimumShouldMatch
+    // @ts-ignore
     delete searchQuery.$search.compound.filter;
   }
 
@@ -99,7 +103,7 @@ async function getData(terms, page, selectedBooks = [], limit = 10) {
   return await cursor.toArray();
 }
 
-export default async function Search(props) {
+export default async function Search(props: any) {
   const searchParams = await props.searchParams;
   const selectedBooks = searchParams?.books
     ? searchParams.books.split(",")
@@ -162,7 +166,7 @@ export default async function Search(props) {
       </div>
       <div className="py-16 px-8 lg:px-40 bg-gray-100 grid gap-2">
         {!!documents.length ? (
-          documents.map((data) => {
+          documents.map((data: any) => {
             const id = data._id;
             return (
               // <Link key={id} href={`/${params.bookId}/${vol.id}`}>
@@ -192,7 +196,7 @@ export default async function Search(props) {
                     </p>
                   </Link>
                 </div>
-                {data.content?.map((content, i) => {
+                {data.content?.map((content: any, i: any) => {
                   return (
                     <Link
                       href={`/book/${data.book_id}/${data.volume_name.ms}#${data.number}`}

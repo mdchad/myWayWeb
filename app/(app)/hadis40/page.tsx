@@ -1,8 +1,10 @@
+// @ts-nocheck
+
 import React from "react";
 import hadiths from "../../../data/hadith40.json";
 
 export default function Hadith40() {
-  function Items({ item }) {
+  function Items({ item }: any) {
     return (
       <div
         id={item.number}

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import clsx from "clsx";
 
-export function AppStoreLink({ color = "black" }) {
+export function AppStoreLink({ color = "black" }: any) {
   return (
     <Link
       href="https://apps.apple.com/us/app/my-way-hadith/id6467808063"

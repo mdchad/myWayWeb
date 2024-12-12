@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import connectToDatabase from "@/lib/mongodb";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { ArrowRight } from "lucide-react";
 
 function SeeMoreBar() {

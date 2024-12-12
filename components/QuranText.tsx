@@ -1,6 +1,8 @@
+// @ts-nocheck
+
 import { cn } from "@/lib/utils";
 
-function QuranText({ text, className, font = "font-arabic" }) {
+function QuranText({ text, className, font = "font-arabic" }: any) {
   const regex = /([\uFD3F].*?[\uFD3E])/; // These are the Unicode points for the Arabic brackets
   const parts = text.split(regex);
 

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const DEFAULT_LANGUAGE = "ms";
 
 export default function getTranslation(item, currentLang) {
