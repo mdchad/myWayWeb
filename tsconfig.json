@@ -24,9 +24,10 @@
     ],
     "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/lib/*": ["lib/*"],
+      "@/components/*": ["components/*"],
+      "@/data/*": ["data/*"],
+      "@/app/*": ["app/*"],
     },
     "forceConsistentCasingInFileNames": true
   },
