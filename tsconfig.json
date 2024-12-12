@@ -22,12 +22,13 @@
         "name": "next"
       }
     ],
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "@/lib/*": ["lib/*"],
-      "@/components/*": ["components/*"],
-      "@/data/*": ["data/*"],
-      "@/app/*": ["app/*"],
+      "@/*": ["./*"],
+      "@/lib/*": ["./lib/*"],
+      "@/data/*": ["./data/*"],
+      "@/components/*": ["./components/*"],
+      "@/app/*": ["./app/*"]
     },
     "forceConsistentCasingInFileNames": true
   },
