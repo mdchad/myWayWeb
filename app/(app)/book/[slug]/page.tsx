@@ -2,7 +2,7 @@
 
 import connectToDatabase from "../../../../lib/mongodb";
 import VolumeContainer from "../../../../components/VolumeContainer";
-import { mapBookId } from "../../../../../data/slug";
+import { mapBookId } from "../../../../data/slug";
 
 export const dynamic = "force-dynamic";
 export const revalidate = false;

@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import React from "react";
-
 function FootnoteReferenceNumber({ footnotes, children }) {
   const sortedFootnotes = [...footnotes].sort((a, b) => b.number - a.number);
   const childrenArray = React.Children.toArray(children);
