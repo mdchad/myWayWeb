@@ -4,9 +4,9 @@
 
 import { CheckIcon, FileEditIcon } from "lucide-react";
 import { useState } from "react";
-import { Button } from "../components/ui/button";
+import { Button } from "@/components/ui/button";
 import * as React from "react";
-import { useToast } from "../components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 
 const correction = {
   "«": "»",

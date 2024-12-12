@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import SeeMoreBar from "../components/SeeMoreBar";
+import SeeMoreBar from "@/components/SeeMoreBar";
 
 async function IntroCard() {
   return (

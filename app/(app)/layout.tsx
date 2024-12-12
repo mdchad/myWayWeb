@@ -4,13 +4,13 @@ import {
   arabicSymbolFont,
   hafs,
   surahFont,
-} from "../../app/font";
-import { Footer } from "../../components/Footer";
-import { Header } from "../../components/Header";
-import { Toaster } from "../../components/ui/toaster";
+} from "@/app/font";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { Toaster } from "@/components/ui/toaster";
 import NextTopLoader from "nextjs-toploader";
 import { Suspense } from "react";
-import SearchBar from "../../components/SearchBar";
+import SearchBar from "@/components/SearchBar";
 import { headers } from "next/headers";
 import "../globals.css";
 

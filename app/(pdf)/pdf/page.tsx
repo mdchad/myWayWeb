@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-import connectToDatabase from "../../../lib/mongodb";
-import { mapBookId } from "../../../data/slug";
-import PDFHadithContainer from "../../../components/PDFHadithContainer";
-import MultiPagePDFContainer from "../../../components/A4Container";
+import connectToDatabase from "@/lib/mongodb";
+import { mapBookId } from "@/data/slug";
+import PDFHadithContainer from "@/components/PDFHadithContainer";
+import MultiPagePDFContainer from "@/components/A4Container";
 
 export const dynamic = "force-dynamic";
 export const revalidate = false;

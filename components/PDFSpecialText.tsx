@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import SpecialText from "../components/SpecialText";
+import SpecialText from "@/components/SpecialText";
 
 function PDFSpecialText({ text, font = "font-sans" }) {
   const regex = /([\uFD3F].*?[\uFD3E])/; // These are the Unicode points for the Arabic brackets

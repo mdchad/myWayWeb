@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-import connectToDatabase from "../../../lib/mongodb";
+import connectToDatabase from "@/lib/mongodb";
 import Link from "next/link";
-import SeeMoreBar from "../../../components/SeeMoreBar";
-import { cn } from "../../../lib/utils";
+import SeeMoreBar from "@/components/SeeMoreBar";
+import { cn } from "@/lib/utils";
 
 async function getData() {
   const db = await connectToDatabase();

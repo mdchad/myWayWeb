@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { cn } from "../lib/utils";
+import { cn } from "@/lib/utils";
 
 function QuranText({ text, className, font = "font-arabic" }: any) {
   const regex = /([\uFD3F].*?[\uFD3E])/; // These are the Unicode points for the Arabic brackets

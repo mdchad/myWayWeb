@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { symbolArabic } from "../lib/symbolUtil";
+import { symbolArabic } from "@/lib/symbolUtil";
 
 function SpecialText({ text, font = "font-sans" }) {
   function containsSpecialSymbol(str) {

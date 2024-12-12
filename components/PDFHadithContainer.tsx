@@ -2,11 +2,11 @@
 
 "use client";
 
-import SpecialText from "../components/SpecialText";
-import QuranText from "../components/QuranText";
+import SpecialText from "@/components/SpecialText";
+import QuranText from "@/components/QuranText";
 import { useRef, useState } from "react";
-import PDFSpecialText from "../components/PDFSpecialText";
-import FootnoteReferenceNumber from "../components/FootnoteReferenceNumber";
+import PDFSpecialText from "@/components/PDFSpecialText";
+import FootnoteReferenceNumber from "@/components/FootnoteReferenceNumber";
 
 function SurahContainer({ surahs = [], hadith }) {
   let surahData =

@@ -2,8 +2,8 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight, ChevronRightSquare } from "lucide-react";
 import { kv } from "@vercel/kv";
-import QuranText from "../components/QuranText";
-import SeeMoreBar from "../components/SeeMoreBar";
+import QuranText from "@/components/QuranText";
+import SeeMoreBar from "@/components/SeeMoreBar";
 
 async function getData() {
   const hadith = await kv.get("todayHadith");

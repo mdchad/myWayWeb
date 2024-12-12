@@ -2,29 +2,29 @@
 
 "use client";
 
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { Textarea } from "../components/ui/textarea";
-import { Label } from "../components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
 import * as React from "react";
-import { useToast } from "../components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "../components/ui/popover";
+} from "@/components/ui/popover";
 import { CopyCheckIcon, MinusIcon, PlusIcon } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
-import { symbolArabic } from "../lib/symbolUtil";
-import QuranText from "../components/QuranText";
+import { symbolArabic } from "@/lib/symbolUtil";
+import QuranText from "@/components/QuranText";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../components/ui/select"
+} from "@/components/ui/select"
 
 // This can come from your database or API.
 const defaultValue = {
