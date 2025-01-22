@@ -58,7 +58,7 @@ function VolumeContainer({ volumes, slug }) {
     <div className="py-16 px-4 lg:px-40 bg-gray-100 grid gap-2">
       <Input
         onChange={(e) => onFilter(e)}
-        className="mb-6"
+        className="mb-6 bg-white"
         placeholder="Cari kitab atau nombor hadis"
       />
       {!!filteredList.length ? (

@@ -1,0 +1,83 @@
+.pagedjs_page {
+  /*background: white;*/
+  /*box-shadow: 10px 12px 30px 0 rgba(0, 0, 0, 0.1);*/
+  /*margin: 1rem;*/
+}
+
+.footnote {
+  position: footnote;
+}
+
+.pagedjs_footnote_area {
+  /*background: orange !important;*/
+}
+
+span.title {
+  string-set: volume content(text);
+}
+
+div.book {
+  string-set: book attr(data-book-name);
+}
+
+::footnote-call {
+  font-weight: 700;
+  font-size: 1em;
+  line-height: 0;
+  color: black;
+  vertical-align: super;
+  font-size: 0.6em;
+}
+
+::footnote-marker {
+  content: attr(data-footnote-number, lower-alpha) ". ";
+  line-height: 0;
+  font-size: 14px
+}
+
+span.footnote {
+  float: footnote;
+    font-size: 14px;
+}
+
+.pagedjs_margin-top {
+  margin-bottom: 30px;
+}
+
+@page {
+  size: A4;
+
+  @footnote {
+        float: bottom;
+        margin-top: 24px;
+        border-top: solid black 2px;
+        padding-top: 10px;
+  }
+  @bottom-center {
+    content: counter(page);
+  }
+
+  @top-right {
+    content: string(volume);
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: 16px;
+    vertical-align: bottom;
+  }
+
+  @top-left {
+    content: string(book);
+    font-weight: 600;
+    font-size: 16px;
+    vertical-align: bottom;
+  }
+
+}
+
+.pagedjs_page_content {
+  padding-top: 12mm;
+}
+
+.pagedjs_margin-top {
+  border-bottom: 1px solid black;
+}

@@ -6,8 +6,8 @@ export function Logomark() {
       src="/logo.png"
       alt="Picture of the logo"
       className="bg-royal-blue px-2 rounded-xl"
-      width={70}
-      height={70}
+      width={60}
+      height={60}
     />
     // <svg viewBox="0 0 40 40" aria-hidden="true" {...props}>
     //   <path

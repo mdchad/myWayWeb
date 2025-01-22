@@ -6,13 +6,13 @@ import {
   surahFont,
 } from "@/app/font";
 import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
 import { Toaster } from "@/components/ui/toaster";
 import NextTopLoader from "nextjs-toploader";
 import { Suspense } from "react";
 import SearchBar from "@/components/SearchBar";
 import { headers } from "next/headers";
 import "../globals.css";
+import Navbar from "@/components/header";
 
 export const metadata = {
   metadataBase: new URL("https://www.myway.my"),
@@ -37,7 +37,8 @@ export default async function RootLayout({ children }: any) {
   // @ts-ignore
   const maintainance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE;
 
-  const fullPath = headersList.get("referrer") || "";
+  const fullPath = headersList.get("referer:") || "";
+  const fullUrl = headersList.get('x-url') || ''
 
   // Extract the last segment of the path
   const pathSegments = fullPath.split("/");
@@ -73,17 +74,7 @@ export default async function RootLayout({ children }: any) {
         content="text/html; charset=utf-8"
       >
         <body>
-          <NextTopLoader />
-          <div className="flex min-h-screen w-full flex-col">
-            <Suspense fallback={<Header />}>
-              <Header>
-                <SearchBar />
-              </Header>
-            </Suspense>
-            {children}
-            <Footer />
-            <Toaster />
-          </div>
+        {children}
         </body>
       </html>
     );

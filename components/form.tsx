@@ -14,11 +14,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import {
-  CopyCheckIcon,
-  MinusIcon,
-  PlusIcon,
-} from "lucide-react";
+import { CopyCheckIcon, MinusIcon, PlusIcon } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import { symbolArabic } from "@/lib/symbolUtil";
 import QuranText from "@/components/QuranText";
@@ -29,7 +25,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Link from "next/link";
 
 // This can come from your database or API.
 const defaultValue = {
@@ -127,10 +124,15 @@ function StickySubmitButton({ submit }) {
 export default StickySubmitButton;
 
 export function HadithForm({ data }) {
+  // console.log(data)
   const { toast } = useToast();
 
   const [value, setValue] = useState(data ? data : defaultValue);
   const [caretPosition, setCaretPosition] = useState(0);
+
+  useEffect(() => {
+    navigator.clipboard.writeText(caretPosition.toString());
+  }, [caretPosition])
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -314,7 +316,9 @@ export function HadithForm({ data }) {
 
   function addFootnote(e) {
     e.preventDefault();
-    const newFootnote = [{}];
+    const newFootnote = [{
+      number: value?.footnotes[0]?.number ? value.footnotes[0].number + 1 : 0
+    }];
     setValue((prevValue) => ({
       ...prevValue,
       footnotes: [...prevValue.footnotes, ...newFootnote],
@@ -328,7 +332,7 @@ export function HadithForm({ data }) {
   }
 
   return (
-    <Tabs defaultValue="form" className="w-full pt-4">
+    <Tabs defaultValue="form" className="w-full pt-4 p-10">
       <StickySubmitButton submit={onSubmit} />
       <TabsList>
         <TabsTrigger value="form">Form</TabsTrigger>
@@ -336,38 +340,38 @@ export function HadithForm({ data }) {
       </TabsList>
       <TabsContent value="form" className="pt-4">
         <div>
-          <p className="font-semibold">Symbols</p>
-          <p className="text-slate-500 text-xs mb-2">
-            Copy paste the following:
-          </p>
-          <div className="flex flex-wrap">
-            {symbolArabic.map((s, i) => {
-              return (
-                <Popover key={i}>
-                  <PopoverTrigger asChild>
-                    <button
-                      onClick={() => copyToClipboard(s)}
-                      className="bg-gray-100 mb-2 mr-2 p-1.5 border rounded-md font-arabicSymbol text-lg"
-                    >
-                      {s}
-                    </button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-fit p-2 flex gap-1">
-                    <CopyCheckIcon size={14} />
-                    <p className="text-xs">Copied to clipboard</p>
-                  </PopoverContent>
-                </Popover>
-              );
-            })}
-          </div>
+          {/*<p className="font-semibold">Symbols</p>*/}
+          {/*<p className="text-slate-500 text-xs mb-2">*/}
+          {/*  Copy paste the following:*/}
+          {/*</p>*/}
+          {/*<div className="flex flex-wrap">*/}
+          {/*  {symbolArabic.map((s, i) => {*/}
+          {/*    return (*/}
+          {/*      <Popover key={i}>*/}
+          {/*        <PopoverTrigger asChild>*/}
+          {/*          <button*/}
+          {/*            onClick={() => copyToClipboard(s)}*/}
+          {/*            className="bg-gray-100 mb-2 mr-2 p-1.5 border rounded-md font-arabicSymbol text-lg"*/}
+          {/*          >*/}
+          {/*            {s}*/}
+          {/*          </button>*/}
+          {/*        </PopoverTrigger>*/}
+          {/*        <PopoverContent className="w-fit p-2 flex gap-1">*/}
+          {/*          <CopyCheckIcon size={14} />*/}
+          {/*          <p className="text-xs">Copied to clipboard</p>*/}
+          {/*        </PopoverContent>*/}
+          {/*      </Popover>*/}
+          {/*    );*/}
+          {/*  })}*/}
+          {/*</div>*/}
 
-          <p className="font-symbol"></p>
-          <form onSubmit={onSubmit} className="space-y-8">
+          <form onSubmit={onSubmit} className="space-y-20">
             <div>
               <Label htmlFor="ar">Number</Label>
               <Input
                 value={value.number}
                 type="number"
+                className="w-fit"
                 onChange={(e) =>
                   setValue({
                     ...value,
@@ -376,192 +380,9 @@ export function HadithForm({ data }) {
                 }
               />
             </div>
-            {value.content.map((contentItem, index) => {
-              return (
-                <div
-                  key={index}
-                  className="space-y-8 border-b border-black pb-8"
-                >
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <Label htmlFor="ar">Arabic</Label>
-                      <Button
-                        size="sm"
-                        className="p-2 text-xs"
-                        onClick={(e) => replaceBracketText(e, value, index)}
-                      >
-                        Replace
-                      </Button>
-                    </div>
-                    <Textarea
-                      value={value.content[index].ar}
-                      lang="ar"
-                      dir="rtl"
-                      className="font-arabic"
-                      onChange={(e) => {
-                        const updatedContent = [...value.content];
-                        updatedContent[index].ar = e.target.value;
-                        setValue((prevValue) => ({
-                          ...prevValue,
-                          content: updatedContent,
-                        }));
-                      }}
-                      ref={(el) => (refs.current[index][0] = el)} // Assign Arabic ref
-                      style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
-                    />
-                  </div>
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <Label htmlFor="ar">Malay</Label>
-                      <Button
-                        size="sm"
-                        className="p-2 text-xs"
-                        onClick={(e) => replaceSymbol(e, value, index)}
-                      >
-                        Replace
-                      </Button>
-                    </div>
-                    <Textarea
-                      value={value.content[index].ms}
-                      className="font-arabicSymbol"
-                      onChange={(e) => {
-                        const updatedContent = [...value.content];
-                        updatedContent[index].ms = e.target.value;
-                        setValue((prevValue) => ({
-                          ...prevValue,
-                          content: updatedContent,
-                        }));
-                        setCaretPosition(e.target.selectionStart);
-                      }}
-                      onKeyUp={(e) => {
-                        setCaretPosition(e.target.selectionStart);
-                      }}
-                      onClick={(e) => {
-                        setCaretPosition(e.target.selectionStart);
-                      }}
-                      ref={(el) => (refs.current[index][1] = el)} // Assign Malay ref
-                      style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
-                    />
-                    <p className="mt-2">Caret position: {caretPosition}</p>
-                  </div>
-                  <div>
-                    <Label htmlFor="ms">English</Label>
-                    <Textarea
-                      value={value.content[index].en}
-                      className="font-arabicSymbol"
-                      onChange={(e) => {
-                        const updatedContent = [...value.content];
-                        updatedContent[index].en = e.target.value;
-                        setValue((prevValue) => ({
-                          ...prevValue,
-                          content: updatedContent,
-                        }));
-                      }}
-                      ref={(el) => (refs.current[index][2] = el)} // Assign English ref
-                      style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
-                    />
-                  </div>
-                  {/*<div className="flex justify-end items-center">*/}
-                  {/*  { index > 0 && <Button onClick={() => removeHadith(index)} size={'sm'} className="bg-red-500 text-white hover:bg-red-700">- Remove hadith</Button> }*/}
-                  {/*</div>*/}
-                  {/*<hr className="h-[2px] bg-gray-500"/>*/}
-                </div>
-              );
-            })}
 
-            <Button size="icon" variant="ghost" onClick={addContent}>
-              <PlusIcon size={16} color={"black"} />
-            </Button>
-            <Button size="icon" variant="ghost" onClick={removeContent}>
-              <MinusIcon size={16} color={"black"} />
-            </Button>
-
-            <div className="space-y-4">
-              <Label>Footnotes</Label>
-              {value.footnotes.map((footnote, i) => {
-                return (
-                  <div className="space-y-2" key={i}>
-                    <div className="flex gap-2">
-                      <Input
-                        defaultValue={caretPosition}
-                        placeholder={"Position"}
-                      />
-                      <Button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          const updatedFootnote = [...value.footnotes];
-                          updatedFootnote[i].position = caretPosition;
-                          setValue((prevValue) => ({
-                            ...prevValue,
-                            footnotes: updatedFootnote,
-                          }));
-                        }}
-                      >
-                        Add position
-                      </Button>
-                    </div>
-                    <Input
-                      value={value.footnotes[i].ms}
-                      onChange={(e) => {
-                        const updatedFootnote = [...value.footnotes];
-                        updatedFootnote[i].ms = e.target.value;
-                        setValue((prevValue) => ({
-                          ...prevValue,
-                          footnotes: updatedFootnote,
-                        }));
-                      }}
-                      placeholder={"Malay"}
-                    />
-                    <Input
-                      value={value.footnotes[i].number}
-                      type="number"
-                      onChange={(e) => {
-                        const updatedFootnote = [...value.footnotes];
-                        updatedFootnote[i].number = parseInt(e.target.value);
-                        setValue((prevValue) => ({
-                          ...prevValue,
-                          footnotes: updatedFootnote,
-                        }));
-                      }}
-                      placeholder={"Number"}
-                    />
-                    <Select
-                      onValueChange={(e) => {
-                        const updatedFootnote = [...value.footnotes];
-                        updatedFootnote[i].type = e;
-                        setValue((prevValue) => ({
-                          ...prevValue,
-                          footnotes: updatedFootnote,
-                        }));
-                      }}
-                    >
-                      <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Select an option" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="content.ms">
-                          Content Malay
-                        </SelectItem>
-                        <SelectItem value="chapter_title.ms">
-                          Chapter
-                        </SelectItem>
-                        <SelectItem value="chapter_metadata.ms">
-                          Chapter Metadata
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                );
-              })}
-              <Button variant="ghost" onClick={addFootnote}>
-                <PlusIcon size={16} color={"black"} /> More footnote
-              </Button>
-              <Button variant="ghost" onClick={removeFootnote}>
-                <MinusIcon size={16} color={"black"} /> Less footnote
-              </Button>
-            </div>
-            <div className="space-y-4">
-              <Label>Chapter</Label>
+            <div className="space-y-4 bg-slate-400/10 rounded-lg p-10 shadow-md">
+              <Label className="font-bold">Chapter</Label>
               <div className="space-y-4">
                 <div className="flex justify-between">
                   <Button
@@ -580,6 +401,7 @@ export function HadithForm({ data }) {
                   </Button>
                 </div>
                 <Input
+                  className="bg-white"
                   value={value.chapter_id}
                   onChange={(e) =>
                     setValue({ ...value, chapter_id: e.target.value })
@@ -597,7 +419,7 @@ export function HadithForm({ data }) {
                 <Input
                   lang="ar"
                   dir="rtl"
-                  className="font-arabic"
+                  className="font-arabic bg-white"
                   value={value.chapter_title.ar}
                   placeholder="Arabic"
                   onChange={(e) =>
@@ -613,7 +435,8 @@ export function HadithForm({ data }) {
               </div>
               <Input
                 value={value.chapter_title.ms}
-                placeholder="Malay"
+                className="bg-white"
+                placeholder="Malay bg-white"
                 onChange={(e) => {
                   setValue({
                     ...value,
@@ -632,6 +455,7 @@ export function HadithForm({ data }) {
                 }}
               />
               <Input
+                className="bg-white"
                 value={value.chapter_title.en}
                 placeholder="English"
                 onChange={(e) =>
@@ -645,6 +469,7 @@ export function HadithForm({ data }) {
                 }
               />
               <Input
+                className="bg-white"
                 value={value.chapter_transliteration.ms}
                 placeholder="Transliteration"
                 onChange={(e) =>
@@ -723,6 +548,204 @@ export function HadithForm({ data }) {
               />
             </div>
 
+            <div className="space-y-8 bg-slate-400/10 p-10 shadow-md rounded-t-lg">
+              <Label className="font-bold">Matan</Label>
+              {value.content.map((contentItem, index) => {
+                return (
+                  <div className="space-y-4" key={index}>
+                    <div>
+                      <div className="flex justify-between items-center mb-2">
+                        <Label htmlFor="ar">Arabic</Label>
+                        <Button
+                          size="xs"
+                          className="p-2 text-xs"
+                          onClick={(e) => replaceBracketText(e, value, index)}
+                        >
+                          Replace
+                        </Button>
+                      </div>
+                      <Textarea
+                        value={value.content[index].ar}
+                        lang="ar"
+                        dir="rtl"
+                        className="font-arabic"
+                        onChange={(e) => {
+                          const updatedContent = [...value.content];
+                          updatedContent[index].ar = e.target.value;
+                          setValue((prevValue) => ({
+                            ...prevValue,
+                            content: updatedContent,
+                        }));
+                          setCaretPosition(e.target.selectionStart);
+                        }}
+                        onKeyUp={(e) => {
+                          setCaretPosition(e.target.selectionStart);
+                        }}
+                        onClick={(e) => {
+                          setCaretPosition(e.target.selectionStart);
+                        }}
+                        ref={(el) => (refs.current[index][0] = el)} // Assign Arabic ref
+                        style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
+                      />
+                    </div>
+                    <div>
+                      <div className="flex justify-between items-center mb-2">
+                        <Label htmlFor="ar">Malay</Label>
+                        <Button
+                          size="sm"
+                          className="p-2 text-xs"
+                          onClick={(e) => replaceSymbol(e, value, index)}
+                        >
+                          Replace
+                        </Button>
+                      </div>
+                      <Textarea
+                        value={value.content[index].ms}
+                        className="font-arabicSymbol"
+                        onChange={(e) => {
+                          const updatedContent = [...value.content];
+                          updatedContent[index].ms = e.target.value;
+                          setValue((prevValue) => ({
+                            ...prevValue,
+                            content: updatedContent,
+                          }));
+                          setCaretPosition(e.target.selectionStart);
+                        }}
+                        onKeyUp={(e) => {
+                          setCaretPosition(e.target.selectionStart);
+                        }}
+                        onClick={(e) => {
+                          setCaretPosition(e.target.selectionStart);
+                        }}
+                        ref={(el) => (refs.current[index][1] = el)} // Assign Malay ref
+                        style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
+                      />
+                      <p className="mt-2">Caret position: {caretPosition}</p>
+                    </div>
+                    <div className="mb-4">
+                      <Label htmlFor="ms">English</Label>
+                      <Textarea
+                        value={value.content[index].en}
+                        className="font-arabicSymbol"
+                        onChange={(e) => {
+                          const updatedContent = [...value.content];
+                          updatedContent[index].en = e.target.value;
+                          setValue((prevValue) => ({
+                            ...prevValue,
+                            content: updatedContent,
+                          }));
+                        }}
+                        ref={(el) => (refs.current[index][2] = el)} // Assign English ref
+                        style={{ minHeight: MIN_TEXTAREA_HEIGHT }}
+                      />
+                    </div>
+                    {/*<div className="flex justify-end items-center">*/}
+                    {/*  { index > 0 && <Button onClick={() => removeHadith(index)} size={'sm'} className="bg-red-500 text-white hover:bg-red-700">- Remove hadith</Button> }*/}
+                    {/*</div>*/}
+                    <hr className="h-[2px] bg-gray-500" />
+                  </div>
+                );
+              })}
+              <Button size="icon" variant="ghost" onClick={addContent}>
+                <PlusIcon size={16} color={"black"} />
+              </Button>
+              <Button size="icon" variant="ghost" onClick={removeContent}>
+                <MinusIcon size={16} color={"black"} />
+              </Button>
+            </div>
+
+            <div className="space-y-4 bg-slate-400/10 rounded-lg p-10 shadow-md">
+              <Label className="font-bold">Footnotes</Label>
+              {value.footnotes.map((footnote, i) => {
+                return (
+                  <div className="space-y-2" key={i}>
+                    <div className="flex gap-2">
+                      <Input
+                        className="bg-white"
+                        defaultValue={footnote.position || caretPosition}
+                        placeholder={"Position"}
+                      />
+                      <Button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          const updatedFootnote = [...value.footnotes];
+                          updatedFootnote[i].position = caretPosition;
+                          setValue((prevValue) => ({
+                            ...prevValue,
+                            footnotes: updatedFootnote,
+                          }));
+                        }}
+                        disabled={footnote.position}
+                      >
+                        Add position
+                      </Button>
+                    </div>
+                    <Input
+                      value={value.footnotes[i]?.ms || ''}
+                      className="bg-white"
+                      onChange={(e) => {
+                        const updatedFootnote = [...value.footnotes];
+                        updatedFootnote[i].ms = e.target.value;
+                        setValue((prevValue) => ({
+                          ...prevValue,
+                          footnotes: updatedFootnote,
+                        }));
+                      }}
+                      placeholder={"Malay"}
+                    />
+                    <Input
+                      value={value.footnotes[i].number || 0}
+                      type="number"
+                      className="bg-white"
+                      onChange={(e) => {
+                        const updatedFootnote = [...value.footnotes];
+                        updatedFootnote[i].number = parseInt(e.target.value);
+                        setValue((prevValue) => ({
+                          ...prevValue,
+                          footnotes: updatedFootnote,
+                        }));
+                      }}
+                      placeholder={"Number"}
+                    />
+                    <Select
+                      defaultValue={footnote.type}
+                      onValueChange={(e) => {
+                        const updatedFootnote = [...value.footnotes];
+                        updatedFootnote[i].type = e;
+                        setValue((prevValue) => ({
+                          ...prevValue,
+                          footnotes: updatedFootnote,
+                        }));
+                      }}
+                    >
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Select an option" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="content.ms">
+                          Content Malay
+                        </SelectItem>
+                        <SelectItem value="chapter_title.ms">
+                          Chapter
+                        </SelectItem>
+                        <SelectItem value="chapter_metadata.ms">
+                          Chapter Metadata
+                        </SelectItem>
+                        <SelectItem value="volume_title.ms">
+                          Volume
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                );
+              })}
+              <Button variant="ghost" onClick={addFootnote}>
+                <PlusIcon size={16} color={"black"} /> More footnote
+              </Button>
+              <Button variant="ghost" onClick={removeFootnote}>
+                <MinusIcon size={16} color={"black"} /> Less footnote
+              </Button>
+            </div>
             {/*<div className="space-y-4">*/}
             {/*  <Label>Volume</Label>*/}
             {/*  <p className="text-slate-500 text-xs">Volume here will get the previously entered volume. <span className="font-bold text-red-400">Make sure to click the add volume button when adding a new volume</span></p>*/}
