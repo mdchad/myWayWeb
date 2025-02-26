@@ -35,7 +35,7 @@ function SearchBarFallback() {
 export default async function RootLayout({ children }: any) {
   const headersList = await headers();
   // @ts-ignore
-  const maintainance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE;
+  const maintenance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE;
 
   const fullPath = headersList.get("referer:") || "";
   const fullUrl = headersList.get('x-url') || ''
@@ -46,8 +46,8 @@ export default async function RootLayout({ children }: any) {
 
   // Check if the last segment is 'pdf'
 
-  if (maintainance === 'maintain') {
-    console.log("maintenance", maintainance)
+  if (maintenance === 'maintain') {
+    console.log("maintenance", maintenance)
     return (
       <html
         lang="en"
