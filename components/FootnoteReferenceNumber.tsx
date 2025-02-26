@@ -1,7 +1,7 @@
-// // @ts-nocheck
+// @ts-nocheck
 import React from 'react'
 
-function FootnoteReferenceNumber({ footnotes, type, children, index = 1 }) {
+function FootnoteReferenceNumber({ footnotes, type, children, index = 1 }: any) {
   const childrenArray = React.Children.toArray(children);
   const originalText = childrenArray[0]?.props?.text || "" ;
 

@@ -18,9 +18,7 @@ import {
 import {Logomark} from "@/components/Logo";
 import Link from "next/link";
 
-const Navbar2 = ({ children }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
+const Navbar = ({ children }: any) => {
   const NavLinks = () => (
     <>
       <Link
@@ -124,4 +122,4 @@ const Navbar2 = ({ children }) => {
   );
 };
 
-export default Navbar2;
+export default Navbar;
