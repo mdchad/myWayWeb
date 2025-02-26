@@ -1,7 +1,7 @@
 // // @ts-nocheck
 import React from 'react'
 
-function FootnoteReferenceNumber({ footnotes, type, children }) {
+function FootnoteReferenceNumber({ footnotes, type, children, index = 1 }) {
   const childrenArray = React.Children.toArray(children);
   const originalText = childrenArray[0]?.props?.text || "" ;
 
@@ -10,24 +10,17 @@ function FootnoteReferenceNumber({ footnotes, type, children }) {
 
   // First, gather all positions and create markers
   const positions = sortedFootnotes
-    .filter(footnote => type === footnote.type)
-    .map(footnote => ({
+    .filter(footnote => type === footnote.type && footnote.hadithIndex === index)
+    .map((footnote, i) => ({
       position: footnote.position,
       marker: (
-        // <sup
-        //   id={`footnote-${footnote.number}`}
-        //   className={childrenArray[0]?.props?.font}
-        //   key={`footnote-${footnote.number}`}
-        // >
-        //   <a href="#footnotes">{footnote.number}</a>
-        // </sup>
-        <span key={footnote.number} className={"footnote"} data-footnote-number={footnote.number}>{footnote.ms} </span>
+        <span key={i} className={"footnote font-arabicSymbol"} data-footnote-number={footnote.number}>{footnote.ms}</span>
       )
     }));
 
   // If no positions, return original content
   if (positions.length === 0) {
-    return <>{children}</>;
+    return children;
   }
 
   // Build the final content
@@ -63,7 +56,7 @@ function FootnoteReferenceNumber({ footnotes, type, children }) {
     );
   }
 
-  return <>{result}</>;
+  return result;
 }
 
 export default FootnoteReferenceNumber;

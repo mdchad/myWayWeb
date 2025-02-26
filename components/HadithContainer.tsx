@@ -206,7 +206,7 @@ function renderHadith(hadith) {
         process.env.NEXT_PUBLIC_ENV_RUNTIME === 'development' || process.env.NEXT_PUBLIC_ENV_RUNTIME === 'localhost' && (
           <div className="mt-2 flex gap-2">
             <Button asChild>
-              <Link href={`/admin/${hadith._id}?volume=${hadith.volume_id}`}>
+              <Link href={`/admin/${hadith._id}?volume=${hadith.volume_id}&bookId=${hadith.book_id}`}>
                 Edit
                 <FileEditIcon size={16} color={"white"} />
               </Link>

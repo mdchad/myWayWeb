@@ -375,7 +375,7 @@ export function HadithForm({ data }) {
                 onChange={(e) =>
                   setValue({
                     ...value,
-                    number: e.target.value ? parseInt(e.target.value) : "",
+                    number: e.target.value ? parseFloat(e.target.value) : "",
                   })
                 }
               />
@@ -555,7 +555,7 @@ export function HadithForm({ data }) {
                   <div className="space-y-4" key={index}>
                     <div>
                       <div className="flex justify-between items-center mb-2">
-                        <Label htmlFor="ar">Arabic</Label>
+                        <Label htmlFor="ar">{index + 1}. Arabic</Label>
                         <Button
                           size="xs"
                           className="p-2 text-xs"
@@ -694,7 +694,7 @@ export function HadithForm({ data }) {
                       placeholder={"Malay"}
                     />
                     <Input
-                      value={value.footnotes[i].number || 0}
+                      value={value.footnotes[i].number}
                       type="number"
                       className="bg-white"
                       onChange={(e) => {
@@ -706,6 +706,20 @@ export function HadithForm({ data }) {
                         }));
                       }}
                       placeholder={"Number"}
+                    />
+                    <Input
+                      value={value.footnotes[i].hadithIndex}
+                      type="number"
+                      className="bg-white"
+                      onChange={(e) => {
+                        const updatedFootnote = [...value.footnotes];
+                        updatedFootnote[i].hadithIndex = parseInt(e.target.value);
+                        setValue((prevValue) => ({
+                          ...prevValue,
+                          footnotes: updatedFootnote,
+                        }));
+                      }}
+                      placeholder={"HadithIndex"}
                     />
                     <Select
                       defaultValue={footnote.type}

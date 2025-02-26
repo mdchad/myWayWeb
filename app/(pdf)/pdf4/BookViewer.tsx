@@ -21,7 +21,7 @@ const BookViewer = () => {
         .forEach((e) => e.parentNode?.removeChild(e));
     };
   }, []);
-  return <div></div>;
+  return <></>;
 };
 
 export default BookViewer;

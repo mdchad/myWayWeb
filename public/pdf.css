@@ -1,83 +1,189 @@
-.pagedjs_page {
+/*.pagedjs_page {*/
   /*background: white;*/
   /*box-shadow: 10px 12px 30px 0 rgba(0, 0, 0, 0.1);*/
   /*margin: 1rem;*/
-}
+/*}*/
 
-.footnote {
-  position: footnote;
-}
+@media print {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 
-.pagedjs_footnote_area {
-  /*background: orange !important;*/
-}
+  @page {
+    size: A4 portrait;
+    min-height: 297mm; /* A4 height */
+    max-height: 297mm;
 
-span.title {
-  string-set: volume content(text);
-}
+    @footnote {
+      float: bottom;
+      /*margin-top: 24px;*/
+      border-top: solid black 2px;
+      padding-top: 10px;
+    }
 
-div.book {
-  string-set: book attr(data-book-name);
-}
+    @bottom-center {
+      content: counter(page);
+    }
 
-::footnote-call {
-  font-weight: 700;
-  font-size: 1em;
-  line-height: 0;
-  color: black;
-  vertical-align: super;
-  font-size: 0.6em;
-}
+    @top-right {
+      content: string(volume);
+      text-transform: capitalize;
+      font-weight: 600;
+      font-size: 16px;
+      vertical-align: bottom;
+      border-bottom: 1px solid black;
+    }
 
-::footnote-marker {
-  content: attr(data-footnote-number, lower-alpha) ". ";
-  line-height: 0;
-  font-size: 14px
-}
+    @top-left {
+      content: string(book);
+      font-weight: 600;
+      font-size: 16px;
+      vertical-align: bottom;
+      border-bottom: 1px solid black;
+    }
 
-span.footnote {
-  float: footnote;
+    @top-center {
+      border-bottom: 1px solid black;
+    }
+  }
+
+  .footnote {
+    position: footnote;
+  }
+
+  div.volume {
+    string-set: volume attr(data-volume-name);
+  }
+
+  div.book {
+    string-set: book attr(data-book-name);
+  }
+
+  ::footnote-call {
+    font-weight: 700;
+    line-height: 0;
+    color: black;
+    vertical-align: super;
+    font-size: 0.6em;
+  }
+
+  ::footnote-marker {
+    content: attr(data-footnote-number, lower-alpha) ". ";
+    line-height: 0;
+    font-size: 14px
+  }
+
+  span.footnote {
+    float: footnote;
     font-size: 14px;
-}
-
-.pagedjs_margin-top {
-  margin-bottom: 30px;
-}
-
-@page {
-  size: A4;
-
-  @footnote {
-        float: bottom;
-        margin-top: 24px;
-        border-top: solid black 2px;
-        padding-top: 10px;
-  }
-  @bottom-center {
-    content: counter(page);
   }
 
-  @top-right {
-    content: string(volume);
-    text-transform: capitalize;
-    font-weight: 600;
-    font-size: 16px;
-    vertical-align: bottom;
+  .volume {
+    break-before: page;
   }
 
-  @top-left {
-    content: string(book);
-    font-weight: 600;
-    font-size: 16px;
-    vertical-align: bottom;
+  .chapter {
+    break-inside: avoid;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
   }
 
-}
+  .custom-gap-1 {
+    gap: 0.25rem;
+    display: flex;
+    flex-direction: column;
+  }
 
-.pagedjs_page_content {
-  padding-top: 12mm;
-}
+  .custom-gap-2 {
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+  }
 
-.pagedjs_margin-top {
-  border-bottom: 1px solid black;
+  .custom-gap-4 {
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .custom-gap-8 {
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .custom-gap-10 {
+    gap: 2.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .custom-gap-12 {
+    gap: 3rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .custom-gap-16 {
+    gap: 4rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .custom-gap-20 {
+    gap: 5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hadith-arabic {
+    font-size: 1.25rem;
+    text-align: justify;
+    white-space: pre-line;
+    line-height: 1.625;
+  }
+
+  .hadith-malay {
+    font-size: 1rem;
+    text-align: justify;
+    white-space: pre-line;
+    text-align-last: left;
+  }
+
+  .text-last-left {
+    text-align-last: left;
+  }
+
+  .text-last-right {
+    text-align-last: right;
+  }
+
+  .hadith-arabic .hadith-malay {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .custom-chapter-arabic {
+    font-weight: 700;
+    line-height: 2;
+  }
+
+  .custom-chapter-malay {
+    font-weight: 700;
+    text-align: justify;
+  }
+
+
+  /*.pagedjs_margin-top {*/
+  /*  border-bottom: 1px solid black;*/
+  /*}*/
+
+  .pagedjs_page_content {
+    padding-top: 8mm;
+    padding-bottom: 10mm !important;
+  }
+
+
 }
