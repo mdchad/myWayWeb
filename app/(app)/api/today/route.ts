@@ -61,8 +61,17 @@ export async function GET() {
     headers: await headers() // you need to pass the headers object.
   })
 
-  if (!session) {
-    return NextResponse.json(emptyData);
+  const maintenance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE;
+
+  // if (!session) {
+  //   return NextResponse.json(emptyData);
+  // }
+
+  if (maintenance === "maintain") {
+    return NextResponse.json({
+      ok: false,
+      data: emptyData
+    });
   }
 
   const hadith = await kv.get("todayHadith");
