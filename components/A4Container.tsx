@@ -16,8 +16,8 @@ const A4PageContainer = ({ children, currentPage, elementId }: any) => {
     fontSize: '12px',
     lineHeight: '1.5',
     position: 'relative',
-    border: '1px solid black',
-    boxSizing: 'border-box',
+    // border: '1px solid black',
+    // boxSizing: 'border-box',
   };
 
   return (

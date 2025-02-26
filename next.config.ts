@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
   //   };
   //   return config;
   // }
+  devIndicators: {
+    appIsrStatus: false,
+  },
 };
 
 export default nextConfig;

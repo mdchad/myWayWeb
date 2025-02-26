@@ -48,19 +48,12 @@ async function getSurah(volume) {
   }
 }
 
-export async function generateMetadata({ params }) {
-  // read route params
-  return {
-    metadataBase: new URL('https://www.myway.my'),
-    title: `My Way - Koleksi Hadis Sahih`,
-    description: " Pelajari sunnah Nabi Muhammad SAW melalui koleksi hadis dari Kutub Sittah yang sahih dan dipercayai",
-  }
-}
-
 export default async function PDF(props) {
   const searchParams = await props.searchParams;
   const volumeParams = searchParams?.volume
   const slug = searchParams?.slug
+  console.log(volumeParams)
+  console.log(slug)
 
   const volumeValue = {
     number: "",
@@ -82,12 +75,57 @@ export default async function PDF(props) {
   const surah = await getSurah(volume);
 
   return (
-    <MultiPagePDFContainer>
-      <PDFHadithContainer
-        hadiths={JSON.parse(JSON.stringify(hadiths))}
-        volumes={JSON.parse(JSON.stringify(volume))}
-        surahs={JSON.parse(JSON.stringify(surah))}
-      />
-    </MultiPagePDFContainer>
+    <>
+      <style>{`
+        @page {
+        size: A4;
+        margin: 20mm;
+
+        @footnote {
+        float: bottom;
+        border-top: 0.5px solid #ddd;
+        padding-top: 8px;
+        margin-top: 8px;
+      }
+      }
+
+        /* Style for footnote calls in the text */
+        .footnote-call {
+        float: footnote;
+        counter-increment: footnote;
+      }
+
+        .footnote-call::footnote-call {
+        content: '[' attr(data-footnote-number) ']';
+        font-size: 0.8em;
+        vertical-align: super;
+        line-height: none;
+      }
+
+        /* Style for the footnote marker in the footnote area */
+        .footnote-call::footnote-marker {
+        content: '[' attr(data-footnote-number) ']';
+        font-size: 0.8em;
+        margin-right: 4px;
+      }
+
+        /* Reset footnote counter for each page */
+        .page {
+        counter-reset: footnote;
+      }
+
+        /* Ensure content wrapper takes full height minus footnote area */
+        .content-wrapper {
+        height: 100%;
+      }`}
+      </style>
+      <MultiPagePDFContainer>
+        <PDFHadithContainer
+          hadiths={JSON.parse(JSON.stringify(hadiths))}
+          volumes={JSON.parse(JSON.stringify(volume))}
+          surahs={JSON.parse(JSON.stringify(surah))}
+        />
+      </MultiPagePDFContainer>
+    </>
   );
 }

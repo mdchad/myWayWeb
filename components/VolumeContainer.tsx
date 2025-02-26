@@ -58,7 +58,7 @@ function VolumeContainer({ volumes, slug }) {
     <div className="py-16 px-4 lg:px-40 bg-gray-100 grid gap-2">
       <Input
         onChange={(e) => onFilter(e)}
-        className="mb-6"
+        className="mb-6 bg-white"
         placeholder="Cari kitab atau nombor hadis"
       />
       {!!filteredList.length ? (
@@ -76,7 +76,7 @@ function VolumeContainer({ volumes, slug }) {
               >
                 <div className="space-y-1 flex flex-col items-start text-left max-w-xs">
                   <p className="text-xl leading-5 font-sans capitalize transition-transform duration-300 ease-in-out group-hover:scale-105">
-                    {vol.title.ms.toLowerCase().trim()}
+                    {vol.number}. {vol.title.ms.toLowerCase().trim()}
                   </p>
                   <p className="text-xs text-gray-500 capitalize font-sans">
                     {vol.transliteration.ms.trim().toUpperCase()}

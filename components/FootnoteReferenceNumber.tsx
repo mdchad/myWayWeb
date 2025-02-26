@@ -1,50 +1,62 @@
 // @ts-nocheck
+import React from 'react'
 
-function FootnoteReferenceNumber({ footnotes, children }) {
-  const sortedFootnotes = [...footnotes].sort((a, b) => b.number - a.number);
+function FootnoteReferenceNumber({ footnotes, type, children, index = 1 }: any) {
   const childrenArray = React.Children.toArray(children);
+  const originalText = childrenArray[0]?.props?.text || "" ;
 
-  let contentWithFootnotes = childrenArray;
-  sortedFootnotes.forEach((footnote) => {
-    const footnoteNumber = footnote.number;
-    const footnoteMarker = (
-      <sup
-        id={`footnote-${footnoteNumber}`}
-        className={childrenArray[0].props.font}
-        key={`footnote-${footnoteNumber}`}
-      >
-        <a href="#footnotes">
-          {footnoteNumber}
-        </a>
-      </sup>
-    );
+  // Sort footnotes by position
+  const sortedFootnotes = [...footnotes].sort((a, b) => a.position - b.position);
 
-    let footnoteInserted = false;
+  // First, gather all positions and create markers
+  const positions = sortedFootnotes
+    .filter(footnote => type === footnote.type && footnote.hadithIndex === index)
+    .map((footnote, i) => ({
+      position: footnote.position,
+      marker: (
+        <span key={i} className={"footnote font-arabicSymbol"} data-footnote-number={footnote.number}>{footnote.ms}</span>
+      )
+    }));
 
-    contentWithFootnotes = contentWithFootnotes.reduce((acc, child) => {
-      const childText = child.props?.text || "";
+  // If no positions, return original content
+  if (positions.length === 0) {
+    return children;
+  }
 
-      const beforeFootnote = childText.slice(0, footnote.position);
-      const afterFootnote = childText.slice(footnote.position);
+  // Build the final content
+  const result = [];
+  let lastPosition = 0;
 
-      acc.push(
-        React.cloneElement(child, {
-          key: `before-${footnote.number}`,
-          text: beforeFootnote,
-        }),
-        footnoteMarker,
-        React.cloneElement(child, {
-          key: `after-${footnote.number}`,
-          text: afterFootnote,
-        }),
+  positions.forEach(({ position, marker }, index) => {
+    // Add text segment
+    const textSegment = originalText.slice(lastPosition, position);
+    if (textSegment) {
+      result.push(
+        React.cloneElement(childrenArray[0], {
+          key: `text-${index}`,
+          text: textSegment,
+        })
       );
-      footnoteInserted = true;
+    }
 
-      return acc;
-    }, []);
+    // Add footnote marker
+    result.push(marker);
+
+    // Update last position
+    lastPosition = position;
   });
 
-  return <>{contentWithFootnotes}</>;
+  // Add remaining text
+  if (lastPosition < originalText.length) {
+    result.push(
+      React.cloneElement(childrenArray[0], {
+        key: 'text-final',
+        text: originalText.slice(lastPosition),
+      })
+    );
+  }
+
+  return result;
 }
 
 export default FootnoteReferenceNumber;
