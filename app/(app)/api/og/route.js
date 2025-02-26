@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og';
-import {loadGoogleFont} from "@/lib/utils";
+// import {loadGoogleFont} from "../../../../lib/utils";
 // App router includes @vercel/og.
 // No need to install it.
 
@@ -52,12 +52,12 @@ export async function GET(request) {
       fonts: [
         {
           name: "Caveat",
-          data: fontData,
+          // data: fontData,
           style: "normal",
         },
         {
           name: "Raleway",
-          data: fontData1,
+          // data: fontData1,
           style: "normal"
         }
       ]
