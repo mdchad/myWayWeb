@@ -32,10 +32,7 @@ export async function GET() {
   // }
 
   if (maintenance === "maintain") {
-      return NextResponse.json({
-        ok: false,
-        data: emptyData
-      });
+      return NextResponse.json(emptyData);
   }
 
   const data = await db.collection("Books").find({}).sort({ _id: 1 }).toArray();

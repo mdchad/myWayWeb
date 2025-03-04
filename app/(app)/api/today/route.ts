@@ -68,10 +68,7 @@ export async function GET() {
   // }
 
   if (maintenance === "maintain") {
-    return NextResponse.json({
-      ok: false,
-      data: emptyData
-    });
+    return NextResponse.json(emptyData);
   }
 
   const hadith = await kv.get("todayHadith");
